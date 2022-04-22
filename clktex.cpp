@@ -3,6 +3,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "clkwin.h"
+
 namespace clk {
   class sprite {
   protected:
@@ -20,7 +22,7 @@ namespace clk {
     int getw();
     int geth();
     int query(uint32_t *format, int *access, int *w, int *h);
-  }
+  };
 }
 
 clk::sprite::sprite(window &renderer, const char filename[]) {
