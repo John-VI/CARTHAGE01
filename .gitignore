@@ -79,3 +79,11 @@ flycheck_*.el
 .dir-locals.el
 
 *log.txt
+
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
