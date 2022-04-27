@@ -22,7 +22,7 @@ int monster::tick() {
 }
 
 void monster::draw() {
-  g->font.drawchar(x * g->w, y * g->h, family);
+  g->font.drawchar(x * g->pw, y * g->ph, family);
 }
 
 int monster::hurt(int delta) {
