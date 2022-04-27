@@ -25,3 +25,42 @@ void monster::draw() {
   g->font.drawchar(x * g->w, y * g->h, family);
 }
 
+int monster::hurt(int delta) {
+  return hp -= delta;
+}
+
+int monster::getx() {
+  return x;
+}
+
+int monster::gety() {
+  return y;
+}
+
+std::pair<int, int> monster::getcoords() {
+  return { x, y };
+}
+
+int monster::getmaxhp() {
+  return maxhp;
+}
+
+void monster::setmaxhp(int newmax) {
+  maxhp = newmax;
+}
+
+int monster::gethp() {
+  return hp;
+}
+
+int monster::getdamage() {
+  return damage;
+}
+
+void monster::setdamage(int newdamage) {
+  damage = newdamage;
+}
+
+void monster::sethp(int newhp) {
+  hp = newhp;
+}

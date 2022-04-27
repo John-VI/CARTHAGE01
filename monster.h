@@ -26,7 +26,7 @@ class monster {
   void setmaxhp(int newmax);
   int gethp();
   int getdamage();
-  void setdamage();
+  void setdamage(int newdamage);
 
   const int type;
   const char family;
