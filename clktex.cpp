@@ -9,25 +9,7 @@
 
 #include "clkwin.h"
 
-namespace clk {
-  class sprite {
-  protected:
-    SDL_Rect screenoffset = { 0, 0, 0, 0 };
-    SDL_Rect sheetoffset;
-    std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> texture;
-    window& renderer;
-    
-  public:
-    sprite(window &renderer, const char filename[]);
-    ~sprite();
-    SDL_Rect draw(int x, int y);
-    void setscreenoffset(SDL_Rect newoffset);
-    void setsheetoffset(SDL_Rect newoffset);
-    int getw();
-    int geth();
-    int query(uint32_t *format, int *access, int *w, int *h);
-  };
-}
+#include "clktex.h"
 
 clk::sprite::sprite(window &renderer, const char filename[]) : renderer(renderer), texture(nullptr, &SDL_DestroyTexture) {
   SDL_Surface *surface = IMG_Load(filename);
@@ -41,7 +23,7 @@ clk::sprite::sprite(window &renderer, const char filename[]) : renderer(renderer
   texture.reset(tex);
 
   int w, h;
-  query(NULL, NULL, &w, &h);
+  query(nullptr, nullptr, &w, &h);
   sheetoffset = { 0, 0, w, h };
 }
 
@@ -54,3 +36,22 @@ int clk::sprite::query(uint32_t *format, int *access, int *w, int *h) {
   return ret;
 }
 
+SDL_Rect clk::sprite::draw(int x, int y) {
+  SDL_Rect region = { screenoffset.x + x + viewport.x, screenoffset.y + y + viewport.y, screenoffset.w, screenoffset.h };
+  SDL_RenderCopy(renderer.getSDL_Renderer(), texture.get(), &sheetoffset, &region);
+  return region;
+}
+
+SDL_Rect clk::sprite::drawchar(int x, int y, char c) {
+  SDL_Rect srcregion = { sheetoffset.x + c - startchar, sheetoffset.y, sheetoffset.w, sheetoffset.h };
+  SDL_Rect dstregion = { screenoffset.x + x + viewport.x, screenoffset.y + y + viewport.y, screenoffset.w, screenoffset.h };
+  SDL_RenderCopy(renderer.getSDL_Renderer(), texture.get(), &srcregion, &dstregion);
+  return dstregion;
+}
+
+SDL_Rect clk::sprite::drawstring(int x, int y, const std::string& str) {
+  for (int i = 0; i < str.length(); i++)
+    this->drawchar(x + sheetoffset.w * i, y, str.at(i));
+
+  return { x + screenoffset.x, y + screenoffset.y, screenoffset.w * (int)str.length(), screenoffset.h };
+}

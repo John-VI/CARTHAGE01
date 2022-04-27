@@ -98,12 +98,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="clkfont.cpp" />
     <ClCompile Include="clktex.cpp" />
     <ClCompile Include="clkwin.cpp" />
+    <ClCompile Include="grid.cpp" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="monster.cpp" />
+    <ClCompile Include="tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="clkfont.h" />
+    <ClInclude Include="clktex.h" />
     <ClInclude Include="clkwin.h" />
+    <ClInclude Include="grid.h" />
+    <ClInclude Include="monster.h" />
+    <ClInclude Include="tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
