@@ -11,7 +11,8 @@
 
 #include "clktex.h"
 
-clk::sprite::sprite(window &renderer, const char filename[]) : renderer(renderer), texture(nullptr, &SDL_DestroyTexture) {
+clk::sprite::sprite(window &renderer, const char filename[],
+		    SDL_Rect *viewport) : renderer(renderer), texture(nullptr, &SDL_DestroyTexture), viewport(viewport) {
   SDL_Surface *surface = IMG_Load(filename);
   if (!surface)
     throw std::runtime_error(std::string({ "IMG_Load failed: ", IMG_GetError() }));

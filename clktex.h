@@ -18,10 +18,11 @@ namespace clk {
     std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> texture;
     window& renderer;
 
-    SDL_Rect viewport = { 10, 10, 900, 900 };
+    SDL_Rect *viewport = nullptr;
 
   public:
-    sprite(window& renderer, const char filename[]);
+    sprite(window& renderer, const char filename[],
+	   SDL_Rect *viewport);
     ~sprite();
     SDL_Rect draw(int x, int y);
     void setscreenoffset(SDL_Rect newoffset);

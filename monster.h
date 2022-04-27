@@ -11,6 +11,8 @@ class monster {
   monster(const int type, const char family, std::string name);
   virtual ~monster();
 
+  virtual void ai();
+
   int tick();
   void draw();
   int hurt(int delta);
@@ -21,7 +23,10 @@ class monster {
   std::pair<int, int> getcoords();
 
   int getmaxhp();
-  int setmaxhp(int newmax);
+  void setmaxhp(int newmax);
+  int gethp();
+  int getdamage();
+  void setdamage();
 
   const int type;
   const char family;
@@ -37,5 +42,7 @@ class monster {
   int damage;
   int speed;
   int meter;
-  short status;
+  short status = 0;
+
+  void sethp(int newhp);
 };
