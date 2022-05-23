@@ -4,9 +4,7 @@
 
 typedef struct monster monster;
 
-class tile {
+struct tile {
   monster *mon = nullptr;
-
- public:
   int type = 0;
 };

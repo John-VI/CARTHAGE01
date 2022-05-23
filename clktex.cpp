@@ -30,7 +30,7 @@ clk::sprite::sprite(window &renderer, const char filename[],
 
 clk::sprite::~sprite() = default;
 
-int clk::sprite::query(uint32_t *format, int *access, int *w, int *h) {
+int clk::sprite::query(uint32_t *format, int *access, int *w, int *h) const {
   int ret = SDL_QueryTexture(texture.get(), format, access, w, h);
   if (ret)
     throw std::runtime_error(std::string({ "SDL_QueryTexture failed: ", SDL_GetError() }));
@@ -38,14 +38,14 @@ int clk::sprite::query(uint32_t *format, int *access, int *w, int *h) {
 }
 
 SDL_Rect clk::sprite::draw(int x, int y) {
-  SDL_Rect region = { screenoffset.x + x + viewport.x, screenoffset.y + y + viewport.y, screenoffset.w, screenoffset.h };
+  SDL_Rect region = { screenoffset.x + x + viewport->x, screenoffset.y + y + viewport->y, screenoffset.w, screenoffset.h };
   SDL_RenderCopy(renderer.getSDL_Renderer(), texture.get(), &sheetoffset, &region);
   return region;
 }
 
 SDL_Rect clk::sprite::drawchar(int x, int y, char c) {
   SDL_Rect srcregion = { sheetoffset.x + c - startchar, sheetoffset.y, sheetoffset.w, sheetoffset.h };
-  SDL_Rect dstregion = { screenoffset.x + x + viewport.x, screenoffset.y + y + viewport.y, screenoffset.w, screenoffset.h };
+  SDL_Rect dstregion = { screenoffset.x + x + viewport->x, screenoffset.y + y + viewport->y, screenoffset.w, screenoffset.h };
   SDL_RenderCopy(renderer.getSDL_Renderer(), texture.get(), &srcregion, &dstregion);
   return dstregion;
 }

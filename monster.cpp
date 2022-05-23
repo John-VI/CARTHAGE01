@@ -7,10 +7,13 @@
 #include "clktex.h"
 
 #include "grid.h"
+#include "tile.h"
 
 monster::monster(const int type, const char family,
 		 std::string name) : type(type), family(family),
 				     name(name) { }
+
+monster::~monster() { g->gettile(x, y)->mon = nullptr; }
 
 int monster::tick() {
   meter -= speed;
@@ -22,18 +25,18 @@ int monster::tick() {
 }
 
 void monster::draw() {
-  g->font.drawchar(x * g->pw, y * g->ph, family);
+  g->font.drawchar(x * g->gettilew(), y * g->gettileh(), family);
 }
 
 int monster::hurt(int delta) {
   return hp -= delta;
 }
 
-int monster::getx() {
+int monster::getx() const {
   return x;
 }
 
-int monster::gety() {
+int monster::gety() const {
   return y;
 }
 
@@ -41,7 +44,7 @@ std::pair<int, int> monster::getcoords() {
   return { x, y };
 }
 
-int monster::getmaxhp() {
+int monster::getmaxhp() const {
   return maxhp;
 }
 
@@ -49,11 +52,11 @@ void monster::setmaxhp(int newmax) {
   maxhp = newmax;
 }
 
-int monster::gethp() {
+int monster::gethp() const {
   return hp;
 }
 
-int monster::getdamage() {
+int monster::getdamage() const {
   return damage;
 }
 

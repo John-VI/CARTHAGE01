@@ -9,7 +9,7 @@ typedef struct grid grid;
 class monster {
  public:
   monster(const int type, const char family, std::string name);
-  virtual ~monster();
+  ~monster();
 
   virtual void ai();
 
@@ -18,14 +18,14 @@ class monster {
   int hurt(int delta);
   std::pair<int, int> move(int newx, int newy);
 
-  int getx();
-  int gety();
+  int getx() const;
+  int gety() const;
   std::pair<int, int> getcoords();
 
-  int getmaxhp();
+  int getmaxhp() const;
   void setmaxhp(int newmax);
-  int gethp();
-  int getdamage();
+  int gethp() const;
+  int getdamage() const;
   void setdamage(int newdamage);
 
   const int type;
