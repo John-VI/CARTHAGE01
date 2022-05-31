@@ -2,10 +2,10 @@
 
 #include "grid.h"
 
+#include <cassert>
 #include <forward_list>
 #include <memory>
 #include <stdexcept>
-#include <cassert>
 
 #include "clktex.h"
 
@@ -16,6 +16,7 @@ grid::grid(int width, int height, int tilewidth, int tileheight,
            clk::sprite &font)
     : w(width), h(height), twidth(tilewidth), theight(tileheight), font(font) {
   tiles = std::unique_ptr<tile[]>(new tile[w * h]);
+  blocking = 0;
 }
 
 int grid::getw() const { return w; }
@@ -30,9 +31,10 @@ tile *grid::gettile(int x, int y) {
 }
 
 void grid::tick() {
-  for (auto &moving : monsters) {
-    moving.get()->tick();
-  }
+  if (!blocking)
+    for (auto &moving : monsters) {
+      moving.get()->tick();
+    }
 }
 
 void grid::draw() {
@@ -43,4 +45,16 @@ void grid::draw() {
     if (t->mon == nullptr)
       font.drawchar((i % w) * twidth, (i / h) * theight, '.');
   }
+}
+
+std::pair<int, int> grid::movemonster(monster *m, int x, int y) {
+  tile *dest = gettile(x, y);
+  if (!dest->mon) {
+    gettile(m->getx(), m->gety())->mon = nullptr;
+    dest->mon = m;
+    m->setx(x);
+    m->sety(y);
+    return std::pair<int, int>(x, y);
+  } else
+    return m->getcoords();
 }

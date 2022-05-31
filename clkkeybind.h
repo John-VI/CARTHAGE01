@@ -15,18 +15,22 @@ protected:
   struct kbdbtrig : public inputtrigger {
     keybind &binding;
     kbdbtrig(keybind &bind);
+    void trigger(const SDL_Event &e) override;
   };
   int registration;
-  inputman *manager = nulptr;
-  std::unordered_map<SDL_Keycode, inputtrigger> registrations;
+  inputman *manager = nullptr;
+  std::unordered_map<SDL_Keycode, std::unique_ptr<inputtrigger>> registrations;
 
 public:
+  keybind();
+  keybind(
+      std::unordered_map<SDL_Keycode, std::unique_ptr<inputtrigger>> basemap);
   void trigger(const SDL_Event &e);
   void managerreg(inputman *manager);
   void managerdereg();
-  int registerinput(SDL_KeyCode code,
-                    std::unique_ptr<inputtrigger> newtrigger);
-  void deregister(SDL_KeyCode code, int id);
+  void registerinput(SDL_KeyCode code,
+                    inputtrigger *newtrigger);
+  void deregister(SDL_KeyCode code);
 };
 
 } // namespace clk

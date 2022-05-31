@@ -6,6 +6,8 @@
 
 #include <SDL2/SDL.h>
 
+#include <string>
+
 typedef struct window window;
 
 namespace clk {
@@ -31,8 +33,8 @@ namespace clk {
     int geth() const;
     int query(uint32_t* format, int *access, int *w, int *h) const;
     SDL_Rect drawchar(int x, int y, char c);
-    SDL_Rect drawstring(int x, int y, const std::string& str);
+    SDL_Rect drawstring(int x, int y, const std::string &str);
     SDL_Rect griddrawchar(int r, int d, char c) const;
-    SDL_Rect griddrawstring(int r, int d, std::string& str);
+    SDL_Rect griddrawstring(int r, int d, std::string &str);
   };
 }

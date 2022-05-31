@@ -100,11 +100,12 @@
   <ItemGroup>
     <ClCompile Include="clkfont.cpp" />
     <ClCompile Include="clkkeybind.cpp" />
+    <ClCompile Include="clkterminator.cpp" />
     <ClCompile Include="clktex.cpp" />
     <ClCompile Include="clkwin.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="clkinputman.cpp" />
-    <ClCompile Include="main.c" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="monster.cpp" />
     <ClCompile Include="tile.cpp" />
   </ItemGroup>
@@ -112,6 +113,7 @@
     <ClInclude Include="clkfont.h" />
     <ClInclude Include="clkinputtrigger.h" />
     <ClInclude Include="clkkeybind.h" />
+    <ClInclude Include="clkterminator.h" />
     <ClInclude Include="clktex.h" />
     <ClInclude Include="clkwin.h" />
     <ClInclude Include="grid.h" />

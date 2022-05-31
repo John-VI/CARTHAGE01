@@ -4,14 +4,18 @@
 
 #include <string>
 
+#include "clkinputtrigger.h"
+#include "clkinputman.h"
+#include "clkkeybind.h"
+
 typedef struct grid grid;
 
 class monster {
- public:
-  monster(const int type, const char family, std::string name);
-  ~monster();
+public:
+  monster(const int type, const char family, std::string name, grid *g);
+  virtual ~monster();
 
-  virtual void ai();
+  void ai();
 
   int tick();
   void draw();
@@ -20,6 +24,8 @@ class monster {
 
   int getx() const;
   int gety() const;
+  void setx(int newx);
+  void sety(int newy);
   std::pair<int, int> getcoords();
 
   int getmaxhp() const;
@@ -30,7 +36,19 @@ class monster {
 
   const int type;
   const char family;
- protected:
+
+  void trigger(const SDL_Event &e);
+  void managerreg(clk::keybind *manager);
+  void managerunreg();
+
+protected:
+  struct montrig : public clk::inputtrigger {
+    monster &binding;
+    montrig(monster &bind);
+    void trigger(const SDL_Event &e) override;
+  };
+  clk::keybind *manager = nullptr;
+
   std::string name;
 
   grid *g;
@@ -45,4 +63,5 @@ class monster {
   short status = 0;
 
   void sethp(int newhp);
+  std::pair<int, int> move(int newx, int newy);
 };

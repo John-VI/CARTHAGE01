@@ -4,8 +4,13 @@
 
 #include <SDL2/SDL_events.h>
 
+namespace clk {
+
 class inputtrigger {
- public:
+public:
   int id;
   virtual void trigger(const SDL_Event &e) = 0;
+  virtual ~inputtrigger();
 };
+
+} // namespace clk

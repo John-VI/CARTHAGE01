@@ -2,4 +2,49 @@
 
 #include "clkkeybind.h"
 
-clk
+#include <stdexcept>
+
+clk::keybind::kbdbtrig::kbdbtrig(keybind &bind) : binding(bind) { }
+
+void clk::keybind::kbdbtrig::trigger(const SDL_Event &e) { binding.trigger(e); }
+
+clk::keybind::keybind() = default;
+
+clk::keybind::keybind(
+    std::unordered_map<SDL_Keycode, std::unique_ptr<inputtrigger>> basemap)
+    : registrations(basemap) { }
+
+void clk::keybind::trigger(const SDL_Event& e) {
+  inputtrigger *itrigger = nullptr;
+  try {
+    itrigger = registrations.at(e.key.keysym.sym).get();
+  } catch (std::out_of_range) {
+  }
+  if (!itrigger)
+    itrigger->trigger(e);
+}
+
+void clk::keybind::managerreg(inputman *man) {
+  if (manager)
+    throw std::runtime_error("Already registered with input dispatcher.");
+  manager = man; 
+  registration = manager->registerinput(SDL_KEYDOWN, new kbdbtrig(*this));
+}
+
+void clk::keybind::managerdereg() {
+  if (manager) {
+    manager->deregister(SDL_KEYDOWN, registration);
+    manager = nullptr;
+  }
+}
+
+void clk::keybind::registerinput(SDL_KeyCode code, inputtrigger *newtrigger) {
+  if (registrations[code] == nullptr)
+    registrations[code].reset(newtrigger);
+  else
+    throw std::runtime_error("Key is already bound.");
+}
+
+void clk::keybind::deregister(SDL_KeyCode code) {
+  registrations[code].reset(nullptr);
+}

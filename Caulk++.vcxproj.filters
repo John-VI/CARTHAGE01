@@ -21,9 +21,6 @@
     <ClCompile Include="clkwin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="clkfont.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -40,6 +37,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="clkkeybind.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clkterminator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -69,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="clkkeybind.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clkterminator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

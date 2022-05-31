@@ -32,4 +32,7 @@ class grid {
   tile *gettile(int x, int y);
   void tick();
   void draw();
+  std::pair<int, int> movemonster(monster *m, int x, int y);
+
+  int blocking;
 };

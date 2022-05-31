@@ -28,8 +28,7 @@ protected:
 public:
   inputman(inputmap &smap);
   int processinputs();
-  int registerinput(SDL_EventType type,
-                    std::unique_ptr<inputtrigger> newtrigger);
+  int registerinput(SDL_EventType type, inputtrigger *newtrigger);
   void deregister(SDL_EventType type, int id);
 };
 
