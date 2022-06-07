@@ -14,6 +14,7 @@ protected:
     terminator &binding;
     quittrig(terminator &bind);
     void trigger(const SDL_Event &e) override;
+    ~quittrig();
   };
   int registration;
   inputman *manager = nullptr;

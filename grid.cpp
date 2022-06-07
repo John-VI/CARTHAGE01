@@ -34,6 +34,8 @@ void grid::tick() {
   if (!blocking)
     for (auto &moving : monsters) {
       moving.get()->tick();
+      if (blocking)
+        break;
     }
 }
 
@@ -57,4 +59,9 @@ std::pair<int, int> grid::movemonster(monster *m, int x, int y) {
     return std::pair<int, int>(x, y);
   } else
     return m->getcoords();
+}
+
+void grid::insertmonster(std::unique_ptr<monster> m) {
+  monsters.push_front(std::move(m));
+  tiles[0].mon = monsters.front().get();
 }

@@ -45,6 +45,9 @@
     <ClCompile Include="clkterminator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="clkinputtrigger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clkwin.h">
@@ -77,5 +80,11 @@
     <ClInclude Include="clkterminator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="SConstruct" />
   </ItemGroup>
 </Project>

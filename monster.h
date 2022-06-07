@@ -13,7 +13,7 @@ typedef struct grid grid;
 class monster {
 public:
   monster(const int type, const char family, std::string name, grid *g);
-  virtual ~monster();
+  /* virtual */ ~monster();
 
   void ai();
 
@@ -63,5 +63,4 @@ protected:
   short status = 0;
 
   void sethp(int newhp);
-  std::pair<int, int> move(int newx, int newy);
 };

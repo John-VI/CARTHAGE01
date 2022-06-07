@@ -2,11 +2,11 @@
 
 #pragma once
 
-#include <forward_list>
+#include <list>
 #include <memory>
 
-typedef struct tile tile;
-typedef struct monster monster;
+#include "tile.h"
+#include "monster.h"
 
 namespace clk {
   typedef struct sprite sprite;
@@ -17,7 +17,7 @@ class grid {
   int h;
   int twidth;
   int theight;
-  std::forward_list<std::unique_ptr<monster>> monsters;
+  std::list<std::unique_ptr<monster>> monsters;
   std::unique_ptr<tile[]> tiles;
 
  public:
@@ -35,4 +35,5 @@ class grid {
   std::pair<int, int> movemonster(monster *m, int x, int y);
 
   int blocking;
+  void insertmonster(std::unique_ptr<monster> m);
 };

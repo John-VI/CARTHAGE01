@@ -23,12 +23,13 @@ typedef std::unordered_map<
 class inputman {
 protected:
   idmap imap;
-  inputmap &sharedmap;
+  //inputmap &sharedmap;
 
 public:
-  inputman(inputmap &smap);
+  inputman();
   int processinputs();
-  int registerinput(SDL_EventType type, inputtrigger *newtrigger);
+  int registerinput(SDL_EventType type,
+                    std::unique_ptr<inputtrigger> newtrigger);
   void deregister(SDL_EventType type, int id);
 };
 

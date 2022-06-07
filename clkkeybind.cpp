@@ -8,11 +8,9 @@ clk::keybind::kbdbtrig::kbdbtrig(keybind &bind) : binding(bind) { }
 
 void clk::keybind::kbdbtrig::trigger(const SDL_Event &e) { binding.trigger(e); }
 
-clk::keybind::keybind() = default;
+clk::keybind::kbdbtrig::~kbdbtrig() {}
 
-clk::keybind::keybind(
-    std::unordered_map<SDL_Keycode, std::unique_ptr<inputtrigger>> basemap)
-    : registrations(basemap) { }
+clk::keybind::keybind() = default;
 
 void clk::keybind::trigger(const SDL_Event& e) {
   inputtrigger *itrigger = nullptr;
@@ -28,7 +26,7 @@ void clk::keybind::managerreg(inputman *man) {
   if (manager)
     throw std::runtime_error("Already registered with input dispatcher.");
   manager = man; 
-  registration = manager->registerinput(SDL_KEYDOWN, new kbdbtrig(*this));
+  registration = manager->registerinput(SDL_KEYDOWN, std::make_unique<kbdbtrig>(*this));
 }
 
 void clk::keybind::managerdereg() {

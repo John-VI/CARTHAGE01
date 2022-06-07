@@ -6,7 +6,7 @@
 
 #include <SDL2/SDL_events.h>
 
-clk::inputman::inputman(inputmap &smap) : sharedmap(smap){};
+clk::inputman::inputman() = default;
 
 int clk::inputman::processinputs() {
   int i = 0;
@@ -25,24 +25,15 @@ int clk::inputman::processinputs() {
       i++;
       registered = nullptr;
     }
-    try {
-      registered =
-          &imap.at((SDL_EventType)e.type).second;
-    } catch (std::out_of_range) {
-    }
-    if (registered) {
-      for (auto &t : *registered)
-        t->trigger(e);
-      i++;
-    }
   }
   return i;
 }
 
-int clk::inputman::registerinput(SDL_EventType type, inputtrigger *newtrigger) {
-  newtrigger->id = ++imap[type].first;
-  imap[type].second.push_back(std::make_unique<inputtrigger>(newtrigger));
-  return newtrigger->id;
+int clk::inputman::registerinput(SDL_EventType type, std::unique_ptr<inputtrigger> newtrigger) {
+  int id = ++imap[type].first;
+  newtrigger->id = id;
+  imap[type].second.push_back(std::move(newtrigger));
+  return id;
 }
 
 void clk::inputman::deregister(SDL_EventType type, int id) {
