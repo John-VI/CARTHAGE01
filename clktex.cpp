@@ -27,6 +27,7 @@ clk::sprite::sprite(window &ren, const char filename[], SDL_Rect *viewport)
   int w, h;
   query(nullptr, nullptr, &w, &h);
   sheetoffset = { 0, 0, w, h };
+  screenoffset = sheetoffset;
 }
 
 clk::sprite::~sprite() = default;
@@ -44,8 +45,16 @@ SDL_Rect clk::sprite::draw(int x, int y) {
   return region;
 }
 
+void clk::sprite::setscreenoffset(SDL_Rect newoffset) {
+  screenoffset = newoffset;
+}
+
+void clk::sprite::setsheetoffset(SDL_Rect newoffset) {
+  sheetoffset = newoffset;
+}
+
 SDL_Rect clk::sprite::drawchar(int x, int y, char c) {
-  SDL_Rect srcregion = { sheetoffset.x + c - startchar, sheetoffset.y, sheetoffset.w, sheetoffset.h };
+  SDL_Rect srcregion = { sheetoffset.x + (c - startchar) * sheetoffset.w, sheetoffset.y, sheetoffset.w, sheetoffset.h };
   SDL_Rect dstregion = { screenoffset.x + x + viewport->x, screenoffset.y + y + viewport->y, screenoffset.w, screenoffset.h };
   SDL_RenderCopy(renderer.getSDL_Renderer(), texture.get(), &srcregion, &dstregion);
   return dstregion;

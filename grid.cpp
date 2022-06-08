@@ -15,7 +15,7 @@
 grid::grid(int width, int height, int tilewidth, int tileheight,
            clk::sprite &font)
     : w(width), h(height), twidth(tilewidth), theight(tileheight), font(font) {
-  tiles = std::unique_ptr<tile[]>(new tile[w * h]);
+  tiles = std::make_unique<tile[]>(w * h);
   blocking = 0;
 }
 

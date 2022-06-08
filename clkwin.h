@@ -25,5 +25,8 @@ namespace clk {
     void setcolor(const SDL_Color *newcolor);
     SDL_Window *getSDL_Window();
     SDL_Renderer *getSDL_Renderer();
+
+    void clear();
+    void draw();
   };
 }

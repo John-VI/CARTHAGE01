@@ -18,7 +18,7 @@ void clk::keybind::trigger(const SDL_Event& e) {
     itrigger = registrations.at(e.key.keysym.sym).get();
   } catch (std::out_of_range) {
   }
-  if (!itrigger)
+  if (itrigger)
     itrigger->trigger(e);
 }
 

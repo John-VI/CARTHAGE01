@@ -36,5 +36,7 @@ SDL_Window *clk::window::getSDL_Window() {
 }
 
 SDL_Renderer *clk::window::getSDL_Renderer() {
-  return ren.get();
-}
+  return ren.get(); }
+
+void clk::window::clear() { SDL_RenderClear(ren.get()); }
+void clk::window::draw() { SDL_RenderPresent(ren.get()); }

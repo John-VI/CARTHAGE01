@@ -18,12 +18,14 @@ const char *copyright = "Copyright (c) John Allen Whitley, 2022, BSD 3-Clause";
 
 int main(int argc, char *argv[]) {
   std::cout << "Starting\n";
-  SDL_Color white = {255, 255, 255};
+  SDL_Color black = {0, 0, 0};
   SDL_Rect viewport = {0, 0, INTWID, INTHEI};
 
-  clk::window win("rusting", INTWID, INTHEI, &white);
+  clk::window win("rusting", INTWID, INTHEI, &black); //We're 100% black
   clk::sprite frog(win, "frog.png", &viewport);
   clk::sprite vga(win, "compac.png", &viewport);
+  vga.setsheetoffset({0, 0, 8, 16});
+  vga.setscreenoffset({0, 0, 8, 16});
 
   grid g(15, 15, 8, 16, vga);
 
@@ -44,8 +46,10 @@ int main(int argc, char *argv[]) {
     g.tick();
     iman.processinputs();
 
+    win.clear();
     frog.draw(0, 0);
     g.draw();
+    win.draw();
   }
   return 0;
 }

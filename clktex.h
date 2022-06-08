@@ -15,7 +15,7 @@ const unsigned int startchar = 32;
 
 class sprite {
 protected:
-  SDL_Rect screenoffset = {0, 0, 0, 0};
+  SDL_Rect screenoffset;
   SDL_Rect sheetoffset;
   std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> texture;
   window &renderer;
