@@ -12,6 +12,8 @@ typedef struct grid grid;
 
 class monster {
 public:
+  int meter;
+
   monster(const int type, const char family, std::string name, grid *g);
   /* virtual */ ~monster();
 
@@ -59,7 +61,7 @@ protected:
   int hp;
   int damage;
   int speed;
-  int meter;
+  //int meter;
   short status = 0;
 
   void sethp(int newhp);

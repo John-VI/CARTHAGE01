@@ -15,6 +15,7 @@
 grid::grid(int width, int height, int tilewidth, int tileheight,
            clk::sprite &font)
     : w(width), h(height), twidth(tilewidth), theight(tileheight), font(font) {
+  std::list<std::unique_ptr<monster>> monsters;
   tiles = std::make_unique<tile[]>(w * h);
   blocking = 0;
 }
@@ -46,6 +47,8 @@ void grid::draw() {
     assert(tiles.get() + i == &(tiles.get()[i]));
     if (t->mon == nullptr)
       font.drawchar((i % w) * twidth, (i / h) * theight, '.');
+    else
+      t->mon->draw();
   }
 }
 

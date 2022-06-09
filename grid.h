@@ -17,10 +17,12 @@ class grid {
   int h;
   int twidth;
   int theight;
-  std::list<std::unique_ptr<monster>> monsters;
+  //std::list<std::unique_ptr<monster>> monsters;
   std::unique_ptr<tile[]> tiles;
 
  public:
+  std::list<std::unique_ptr<monster>> monsters;
+
   grid(int width, int height, int tilewidth, int tileheight, clk::sprite &font);
 
   clk::sprite &font;

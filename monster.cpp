@@ -11,7 +11,10 @@
 #include "tile.h"
 
 monster::monster(const int type, const char family, std::string name, grid *g)
-    : type(type), family(family), name(name), x(0), y(0), g(g) {}
+    : type(type), family(family), name(name), x(0), y(0), g(g) {
+  meter = 100;
+  speed = 10;
+}
 
 monster::~monster() { g->gettile(x, y)->mon = nullptr; }
 
@@ -19,7 +22,6 @@ int monster::tick() {
   meter -= speed;
   if (meter <= 0) {
     ai();
-    meter += 100;
   }
   return meter;
 }
@@ -48,7 +50,7 @@ void monster::setdamage(int newdamage) { damage = newdamage; }
 
 void monster::sethp(int newhp) { hp = newhp; }
 
-void monster::ai() {}
+void monster::ai() { g->blocking = 1; }
 
 void monster::setx(int newx) { x = newx; }
 void monster::sety(int newy) { y = newy; }
@@ -65,7 +67,7 @@ monster::montrig::montrig(monster &bind) : binding(bind) {}
 void monster::montrig::trigger(const SDL_Event &e) { binding.trigger(e); }
 
 void monster::trigger(const SDL_Event &e) {
-  switch (e.key.keysym.scancode) {
+  switch (e.key.keysym.sym) {
   case SDLK_KP_7:
     move(x - 1, y - 1);
     break;
@@ -92,6 +94,7 @@ void monster::trigger(const SDL_Event &e) {
     break;
   }
   g->blocking = 0;
+  meter += 100;
 }
 
 void monster::managerreg(clk::keybind *m) {

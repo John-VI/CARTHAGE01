@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
     win.clear();
     frog.draw(0, 0);
     g.draw();
+    vga.drawstring(80, 80, std::to_string(g.monsters.front().get()->meter));
     win.draw();
   }
   return 0;
