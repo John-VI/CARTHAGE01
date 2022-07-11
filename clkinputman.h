@@ -23,7 +23,7 @@ typedef std::unordered_map<
 class inputman {
 protected:
   idmap imap;
-  //inputmap &sharedmap;
+  // inputmap &sharedmap;
 
 public:
   inputman();

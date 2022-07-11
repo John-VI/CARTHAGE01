@@ -15,8 +15,7 @@ int clk::inputman::processinputs() {
   while (SDL_PollEvent(&e)) {
     std::list<std::unique_ptr<inputtrigger>> *registered = nullptr;
     try {
-      registered =
-          &imap.at((SDL_EventType)e.type).second;
+      registered = &imap.at((SDL_EventType)e.type).second;
     } catch (std::out_of_range) {
     }
     if (registered) {
@@ -29,7 +28,8 @@ int clk::inputman::processinputs() {
   return i;
 }
 
-int clk::inputman::registerinput(SDL_EventType type, std::unique_ptr<inputtrigger> newtrigger) {
+int clk::inputman::registerinput(SDL_EventType type,
+                                 std::unique_ptr<inputtrigger> newtrigger) {
   int id = ++imap[type].first;
   newtrigger->id = id;
   imap[type].second.push_back(std::move(newtrigger));

@@ -46,7 +46,7 @@ void grid::draw() {
     t = tiles.get() + i;
     assert(tiles.get() + i == &(tiles.get()[i]));
     if (t->mon == nullptr)
-      font.drawchar((i % w) * twidth, (i / h) * theight, '.');
+      font.drawchar(vports::GRID, (i % w) * twidth, (i / h) * theight, '.');
     else
       t->mon->draw();
   }

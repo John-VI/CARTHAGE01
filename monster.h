@@ -4,8 +4,8 @@
 
 #include <string>
 
-#include "clkinputtrigger.h"
 #include "clkinputman.h"
+#include "clkinputtrigger.h"
 #include "clkkeybind.h"
 
 typedef struct grid grid;
@@ -61,7 +61,7 @@ protected:
   int hp;
   int damage;
   int speed;
-  //int meter;
+  // int meter;
   short status = 0;
 
   void sethp(int newhp);

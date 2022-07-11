@@ -24,13 +24,13 @@ protected:
 
 public:
   keybind();
-//  keybind(
-//      std::unordered_map<SDL_Keycode, std::unique_ptr<inputtrigger>> basemap);
+  //  keybind(
+  //      std::unordered_map<SDL_Keycode, std::unique_ptr<inputtrigger>>
+  //      basemap);
   void trigger(const SDL_Event &e);
   void managerreg(inputman *manager);
   void managerdereg();
-  void registerinput(SDL_KeyCode code,
-                    inputtrigger *newtrigger);
+  void registerinput(SDL_KeyCode code, inputtrigger *newtrigger);
   void deregister(SDL_KeyCode code);
 };
 

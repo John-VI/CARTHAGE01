@@ -17,7 +17,8 @@ void clk::terminator::managerreg(inputman *man) {
   if (manager)
     throw std::runtime_error("Already registered with input dispatcher.");
   manager = man;
-  registration = manager->registerinput(SDL_QUIT, std::make_unique<quittrig>(*this));
+  registration =
+      manager->registerinput(SDL_QUIT, std::make_unique<quittrig>(*this));
 }
 
 void clk::terminator::managerdereg() {

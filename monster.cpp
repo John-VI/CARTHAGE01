@@ -2,8 +2,8 @@
 
 #include "monster.h"
 
-#include <string>
 #include <stdexcept>
+#include <string>
 
 #include "clktex.h"
 
@@ -27,7 +27,7 @@ int monster::tick() {
 }
 
 void monster::draw() {
-  g->font.drawchar(x * g->gettilew(), y * g->gettileh(), family);
+  g->font.drawchar(vports::GRID, x * g->gettilew(), y * g->gettileh(), family);
 }
 
 int monster::hurt(int delta) { return hp -= delta; }
@@ -57,6 +57,7 @@ void monster::sety(int newy) { y = newy; }
 
 std::pair<int, int> monster::move(int newx, int newy) {
   if (g->blocking) {
+    meter += 100;
     g->blocking = 0;
     return g->movemonster(this, newx, newy);
   } else
@@ -93,8 +94,6 @@ void monster::trigger(const SDL_Event &e) {
     move(x + 1, y + 1);
     break;
   }
-  g->blocking = 0;
-  meter += 100;
 }
 
 void monster::managerreg(clk::keybind *m) {

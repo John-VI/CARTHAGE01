@@ -50,6 +50,6 @@ def RecursiveGlob(pattern, dir_name=builddir):
 	matches = env.Glob("C:\\Users\\dogja\\Projects\\C++\\caulk-", pattern)
 	return matches
 
-rust = env.Program(os.path.join(bindir, "rusting"), ["clkfont.cpp", "clkinputman.cpp", "clkinputtrigger.cpp", "clkkeybind.cpp", "clkterminator.cpp", "clktex.cpp", "clkwin.cpp", "grid.cpp", "monster.cpp", "tile.cpp", 
+rust = env.Program(os.path.join(bindir, "rusting"), ["clkfont.cpp", "clkinputman.cpp", "clkinputtrigger.cpp", "clkkeybind.cpp", "clkterminator.cpp", "clktex.cpp", "clkwin.cpp", "grid.cpp", "monster.cpp", "tile.cpp", "clkviewport.cpp",
 "main.cpp"])
 env.Default(rust)

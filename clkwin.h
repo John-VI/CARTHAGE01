@@ -2,9 +2,12 @@
 
 #pragma once
 
+#include <array>
 #include <memory>
 
 #include <SDL2/SDL.h>
+
+#include "clkviewport.h"
 
 // typedef struct SDL_Color SDL_Color;
 // typedef struct SDL_Window SDL_Window;
@@ -13,20 +16,27 @@
 // void SDL_DestroyRenderer(SDL_Renderer *);
 // void SDL_DestroyWindow(SDL_Window *);
 
+enum class vports : int { FULL, GRID, MESSAGES, STATUS, MAX };
+
 namespace clk {
-  class window {
-    const SDL_Color *color;
-    std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> win;
-    std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> ren;
+class window {
+  const SDL_Color *color;
+  std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> win;
+  std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> ren;
 
-  public:
-    window(const char name[], int width, int height, const SDL_Color *color);
-    ~window();
-    void setcolor(const SDL_Color *newcolor);
-    SDL_Window *getSDL_Window();
-    SDL_Renderer *getSDL_Renderer();
+  std::array<viewport, (int)vports::MAX> viewports;
 
-    void clear();
-    void draw();
-  };
-}
+public:
+  window(const char name[], int width, int height, const SDL_Color *color);
+  ~window();
+  void setcolor(const SDL_Color *newcolor);
+  SDL_Window *getSDL_Window();
+  SDL_Renderer *getSDL_Renderer();
+
+  const viewport &getviewport(vports port);
+  void setviewport(vports port, viewport newport);
+
+  void clear();
+  void draw();
+};
+} // namespace clk
