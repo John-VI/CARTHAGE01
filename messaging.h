@@ -22,16 +22,16 @@ struct message {
 
 class messages {
 protected:
-  std::deque<message> queue;
+  static std::deque<message> queue;
   devlevel level;
-  const clk::window &win;
-  const clk::sprite &font;
-  unsigned int msgcap = 500;
+  clk::window &win;
+  clk::sprite &font;
+  const static unsigned int msgcap = 500;
 
 public:
-  messages(const clk::window &window, const clk::sprite &fontface, devlevel level = devlevel::GAME);
+  messages(clk::window &window, clk::sprite &fontface, devlevel level = devlevel::GAME);
 
-  void push(message);
+  static void push(message);
 
   void draw();
 };

@@ -17,6 +17,7 @@
 #include "clkwin.h"
 #include "grid.h"
 #include "monster.h"
+#include "messaging.h"
 
 const char *copyright = "Copyright (c) John Allen Whitley, 2022, BSD 3-Clause";
 
@@ -52,6 +53,8 @@ int main(int argc, char *argv[]) {
   m->managerreg(&kbd);
   g.insertmonster(std::move(m));
 
+  messages msg(win, vga);
+
   while (!terminator) {
     g.tick();
     iman.processinputs();
@@ -61,6 +64,7 @@ int main(int argc, char *argv[]) {
     g.draw();
     vga.drawstring(vports::STATUS, 0, 0,
                    std::to_string(g.monsters.front().get()->meter));
+    msg.draw();
 
     win.draw();
   }
