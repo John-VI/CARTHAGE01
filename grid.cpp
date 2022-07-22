@@ -9,9 +9,9 @@
 
 #include "clktex.h"
 
+#include "messaging.h"
 #include "monster.h"
 #include "tile.h"
-#include "messaging.h"
 
 grid::grid(int width, int height, int tilewidth, int tileheight,
            clk::sprite &font)
@@ -60,7 +60,8 @@ void grid::draw() {
 }
 
 std::pair<int, int> grid::movemonster(monster *m, int x, int y) {
-  msg.push({ "Monster move request", severitylevel::NORMAL, devlevel::GAME, 0 });
+  messages::push(
+      {"Monster move request", severitylevel::NORMAL, devlevel::GAME, 0});
   tile *dest = gettile(x, y);
   if (!dest->mon && dest->flags & (char)tileflag::PASSABLE) {
     gettile(m->getx(), m->gety())->mon = nullptr;

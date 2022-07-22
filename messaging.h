@@ -3,8 +3,8 @@
 #pragma once
 
 #include "clkwin.h"
-#include <string>
 #include <deque>
+#include <string>
 
 enum class devlevel { GAME, DEV };
 enum class severitylevel { DEATH, CRITICAL, WARNING, NORMAL, DEV };
@@ -29,10 +29,10 @@ protected:
   const static unsigned int msgcap = 500;
 
 public:
-  messages(clk::window &window, clk::sprite &fontface, devlevel level = devlevel::GAME);
+  messages(clk::window &window, clk::sprite &fontface,
+           devlevel level = devlevel::GAME);
 
   static void push(message);
 
   void draw();
 };
-

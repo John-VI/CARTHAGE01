@@ -16,8 +16,8 @@
 #include "clkviewport.h"
 #include "clkwin.h"
 #include "grid.h"
-#include "monster.h"
 #include "messaging.h"
+#include "monster.h"
 
 const char *copyright = "Copyright (c) John Allen Whitley, 2022, BSD 3-Clause";
 
