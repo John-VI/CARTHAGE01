@@ -30,8 +30,8 @@ public:
   void trigger(const SDL_Event &e);
   void managerreg(inputman *manager);
   void managerdereg();
-  void registerinput(SDL_KeyCode code, inputtrigger *newtrigger);
-  void deregister(SDL_KeyCode code);
+  void registerinput(SDL_Keycode code, inputtrigger *newtrigger);
+  void deregister(SDL_Keycode code);
 };
 
 } // namespace clk

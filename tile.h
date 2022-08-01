@@ -19,9 +19,11 @@ struct tile {
   tiletype type = tiletype::UNDEF;
   tilefeature feature = tilefeature::NONE;
   char flags;
+  char placeholder;
   short health = 1000;
   monster *mon = nullptr;
 
   static const std::unordered_map<tiletype, char> tiledefaults;
   void mktype(tiletype newtype);
+  void mkfeat(tilefeature newfeature);
 };

@@ -16,8 +16,6 @@
 // void SDL_DestroyRenderer(SDL_Renderer *);
 // void SDL_DestroyWindow(SDL_Window *);
 
-enum class vports : int { FULL, GRID, MESSAGES, STATUS, MAX };
-
 namespace clk {
 class window {
   const SDL_Color *color;

@@ -26,8 +26,7 @@ void clk::keybind::managerreg(inputman *man) {
   if (manager)
     throw std::runtime_error("Already registered with input dispatcher.");
   manager = man;
-  registration =
-      manager->registerinput(SDL_KEYDOWN, std::make_unique<kbdbtrig>(*this));
+  registration = manager->registerinput(SDL_KEYDOWN, new kbdbtrig(*this));
 }
 
 void clk::keybind::managerdereg() {
@@ -37,13 +36,13 @@ void clk::keybind::managerdereg() {
   }
 }
 
-void clk::keybind::registerinput(SDL_KeyCode code, inputtrigger *newtrigger) {
+void clk::keybind::registerinput(SDL_Keycode code, inputtrigger *newtrigger) {
   if (registrations[code] == nullptr)
     registrations[code].reset(newtrigger);
   else
     throw std::runtime_error("Key is already bound.");
 }
 
-void clk::keybind::deregister(SDL_KeyCode code) {
+void clk::keybind::deregister(SDL_Keycode code) {
   registrations[code].reset(nullptr);
 }

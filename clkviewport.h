@@ -4,6 +4,8 @@
 
 #include <SDL2/SDL_rect.h>
 
+enum class vports : int { FULL, GRID, MESSAGES, STATUS, MAX };
+
 namespace clk {
 struct viewport : public SDL_Rect {
   viewport();

@@ -13,8 +13,8 @@ typedef struct sprite sprite;
 }
 
 class grid {
-  int w;
-  int h;
+  unsigned short w;
+  unsigned short h;
   int twidth;
   int theight;
   // std::list<std::unique_ptr<monster>> monsters;
@@ -23,18 +23,23 @@ class grid {
 public:
   std::list<std::unique_ptr<monster>> monsters;
 
-  grid(int width, int height, int tilewidth, int tileheight, clk::sprite &font);
+  grid(unsigned short width, unsigned short height, int tilewidth,
+       int tileheight, clk::sprite &font);
+  grid(std::pair<unsigned short, unsigned short>, int tilewidth, int tileheight,
+       clk::sprite &font);
 
+  void setgrid(tile tiles[]);
   clk::sprite &font;
 
-  int getw() const;
-  int geth() const;
+  unsigned short getw() const;
+  unsigned short geth() const;
   int gettilew() const;
   int gettileh() const;
-  tile *gettile(int x, int y);
+  tile *gettile(unsigned short x, unsigned short y);
   void tick();
   void draw();
-  std::pair<int, int> movemonster(monster *m, int x, int y);
+  std::pair<unsigned short, unsigned short>
+  movemonster(monster *m, unsigned short x, unsigned short y);
 
   int blocking;
   void insertmonster(std::unique_ptr<monster> m);

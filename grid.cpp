@@ -13,8 +13,8 @@
 #include "monster.h"
 #include "tile.h"
 
-grid::grid(int width, int height, int tilewidth, int tileheight,
-           clk::sprite &font)
+grid::grid(unsigned short width, unsigned short height, int tilewidth,
+           int tileheight, clk::sprite &font)
     : w(width), h(height), twidth(tilewidth), theight(tileheight), font(font) {
   std::list<std::unique_ptr<monster>> monsters;
   tiles = std::make_unique<tile[]>(w * h);
@@ -26,12 +26,19 @@ grid::grid(int width, int height, int tilewidth, int tileheight,
   }
 }
 
-int grid::getw() const { return w; }
-int grid::geth() const { return h; }
+grid::grid(std::pair<unsigned short, unsigned short> dimensions, int tilewidth,
+           int tileheight, clk::sprite &font)
+    : w(dimensions.first), h(dimensions.second), twidth(tilewidth),
+      theight(tileheight), font(font) {}
+
+void grid::setgrid(tile t[]) { tiles = std::unique_ptr<tile[]>(t); }
+
+unsigned short grid::getw() const { return w; }
+unsigned short grid::geth() const { return h; }
 int grid::gettilew() const { return twidth; }
 int grid::gettileh() const { return theight; }
 
-tile *grid::gettile(int x, int y) {
+tile *grid::gettile(unsigned short x, unsigned short y) {
   if (x >= w || x < 0 || y >= h || y < 0)
     throw std::runtime_error("Tile grid reference out of bounds.");
   return tiles.get() + x + y * w;
@@ -48,7 +55,7 @@ void grid::tick() {
 
 void grid::draw() {
   tile *t;
-  for (int i = 0; i < w * h; i++) {
+  for (unsigned short i = 0; i < w * h; i++) {
     t = tiles.get() + i;
     assert(tiles.get() + i == &(tiles.get()[i]));
     if (t->mon == nullptr)
@@ -59,7 +66,8 @@ void grid::draw() {
   }
 }
 
-std::pair<int, int> grid::movemonster(monster *m, int x, int y) {
+std::pair<unsigned short, unsigned short>
+grid::movemonster(monster *m, unsigned short x, unsigned short y) {
   messages::push(
       {"Monster move request", severitylevel::NORMAL, devlevel::GAME, 0});
   tile *dest = gettile(x, y);
@@ -68,7 +76,7 @@ std::pair<int, int> grid::movemonster(monster *m, int x, int y) {
     dest->mon = m;
     m->setx(x);
     m->sety(y);
-    return std::pair<int, int>(x, y);
+    return std::pair<unsigned short, unsigned short>(x, y);
   } else
     return m->getcoords();
 }

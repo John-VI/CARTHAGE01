@@ -11,6 +11,7 @@
 
 #include "clkinputman.h"
 #include "clkkeybind.h"
+#include "clkmenutrig.h"
 #include "clkterminator.h"
 #include "clktex.h"
 #include "clkviewport.h"
@@ -53,6 +54,10 @@ int main(int argc, char *argv[]) {
   m->managerreg(&kbd);
   g.insertmonster(std::move(m));
 
+  char value = 0;
+
+  clk::menubuild menuman({{SDLK_c, &value}}, iman, kbd, vga);
+
   messages msg(win, vga);
 
   while (!terminator) {
@@ -65,6 +70,8 @@ int main(int argc, char *argv[]) {
     vga.drawstring(vports::STATUS, 0, 0,
                    std::to_string(g.monsters.front().get()->meter));
     msg.draw();
+    vga.drawstring(vports::STATUS, 20, 0, std::to_string(value));
+    menuman.draw();
 
     win.draw();
   }
