@@ -2,14 +2,16 @@
 
 #pragma once
 
-#include "grid.h"
-
-#include "clktex.h"
-
 #include <sstream>
+
+namespace clk {
+typedef struct sprite sprite;
+}
+typedef struct grid grid;
 
 namespace clf1 {
 
 grid decode(std::istream &level, int fonwid, int fonhei, clk::sprite &font);
+long encode(std::ostream &level, const grid &g);
 
-}
+} // namespace clf1

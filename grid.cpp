@@ -44,6 +44,24 @@ tile *grid::gettile(unsigned short x, unsigned short y) {
   return tiles.get() + x + y * w;
 }
 
+tile *grid::gettile(unsigned long i) {
+  if (i >= w * h)
+    throw std::runtime_error("Tile grid reference out of bounds.");
+  return tiles.get() + i;
+}
+
+const tile *grid::gettile(unsigned short x, unsigned short y) const {
+  if (x >= w || x < 0 || y >= h || y < 0)
+    throw std::runtime_error("Tile grid reference out of bounds.");
+  return tiles.get() + x + y * w;
+}
+
+const tile *grid::gettile(unsigned long i) const {
+  if (i >= w * h)
+    throw std::runtime_error("Tile grid reference out of bounds.");
+  return tiles.get() + i;
+}
+
 void grid::tick() {
   if (!blocking)
     for (auto &moving : monsters) {

@@ -36,6 +36,9 @@ public:
   int gettilew() const;
   int gettileh() const;
   tile *gettile(unsigned short x, unsigned short y);
+  tile *gettile(unsigned long x);
+  const tile *gettile(unsigned long x) const;
+  const tile *gettile(unsigned short x, unsigned short y) const;
   void tick();
   void draw();
   std::pair<unsigned short, unsigned short>

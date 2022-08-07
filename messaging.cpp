@@ -19,6 +19,7 @@ void messages::push(message msg) {
   if (queue.size() > msgcap) {
     queue.pop_front();
   }
+  std::cout << msg.text << std::endl;
 }
 
 void messages::draw() {

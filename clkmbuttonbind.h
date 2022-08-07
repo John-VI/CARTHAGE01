@@ -4,11 +4,15 @@
 
 #include "clkinputtrigger.h"
 
+#include <memory>
 #include <unordered_map>
 
-#include "clkinputman.h"
+typedef struct grid grid;
 
 namespace clk {
+
+typedef struct inputman inputman;
+typedef struct inputtrigger inputtrigger;
 
 class mbuttonbind {
 protected:
@@ -19,17 +23,21 @@ protected:
     ~mbuttontrig();
   };
   int registration;
-  inputman *manager = nullptr;
-  std::unordered_map<char, std::unique_ptr<inputtrigger>> registrations;
+  inputman &manager;
+  grid &g;
 
 public:
-  mbuttonbind();
+  char stype, sfeat, sflag;
+
+  mbuttonbind(grid &, inputman &);
 
   void trigger(const SDL_Event &e);
-  void managerreg(inputman *manager);
+  void managerreg();
   void managerdereg();
   void registerinput(char, inputtrigger *newtrigger);
   void deregister(char);
+
+  ~mbuttonbind();
 };
 
 } // namespace clk
