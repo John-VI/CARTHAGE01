@@ -43,18 +43,6 @@ int main(int argc, char *argv[]) {
   vga.setsheetoffset({0, 0, 8, 16});
   vga.setscreenoffset({0, 0, 8, 16});
 
-  grid g2(15, 15, 8, 16,
-          vga); // FIXME: Oopsie, I jacked up the grid for testing!
-
-  std::fstream levelfile;
-  levelfile.open("testio.clf1", std::ios::in | std::ios::out |
-                                    std::ios::binary | std::ios::trunc);
-  assert(levelfile.is_open());
-  clf1::encode(levelfile, g2);
-  levelfile.clear();
-  levelfile.seekg(0);
-  grid g = clf1::decode(levelfile, 8, 16, vga);
-
   clk::inputman iman;
 
   int terminator = 0;
@@ -63,6 +51,10 @@ int main(int argc, char *argv[]) {
 
   clk::keybind kbd;
   kbd.managerreg(&iman);
+
+  clf1::levelloader ll(SDLK_s, SDLK_d, kbd, vga);
+  grid g = ll.load();
+  ll.managerreg();
 
   std::unique_ptr<monster> m =
       std::make_unique<monster>(0, '@', std::string("You"), &g);

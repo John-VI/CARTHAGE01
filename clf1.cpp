@@ -7,6 +7,7 @@
 
 #include "messaging.h"
 
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <utility>
@@ -28,14 +29,18 @@ void proctile(tile *t, std::istream &level) {
   level.ignore(2, EOF);
 }
 
-grid clf1::decode(std::istream &level, int fonwid, int fonhei,
-                  clk::sprite &font) {
+grid decode(std::istream &level, int fonwid, int fonhei, clk::sprite &font) {
+  if (!level.good())
+    throw std::runtime_error("Passed bad stream for reading level!");
   std::pair<unsigned short, unsigned short> dimensions = prochead(level);
   grid output(dimensions, fonwid, fonhei, font);
   tile *t = new tile[dimensions.first * dimensions.second];
 
   for (unsigned short i = 0; i < dimensions.first * dimensions.second; i++)
-    proctile(&t[i], level);
+    if (level.good())
+      proctile(&t[i], level);
+    else
+      throw std::runtime_error("Stream went bad while reading level file!");
 
   output.setgrid(t);
 
@@ -71,7 +76,9 @@ long outptile(std::ostream &level, const tile *t) {
   return count;
 }
 
-long clf1::encode(std::ostream &level, const grid &g) {
+long encode(std::ostream &level, const grid &g) {
+  if (!level.good())
+    throw std::runtime_error("Passed bad stream for writing level!");
   long header = mkhead(level, g);
   unsigned long i;
   long tiles = 0;
@@ -83,4 +90,51 @@ long clf1::encode(std::ostream &level, const grid &g) {
                       " tiles written.",
                   severitylevel::DEV, devlevel::DEV, 0});
   return header + tiles;
+}
+
+clf1::levelloader::lltrig::lltrig(levelloader &l) : binding(l) {}
+clf1::levelloader::lltrig::~lltrig() {}
+void clf1::levelloader::lltrig::trigger(const SDL_Event &e) {
+  binding.trigger(e);
+}
+
+clf1::levelloader::levelloader(SDL_Keycode savekey, SDL_Keycode loadkey,
+                               clk::keybind &kbdmanager, clk::sprite &font,
+                               std::string filename)
+    : manager(kbdmanager), filename(filename), sbind(savekey), lbind(loadkey),
+      font(font) {}
+
+void clf1::levelloader::managerreg() {
+  if (!bound) {
+    manager.registerinput(sbind, new lltrig(*this));
+    manager.registerinput(lbind, new lltrig(*this));
+  }
+}
+
+void clf1::levelloader::managerdereg() {
+  if (bound) {
+    manager.deregister(sbind);
+    manager.deregister(lbind);
+  }
+}
+
+grid clf1::levelloader::load() {
+  std::ifstream levelfile;
+  levelfile.open(filename, std::ios::in | std::ios::binary);
+  return decode(
+      levelfile, 8, 16,
+      font); // Relying on destructor close() here for move semantics ease
+}
+
+long clf1::levelloader::save(grid &g) {
+  std::ofstream levelfile;
+  levelfile.open(filename, std::ios::out | std::ios::binary | std::ios::trunc);
+  return encode(levelfile, g);
+}
+
+void clf1::levelloader::trigger(const SDL_Event &e) {
+  if (e.key.keysym.sym == sbind)
+    save();
+  else
+    load();
 }

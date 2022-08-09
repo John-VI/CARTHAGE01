@@ -103,3 +103,23 @@ void grid::insertmonster(std::unique_ptr<monster> m) {
   monsters.push_front(std::move(m));
   tiles[0].mon = monsters.front().get();
 }
+
+/*
+grid::~grid() = default;
+
+grid::grid(const grid &g) : w(g.w), h(g.h), twidth(g.twidth), theight(g.theight), monsters(g.monsters), font(g.font),
+	blocking(g.blocking) {
+		tiles = std::make_unique<tile[]>(w * h);
+		for (long i = 0; i < w * h; i++)
+			tiles.get()[i] = g.tiles.get()[i];
+	}
+
+grid &grid::operator=(const grid &g) {
+	if (&g == this)
+		return *this;
+
+	w = g.w;
+	h = g.h;
+	twidth = g.twidth;
+	theight = g.theight;
+	*/

@@ -36,7 +36,7 @@ public:
   int gettilew() const;
   int gettileh() const;
   tile *gettile(unsigned short x, unsigned short y);
-  tile *gettile(unsigned long x);
+  tile *gettile(unsigned long x); // nick fuentes catboys
   const tile *gettile(unsigned long x) const;
   const tile *gettile(unsigned short x, unsigned short y) const;
   void tick();
@@ -46,4 +46,13 @@ public:
 
   int blocking;
   void insertmonster(std::unique_ptr<monster> m);
+
+  /*
+  ~grid();
+  grid(const grid &other);
+  grid &operator=(const grid &other);
+
+  grid(const grid &&other);
+  grid &operator=(grid &&other);
+  */
 };
