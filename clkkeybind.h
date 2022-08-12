@@ -10,6 +10,9 @@
 
 namespace clk {
 
+/* FIXME: Redo this to allow multiple binding like inputman but right know I
+ * can't fing care */
+
 class keybind {
 protected:
   struct kbdbtrig : public inputtrigger {

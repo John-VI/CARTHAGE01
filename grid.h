@@ -10,7 +10,8 @@
 
 namespace clk {
 typedef struct sprite sprite;
-}
+typedef struct keybind keybind;
+} // namespace clk
 
 class grid {
   unsigned short w;
@@ -19,6 +20,7 @@ class grid {
   int theight;
   // std::list<std::unique_ptr<monster>> monsters;
   std::unique_ptr<tile[]> tiles;
+  clk::keybind *kman = nullptr;
 
 public:
   std::list<std::unique_ptr<monster>> monsters;
@@ -46,6 +48,9 @@ public:
 
   int blocking;
   void insertmonster(std::unique_ptr<monster> m);
+
+  void managerreg(clk::keybind *kbdman);
+  void managerdereg();
 
   /*
   ~grid();

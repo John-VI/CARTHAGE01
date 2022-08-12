@@ -5,11 +5,11 @@
 #include <iostream>
 #include <string>
 
-#include "clkinputtrigger.h"
+//#include "clkinputtrigger.h"
 
 namespace clk {
 typedef struct sprite sprite;
-typedef struct keybind keybind;
+// typedef struct keybind keybind;
 } // namespace clk
 typedef struct grid grid;
 
@@ -17,29 +17,21 @@ namespace clf1 {
 
 class levelloader {
 protected:
-  struct lltrig : public clk::inputtrigger {
-    levelloader &binding;
-    lltrig(levelloader &);
-    void trigger(const SDL_Event &e) override;
-    ~lltrig();
-  };
-  SDL_Keycode sbind, lbind;
-  std::string filename;
+  /*   SDL_Keycode sbind, lbind;
   clk::keybind &manager;
-  bool bound = false;
+  bool bound = false; */
   clk::sprite &font;
+  // std::string filename;
 
 public:
-  levelloader(SDL_Keycode savekey, SDL_Keycode loadkey,
-              clk::keybind &kbdmanager, clk::sprite &font,
-              std::string filename = "default.clf1");
+  levelloader(clk::sprite &font);
 
-  void trigger(const SDL_Event &e);
+  /* void trigger(const SDL_Event &e);
   void managerreg();
-  void managerdereg();
-  grid load();
-  long save(grid &g);
-  void setfilename(std::string);
+  void managerdereg(); */
+  grid *load(std::string filename);
+  long save(grid &g, std::string filename);
+  // void setfilename(std::string);
   std::string getfilename();
 };
 

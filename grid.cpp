@@ -102,24 +102,45 @@ grid::movemonster(monster *m, unsigned short x, unsigned short y) {
 void grid::insertmonster(std::unique_ptr<monster> m) {
   monsters.push_front(std::move(m));
   tiles[0].mon = monsters.front().get();
+
+  if (kman)
+    monsters.front().get()->managerreg(kman);
+}
+
+void grid::managerreg(clk::keybind *kbdman) {
+  if (kman)
+    throw std::runtime_error("Grid already registered for keyboard input!");
+
+  kman = kbdman;
+  for (auto &m : monsters)
+    m.get()->managerreg(kman);
+}
+
+void grid::managerdereg() {
+  if (!kman)
+    return;
+
+  kman = nullptr;
+  for (auto &m : monsters)
+    m.get()->managerdereg();
 }
 
 /*
 grid::~grid() = default;
 
-grid::grid(const grid &g) : w(g.w), h(g.h), twidth(g.twidth), theight(g.theight), monsters(g.monsters), font(g.font),
-	blocking(g.blocking) {
-		tiles = std::make_unique<tile[]>(w * h);
-		for (long i = 0; i < w * h; i++)
-			tiles.get()[i] = g.tiles.get()[i];
-	}
+grid::grid(const grid &g) : w(g.w), h(g.h), twidth(g.twidth),
+theight(g.theight), monsters(g.monsters), font(g.font), blocking(g.blocking) {
+                tiles = std::make_unique<tile[]>(w * h);
+                for (long i = 0; i < w * h; i++)
+                        tiles.get()[i] = g.tiles.get()[i];
+        }
 
 grid &grid::operator=(const grid &g) {
-	if (&g == this)
-		return *this;
+        if (&g == this)
+                return *this;
 
-	w = g.w;
-	h = g.h;
-	twidth = g.twidth;
-	theight = g.theight;
-	*/
+        w = g.w;
+        h = g.h;
+        twidth = g.twidth;
+        theight = g.theight;
+        */

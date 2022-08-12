@@ -1,12 +1,12 @@
 // Copyright (c) John Allen Whitley, 2022, BSD 3-Clause
 
-#include <cassert>
 #define INTWID 480
 #define INTHEI 416
 
 #define FONWID 8
 #define FONHEI 16
 
+#include <cassert>
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -22,6 +22,7 @@
 
 #include "clf1.h"
 #include "grid.h"
+#include "gridman.h"
 #include "messaging.h"
 #include "monster.h"
 
@@ -52,16 +53,17 @@ int main(int argc, char *argv[]) {
   clk::keybind kbd;
   kbd.managerreg(&iman);
 
-  clf1::levelloader ll(SDLK_s, SDLK_d, kbd, vga);
-  grid g = ll.load();
-  ll.managerreg();
+  gridman gman(vga, kbd);
+  gman.load();
+  gman.managerreg();
 
   std::unique_ptr<monster> m =
-      std::make_unique<monster>(0, '@', std::string("You"), &g);
-  m->managerreg(&kbd);
-  g.insertmonster(std::move(m));
+      std::make_unique<monster>(0, '@', std::string("You"), gman.clevel.get());
+  gman.clevel.get()->insertmonster(std::move(m));
 
-  clk::mbuttonbind mouse(g, iman);
+  clk::mbuttonbind mouse(
+      *gman.clevel.get(),
+      iman); // FIXME this is going to break when we change levels
   mouse.managerreg();
 
   clk::menubuild menuman(
@@ -71,14 +73,15 @@ int main(int argc, char *argv[]) {
   messages msg(win, vga);
 
   while (!terminator) {
-    g.tick();
+    gman.clevel.get()->tick();
     iman.processinputs();
 
     win.clear();
     frog.draw(vports::FULL, 0, 0);
-    g.draw();
-    vga.drawstring(vports::STATUS, 96, 0,
-                   std::to_string(g.monsters.front().get()->meter));
+    gman.clevel.get()->draw();
+    vga.drawstring(
+        vports::STATUS, 96, 0,
+        std::to_string(gman.clevel.get()->monsters.front().get()->meter));
     msg.draw();
     vga.drawstring(vports::STATUS, 0, 0, std::to_string(mouse.stype));
     vga.drawstring(vports::STATUS, 32, 0, std::to_string(mouse.sfeat));

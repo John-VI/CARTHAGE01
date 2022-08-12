@@ -41,6 +41,7 @@ public:
 
   void trigger(const SDL_Event &e);
   void managerreg(clk::keybind *manager);
+  void managerdereg();
   void managerunreg();
 
 protected:
