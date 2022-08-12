@@ -57,10 +57,6 @@ int main(int argc, char *argv[]) {
   gman.load();
   gman.managerreg();
 
-  std::unique_ptr<monster> m =
-      std::make_unique<monster>(0, '@', std::string("You"), gman.clevel.get());
-  gman.clevel.get()->insertmonster(std::move(m));
-
   clk::mbuttonbind mouse(
       *gman.clevel.get(),
       iman); // FIXME this is going to break when we change levels
