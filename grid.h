@@ -48,6 +48,7 @@ public:
 
   int blocking;
   void insertmonster(std::unique_ptr<monster> m);
+  void insertmonster(monster *m);
 
   void managerreg(clk::keybind *kbdman);
   void managerdereg();

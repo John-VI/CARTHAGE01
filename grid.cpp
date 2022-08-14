@@ -100,7 +100,21 @@ grid::movemonster(monster *m, unsigned short x, unsigned short y) {
 }
 
 void grid::insertmonster(std::unique_ptr<monster> m) {
+  m.get()->g = this;
+  m.get()->x = 0;
+  m.get()->y = 0;
   monsters.push_front(std::move(m));
+  tiles[0].mon = monsters.front().get();
+
+  if (kman)
+    monsters.front().get()->managerreg(kman);
+}
+
+void grid::insertmonster(monster *m) {
+  m->g = this;
+  m->x = 0;
+  m->y = 0;
+  monsters.push_front(std::unique_ptr<monster>(m));
   tiles[0].mon = monsters.front().get();
 
   if (kman)

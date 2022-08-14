@@ -3,21 +3,27 @@
 #pragma once
 
 #include <string>
+#include <functional>
 
 #include "clkinputman.h"
 #include "clkinputtrigger.h"
 #include "clkkeybind.h"
 
+#include "protomonster.h"
+
 typedef struct grid grid;
 
-class monster {
+class monster : public protomonster {
 public:
-  int meter;
+  int meter = 0;
+  grid *g = nullptr;
+  int x, y;
+  int hp;
 
-  monster(const int type, const char family, std::string name, grid *g);
+  monster(protomonster &form, enum aitype ai = aitype::MAX); // What the f
   /* virtual */ ~monster();
 
-  void ai();
+  std::function<void(monster &)> ai;
 
   int tick();
   void draw();
@@ -36,13 +42,11 @@ public:
   int getdamage() const;
   void setdamage(int newdamage);
 
-  const int type;
-  const char family;
-
   void trigger(const SDL_Event &e);
   void managerreg(clk::keybind *manager);
   void managerdereg();
   void managerunreg();
+
 
 protected:
   struct montrig : public clk::inputtrigger {
@@ -50,20 +54,9 @@ protected:
     montrig(monster &bind);
     void trigger(const SDL_Event &e) override;
   };
+
   clk::keybind *manager = nullptr;
-
-  std::string name;
-
-  grid *g;
-
-  int x, y;
-
-  int maxhp;
-  int hp;
-  int damage;
-  int speed;
   // int meter;
-  short status = 0;
-
   void sethp(int newhp);
 };
+

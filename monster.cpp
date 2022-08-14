@@ -9,11 +9,17 @@
 
 #include "grid.h"
 #include "tile.h"
+#include "protomonster.h"
 
-monster::monster(const int type, const char family, std::string name, grid *g)
+/* monster::monster(const int type, const char family, std::string name, grid *g)
     : type(type), family(family), name(name), x(0), y(0), g(g) {
   meter = 100;
   speed = 10;
+} */
+
+monster::monster(protomonster &form, enum aitype ait) : protomonster(form) {
+  hp = maxhp;
+  ai = ait == aitype::MAX ? aifuncs[aitype] : aifuncs[(protomonster::aitype)ait];
 }
 
 monster::~monster() { g->gettile(x, y)->mon = nullptr; }
@@ -21,7 +27,7 @@ monster::~monster() { g->gettile(x, y)->mon = nullptr; }
 int monster::tick() {
   meter -= speed;
   if (meter <= 0) {
-    ai();
+    ai(*this);
   }
   return meter;
 }
@@ -49,8 +55,6 @@ int monster::getdamage() const { return damage; }
 void monster::setdamage(int newdamage) { damage = newdamage; }
 
 void monster::sethp(int newhp) { hp = newhp; }
-
-void monster::ai() { g->blocking = 1; }
 
 void monster::setx(int newx) { x = newx; }
 void monster::sety(int newy) { y = newy; }

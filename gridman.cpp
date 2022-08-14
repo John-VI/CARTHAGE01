@@ -45,7 +45,8 @@ void gridman::managerdereg() {
 void gridman::load() {
   std::shared_ptr<grid> newlvl(lloader.load(filename));
   if (!levels.empty()) {
-	  levels.front().get()->managerdereg(); //FIXME: Make the grid deregister itself in the destructor.
+    levels.front().get()->managerdereg(); // FIXME: Make the grid deregister
+                                          // itself in the destructor.
     levels.pop_back();
   }
 
@@ -54,8 +55,9 @@ void gridman::load() {
 
   if (bound)
     clevel.get()->managerreg(&kman);
-  
-  clevel.get()->insertmonster(std::make_unique<monster>(0, '@', "Dudley", clevel.get()));
+
+  clevel.get()->insertmonster(
+      std::make_unique<monster>(0, '@', "Dudley", clevel.get()));
 }
 
 void gridman::save() { lloader.save(*clevel.get(), filename); }
