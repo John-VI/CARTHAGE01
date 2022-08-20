@@ -2,11 +2,13 @@
 
 #include "grid.h"
 
+#include <algorithm>
 #include <cassert>
 #include <forward_list>
 #include <memory>
 #include <stdexcept>
 
+#include "clkrand.h"
 #include "clktex.h"
 
 #include "messaging.h"
@@ -158,3 +160,29 @@ grid &grid::operator=(const grid &g) {
         twidth = g.twidth;
         theight = g.theight;
         */
+
+std::pair<unsigned short, unsigned short>
+grid::newmonst(protomonster::montype type) {
+  std::vector<std::pair<tile *, unsigned long>> candidates;
+  for (unsigned long i = 0; i < w * h; i++)
+    if ((gettile(i)->mon == nullptr) &&
+        (gettile(i)->flags & (char)tileflag::PASSABLE))
+      candidates.push_back({gettile(i), i});
+
+  if (candidates.size() <= 0)
+    throw std::runtime_error("No candidates for monster spawn!");
+
+  monster *m = protomonster::kinds[(int)type].genmonster();
+  m->g = this;
+  int roll = clk::randctl::randint<int>(0, candidates.size() - 1);
+  tile &t = *candidates[roll].first;
+  m->x = candidates[roll].second % w;
+  m->y = candidates[roll].second / w;
+  monsters.push_back(std::unique_ptr<monster>(m));
+  t.mon = m;
+
+  if (kman)
+    m->managerreg(kman);
+
+  return {m->x, m->y};
+}

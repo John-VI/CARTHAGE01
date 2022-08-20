@@ -8,18 +8,18 @@
 #include "clktex.h"
 
 #include "grid.h"
-#include "tile.h"
 #include "protomonster.h"
+#include "tile.h"
 
-/* monster::monster(const int type, const char family, std::string name, grid *g)
-    : type(type), family(family), name(name), x(0), y(0), g(g) {
-  meter = 100;
+/* monster::monster(const int type, const char family, std::string name, grid
+*g) : type(type), family(family), name(name), x(0), y(0), g(g) { meter = 100;
   speed = 10;
 } */
 
-monster::monster(protomonster &form, enum aitype ait) : protomonster(form) {
+monster::monster(protomonster form, enum aitype ait) : protomonster(form) {
   hp = maxhp;
-  ai = ait == aitype::MAX ? aifuncs[aitype] : aifuncs[(protomonster::aitype)ait];
+  if (ait < aitype::MAX)
+    ai = (aitype)ait;
 }
 
 monster::~monster() { g->gettile(x, y)->mon = nullptr; }
@@ -27,7 +27,7 @@ monster::~monster() { g->gettile(x, y)->mon = nullptr; }
 int monster::tick() {
   meter -= speed;
   if (meter <= 0) {
-    ai(*this);
+    aifuncs[(int)ai](*this);
   }
   return meter;
 }

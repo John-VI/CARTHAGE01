@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <string>
 #include <functional>
+#include <string>
 
 #include "clkinputman.h"
 #include "clkinputtrigger.h"
@@ -20,10 +20,8 @@ public:
   int x, y;
   int hp;
 
-  monster(protomonster &form, enum aitype ai = aitype::MAX); // What the f
+  monster(protomonster form, enum aitype ai = aitype::MAX); // What the f
   /* virtual */ ~monster();
-
-  std::function<void(monster &)> ai;
 
   int tick();
   void draw();
@@ -47,7 +45,6 @@ public:
   void managerdereg();
   void managerunreg();
 
-
 protected:
   struct montrig : public clk::inputtrigger {
     monster &binding;
@@ -59,4 +56,3 @@ protected:
   // int meter;
   void sethp(int newhp);
 };
-

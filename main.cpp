@@ -15,6 +15,7 @@
 #include "clkkeybind.h"
 #include "clkmbuttonbind.h"
 #include "clkmenutrig.h"
+#include "clkrand.h"
 #include "clkterminator.h"
 #include "clktex.h"
 #include "clkviewport.h"
@@ -52,6 +53,8 @@ int main(int argc, char *argv[]) {
 
   clk::keybind kbd;
   kbd.managerreg(&iman);
+
+  clk::randctl::randinit();
 
   gridman gman(vga, kbd);
   gman.load();

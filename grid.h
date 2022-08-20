@@ -4,8 +4,10 @@
 
 #include <list>
 #include <memory>
+#include <utility>
 
 #include "monster.h"
+#include "protomonster.h"
 #include "tile.h"
 
 namespace clk {
@@ -49,6 +51,8 @@ public:
   int blocking;
   void insertmonster(std::unique_ptr<monster> m);
   void insertmonster(monster *m);
+  std::pair<unsigned short, unsigned short>
+  newmonst(protomonster::montype type);
 
   void managerreg(clk::keybind *kbdman);
   void managerdereg();

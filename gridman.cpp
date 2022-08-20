@@ -6,7 +6,9 @@
 #include "clkinputtrigger.h"
 #include "clkkeybind.h"
 #include "clktex.h"
+
 #include "grid.h"
+#include "protomonster.h"
 
 #include <deque>
 #include <exception>
@@ -56,8 +58,7 @@ void gridman::load() {
   if (bound)
     clevel.get()->managerreg(&kman);
 
-  clevel.get()->insertmonster(
-      std::make_unique<monster>(0, '@', "Dudley", clevel.get()));
+  clevel.get()->newmonst(protomonster::montype::human);
 }
 
 void gridman::save() { lloader.save(*clevel.get(), filename); }

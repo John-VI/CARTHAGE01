@@ -2,28 +2,32 @@
 
 #pragma once
 
-#include <string>
 #include <array>
 #include <functional>
+#include <string>
 
 typedef struct monster monster;
 
 struct protomonster {
-	 enum class montype { human, gad, naphtali, MAX };
-	 enum class aitype { player, MAX };
+  enum class montype { human, gad, naphtali, MAX };
+  enum class aitype { player, MAX };
 
-	 montype type;
-	 char family;
-	 short flags;
-	 std::string name;
-	 int maxhp;
-	 int damage;
-	 int speed;
-   int aitype;
-	 char status = 0;
+  protomonster(montype, char family, short flags, std::string name, int maxhp,
+               int damage, int speed, aitype, char status = 0);
 
-	 static const std::array<protomonster, (int)montype::MAX> kinds;
-	 static const std::array<std::function<void(monster &)>, (int)aitype::MAX> aifuncs;
+  montype type;
+  char family;
+  short flags;
+  std::string name;
+  int maxhp;
+  int damage;
+  int speed;
+  aitype ai;
+  char status = 0;
 
-	 virtual monster *genmonster();
+  static const std::array<protomonster, (int)montype::MAX> kinds;
+  static const std::array<std::function<void(monster &)>, (int)aitype::MAX>
+      aifuncs;
+
+  virtual monster *genmonster() const;
 };
