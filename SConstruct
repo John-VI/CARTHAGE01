@@ -31,7 +31,7 @@ opts.AddVariables(
 opts.Update(env)
 Help(opts.GenerateHelpText(env))
 
-flags = ["-Wall", "-pedantic", "-fdiagnostics-color=always"]
+flags = ["-Wall", "-pedantic", "-fdiagnostics-color=always", "-I."]
 if env["mode"] == "debug":
 	flags += ["-ggdb"]
 elif env["mode"] == "release":
@@ -50,6 +50,10 @@ def RecursiveGlob(pattern, dir_name=builddir):
 	matches = env.Glob("C:\\Users\\dogja\\Projects\\C++\\caulk-", pattern)
 	return matches
 
-rust = env.Program(os.path.join(bindir, "rusting"), ["clkinputman.cpp", "clkinputtrigger.cpp", "clkkeybind.cpp", "clkterminator.cpp", "clktex.cpp", "clkwin.cpp", "grid.cpp", "monster.cpp", "tile.cpp", "clkviewport.cpp", "messaging.cpp", "clkmenutrig.cpp", "clkmbuttonbind.cpp", "clf1.cpp", "gridman.cpp", "protomonster.cpp", "clkrand.cpp",
+env.Tool('compilation_db')
+cdb = env.CompilationDatabase('compile_commands.json')
+Alias('cdb', cdb)
+
+rust = env.Program(os.path.join(bindir, "rusting"), ["clkinputman.cpp", "clkinputtrigger.cpp", "clkkeybind.cpp", "clkterminator.cpp", "clktex.cpp", "clkwin.cpp", "grid.cpp", "monster.cpp", "tile.cpp", "clkviewport.cpp", "messaging.cpp", "clkmenutrig.cpp", "clkmbuttonbind.cpp", "clf1.cpp", "gridman.cpp", "protomonster.cpp", "clkrand.cpp", "feature.cpp", "door.cpp",
 "main.cpp"])
 env.Default(rust)

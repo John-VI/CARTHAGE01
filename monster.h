@@ -15,10 +15,13 @@ typedef struct grid grid;
 
 class monster : public protomonster {
 public:
+  enum class monmode { NONE, ACTING };
+
   int meter = 0;
   grid *g = nullptr;
   int x, y;
   int hp;
+  monmode mode = monmode::NONE;
 
   monster(protomonster form, enum aitype ai = aitype::MAX); // What the f
   /* virtual */ ~monster();
@@ -26,7 +29,9 @@ public:
   int tick();
   void draw();
   int hurt(int delta);
-  std::pair<int, int> move(int newx, int newy);
+
+  std::pair<int, int> move(int x, int y);
+  std::pair<int, int> act(int x, int y);
 
   int getx() const;
   int gety() const;

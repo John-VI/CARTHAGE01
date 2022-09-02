@@ -2,12 +2,14 @@
 
 #pragma once
 
+#include <memory>
 #include <unordered_map>
 
 typedef struct monster monster;
+typedef struct feature feature;
 
 enum class tiletype : char { UNDEF, FLOOR, WALL, MAX };
-enum class tilefeature : char { NONE, USTAIR, DSTAIR, GOLD };
+enum class tilefeature : char { NONE, USTAIR, DSTAIR, GOLD, MAX };
 
 enum class tileflag : char {
   PASSABLE = 0b00000001,
@@ -15,15 +17,26 @@ enum class tileflag : char {
   TRANSLUC = 0b00000100
 };
 
+struct tiledef {
+  short health;
+  char tile;
+  char flags;
+};
+
 struct tile {
   tiletype type = tiletype::UNDEF;
-  tilefeature feature = tilefeature::NONE;
-  char flags;
+  std::unique_ptr<feature> feature = nullptr;
   char placeholder;
   short health = 1000;
   monster *mon = nullptr;
 
-  static const std::unordered_map<tiletype, char> tiledefaults;
+  static const std::array<tiledef, (int)tiletype::MAX> ttypes;
+
   void mktype(tiletype newtype);
-  void mkfeat(tilefeature newfeature);
+  template <class T> void mkfeat();
+  void setfeat(tilefeature *newfeature);
+
+  char flags();
 };
+
+template <class T> void tile::mkfeat() { feature = new T(*this); }

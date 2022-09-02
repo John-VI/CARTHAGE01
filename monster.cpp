@@ -2,12 +2,16 @@
 
 #include "monster.h"
 
+#include <SDL2/SDL_keycode.h>
+#include <functional>
 #include <stdexcept>
 #include <string>
 
 #include "clktex.h"
 
+#include "feature.h"
 #include "grid.h"
+#include "messaging.h"
 #include "protomonster.h"
 #include "tile.h"
 
@@ -68,34 +72,62 @@ std::pair<int, int> monster::move(int newx, int newy) {
     return std::pair<int, int>(x, y);
 }
 
+std::pair<int, int> monster::act(int x, int y) {
+  if (g->blocking)
+    if (g->gettile(x, y)->feature && g->gettile(x, y)->feature.get()->fflags) {
+      g->gettile(x, y)->feature.get()->act(*this);
+      meter += 100;
+      g->blocking = 0;
+    } else {
+      messages::push(
+          {"That would be silly.", severitylevel::NORMAL, devlevel::GAME, 0});
+    }
+  return {0, 0};
+}
+
 monster::montrig::montrig(monster &bind) : binding(bind) {}
 void monster::montrig::trigger(const SDL_Event &e) { binding.trigger(e); }
 
 void monster::trigger(const SDL_Event &e) {
+  std::function<std::pair<int, int>(int, int)> action;
+
+  switch (mode) {
+  case monmode::NONE:
+    action = [this](int x, int y) { return this->move(x, y); };
+  case monmode::ACTING:
+    action = [this](int x, int y) { return this->act(x, y); };
+  }
+
   switch (e.key.keysym.sym) {
+  case SDLK_a:
+    mode = monmode::ACTING;
+    break;
+  case SDLK_ESCAPE:
+    mode = monmode::NONE;
+    break;
   case SDLK_KP_7:
-    move(x - 1, y - 1);
+    action(x - 1, y - 1);
     break;
   case SDLK_KP_8:
-    move(x, y - 1);
+    action(x, y - 1);
     break;
   case SDLK_KP_9:
-    move(x + 1, y - 1);
+    action(x + 1, y - 1);
     break;
   case SDLK_KP_4:
-    move(x - 1, y);
+    action(x - 1, y);
     break;
   case SDLK_KP_6:
-    move(x + 1, y);
+    action(x + 1, y);
     break;
   case SDLK_KP_1:
-    move(x - 1, y + 1);
+    action(x - 1, y + 1);
     break;
   case SDLK_KP_2:
-    move(x, y + 1);
+    action(x, y + 1);
     break;
   case SDLK_KP_3:
-    move(x + 1, y + 1);
+    action(x + 1, y + 1);
     break;
   }
 }
