@@ -2,8 +2,13 @@
 
 #pragma once
 
+#include "tile.h"
+
+#include "tileflag.h"
+
 #include <memory>
 #include <unordered_map>
+#include <bitset>
 
 typedef struct monster monster;
 typedef struct feature feature;
@@ -11,16 +16,10 @@ typedef struct feature feature;
 enum class tiletype : char { UNDEF, FLOOR, WALL, MAX };
 enum class tilefeature : char { NONE, USTAIR, DSTAIR, GOLD, MAX };
 
-enum class tileflag : char {
-  PASSABLE = 0b00000001,
-  DESTRUCT = 0b00000010,
-  TRANSLUC = 0b00000100
-};
-
 struct tiledef {
+  std::bitset<TILEFLAG_SIZE> flags;
   short health;
   char tile;
-  char flags;
 };
 
 struct tile {
@@ -36,7 +35,7 @@ struct tile {
   template <class T> void mkfeat();
   void setfeat(tilefeature *newfeature);
 
-  char flags();
+  std::bitset<TILEFLAG_SIZE> flags();
 };
 
 template <class T> void tile::mkfeat() { feature = new T(*this); }

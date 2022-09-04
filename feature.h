@@ -2,6 +2,10 @@
 
 #pragma once
 
+#include "tileflag.h"
+
+#include <bitset>
+
 typedef struct tile tile;
 typedef struct monster monster;
 
@@ -18,7 +22,7 @@ public:
   virtual void act(monster &);
   virtual void tick();
 
-  char flags();
+  virtual std::bitset<TILEFLAG_SIZE> flags();
 
 private:
   tile &t;

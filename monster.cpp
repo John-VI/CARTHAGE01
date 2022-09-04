@@ -140,6 +140,8 @@ void monster::managerreg(clk::keybind *m) {
 
   for (int i = SDLK_KP_1; i <= SDLK_KP_9; i++)
     manager->registerinput((SDL_Keycode)i, new montrig(*this));
+  manager->registerinput(SDLK_a, new montrig(*this));
+  manager->registerinput(SDLK_ESCAPE, new montrig(*this));
 }
 
 void monster::managerdereg() {

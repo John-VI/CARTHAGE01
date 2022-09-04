@@ -5,8 +5,11 @@
 #include "feature.h"
 #include "monster.h"
 
+const tflags door::closedflags = (TILEFLAG_UNDERLYING)tileflag::DESTRUCT;
+const tflags door::openflags = tileflag::PASSABLE | tileflag::TRANSLUC;
+
+
 door::door(tile &t) : feature(t) {
-  custflags = true;
   open = open % 2;
   fflags = 1;
   toggle();
@@ -15,13 +18,15 @@ door::door(tile &t) : feature(t) {
 void door::toggle() {
   if (open) {
     open = false;
-    flags = closedflags;
     sprite = '8';
   } else {
     open = true;
-    flags = openflags;
     sprite = '0';
   }
 }
 
 void door::act(monster &) { toggle(); }
+
+tflags door::flags() {
+  return open ? openflags : closedflags;
+}

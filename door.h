@@ -4,16 +4,18 @@
 
 #include "feature.h"
 
+#include "tileflag.h"
+
 #include "tile.h"
 
 class door : public feature {
   bool open;
 
-  static const char closedflags = (char)tileflag::DESTRUCT;
-  static const char openflags =
-      (char)tileflag::PASSABLE | (char)tileflag::TRANSLUC;
+  static const std::bitset<TILEFLAG_SIZE> closedflags;
+  static const std::bitset<TILEFLAG_SIZE> openflags;
 
   void toggle();
+  tflags flags() override;
 
 public:
   door(tile &);
