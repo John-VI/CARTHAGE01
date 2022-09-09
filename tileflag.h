@@ -15,7 +15,37 @@ enum class tileflag : TILEFLAG_UNDERLYING {
   TRANSLUC = 0b00000100
 };
 
-const inline TILEFLAG_UNDERLYING operator&(tileflag lhs, tileflag rhs);
-const inline TILEFLAG_UNDERLYING operator&(TILEFLAG_UNDERLYING lhs, tileflag rhs);
-const inline TILEFLAG_UNDERLYING operator|(tileflag lhs, tileflag rhs);
-const inline TILEFLAG_UNDERLYING operator|(TILEFLAG_UNDERLYING lhs, tileflag rhs);
+/* inline TILEFLAG_UNDERLYING operator&(tileflag lhs, tileflag rhs); */
+/* inline TILEFLAG_UNDERLYING operator&(TILEFLAG_UNDERLYING lhs, tileflag rhs); */
+/* inline TILEFLAG_UNDERLYING operator|(tileflag lhs, tileflag rhs); */
+/* inline TILEFLAG_UNDERLYING operator|(TILEFLAG_UNDERLYING lhs, tileflag rhs); */
+
+inline TILEFLAG_UNDERLYING operator&( tileflag lhs, const tileflag rhs) {
+  return (TILEFLAG_UNDERLYING)lhs & (TILEFLAG_UNDERLYING)rhs;
+}
+
+inline TILEFLAG_UNDERLYING operator&( TILEFLAG_UNDERLYING lhs, const tileflag rhs) {
+  return lhs & (TILEFLAG_UNDERLYING)rhs;
+}
+
+inline TILEFLAG_UNDERLYING operator|( tileflag lhs, const tileflag rhs) {
+  return (TILEFLAG_UNDERLYING)lhs & (TILEFLAG_UNDERLYING)rhs;
+}
+
+inline TILEFLAG_UNDERLYING operator|( TILEFLAG_UNDERLYING lhs, const tileflag rhs) {
+  return lhs & (TILEFLAG_UNDERLYING)rhs;
+}
+
+inline tflags operator&( tflags lhs,
+                                      tileflag rhs) {
+  return lhs & (tflags)(char)rhs; // C++ typing is weird
+}
+
+inline tflags operator|( tflags lhs,
+                                      tileflag rhs) {
+  return lhs & (tflags)(char)rhs;
+}
+
+inline bool compbit(tflags bits, tileflag flag) {
+  return bits.to_ulong() & flag;
+}

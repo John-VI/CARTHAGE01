@@ -74,8 +74,8 @@ std::pair<int, int> monster::move(int newx, int newy) {
 
 std::pair<int, int> monster::act(int x, int y) {
   if (g->blocking)
-    if (g->gettile(x, y)->feature && g->gettile(x, y)->feature.get()->fflags) {
-      g->gettile(x, y)->feature.get()->act(*this);
+    if (g->gettile(x, y)->feat && g->gettile(x, y)->feat.get()->fflags) {
+      g->gettile(x, y)->feat.get()->act(*this);
       meter += 100;
       g->blocking = 0;
     } else {
@@ -128,6 +128,9 @@ void monster::trigger(const SDL_Event &e) {
     break;
   case SDLK_KP_3:
     action(x + 1, y + 1);
+    break;
+  case SDLK_KP_5:
+    action(x, y);
     break;
   }
 }

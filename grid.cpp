@@ -15,6 +15,7 @@
 #include "messaging.h"
 #include "monster.h"
 #include "tile.h"
+#include "tileflag.h"
 
 grid::grid(unsigned short width, unsigned short height, int tilewidth,
            int tileheight, clk::sprite &font)
@@ -80,13 +81,13 @@ void grid::draw() {
     t = tiles.get() + i;
     assert(tiles.get() + i == &(tiles.get()[i]));
     if (t->mon == nullptr) {
-      if (t->feature.get() && t->feature.get()->sprite)
+      if (t->feat.get() && t->feat.get()->sprite)
         font.drawchar(vports::GRID, (i % w) * twidth, (i / h) * theight,
-                      t->feature.get()->sprite);
+                      t->feat.get()->sprite);
       else
         font.drawchar(
             vports::GRID, (i % w) * twidth, (i / h) * theight,
-            (tile::ttypes[(int)t->type].flags & (char)tileflag::PASSABLE)
+            compbit(tile::ttypes[(int)t->type].flags, tileflag::PASSABLE)
                 ? '.'
                 : '#');
     } else
@@ -96,15 +97,15 @@ void grid::draw() {
 
 std::pair<unsigned short, unsigned short>
 grid::movemonster(monster *m, unsigned short x, unsigned short y) {
-  messages::push(
-      {"Monster move request", severitylevel::NORMAL, devlevel::GAME, 0});
   tile *dest = gettile(x, y);
   if (!dest->mon &&
-      tile::ttypes[(int)dest->type].flags & (char)tileflag::PASSABLE) {
+      compbit(dest->flags(), tileflag::PASSABLE)) {
     gettile(m->getx(), m->gety())->mon = nullptr;
     dest->mon = m;
     m->setx(x);
     m->sety(y);
+    if (dest->feat.get())
+      dest->feat.get()->step(*m);
     return std::pair<unsigned short, unsigned short>(x, y);
   } else
     return m->getcoords();
@@ -175,7 +176,7 @@ grid::newmonst(protomonster::montype type) {
   std::vector<std::pair<tile *, unsigned long>> candidates;
   for (unsigned long i = 0; i < w * h; i++)
     if ((gettile(i)->mon == nullptr) &&
-        (tile::ttypes[(int)gettile(i)->type].flags & (char)tileflag::PASSABLE))
+        compbit(tile::ttypes[(int)gettile(i)->type].flags, tileflag::PASSABLE))
       candidates.push_back({gettile(i), i});
 
   if (candidates.size() <= 0)

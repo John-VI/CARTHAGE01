@@ -24,7 +24,7 @@ struct tiledef {
 
 struct tile {
   tiletype type = tiletype::UNDEF;
-  std::unique_ptr<feature> feature = nullptr;
+  std::unique_ptr<feature> feat = nullptr;
   char placeholder;
   short health = 1000;
   monster *mon = nullptr;
@@ -38,4 +38,4 @@ struct tile {
   std::bitset<TILEFLAG_SIZE> flags();
 };
 
-template <class T> void tile::mkfeat() { feature = new T(*this); }
+template <class T> void tile::mkfeat() { feat = new T(*this); }

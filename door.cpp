@@ -4,9 +4,10 @@
 
 #include "feature.h"
 #include "monster.h"
+#include "tileflag.h"
 
 const tflags door::closedflags = (TILEFLAG_UNDERLYING)tileflag::DESTRUCT;
-const tflags door::openflags = tileflag::PASSABLE | tileflag::TRANSLUC;
+const tflags door::openflags = (char)(tileflag::PASSABLE | tileflag::TRANSLUC);
 
 
 door::door(tile &t) : feature(t) {
