@@ -22,6 +22,7 @@
 #include "clkwin.h"
 
 #include "clf1.h"
+#include "door.h"
 #include "grid.h"
 #include "gridman.h"
 #include "messaging.h"
@@ -59,6 +60,8 @@ int main(int argc, char *argv[]) {
   gridman gman(vga, kbd);
   gman.load();
   gman.managerreg();
+
+  gman.clevel.get()->gettile(5, 5)->mkfeat<door>();
 
   clk::mbuttonbind mouse(
       *gman.clevel.get(),

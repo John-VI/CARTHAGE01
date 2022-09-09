@@ -73,7 +73,7 @@ std::pair<int, int> monster::move(int newx, int newy) {
 }
 
 std::pair<int, int> monster::act(int x, int y) {
-  if (g->blocking)
+  if (g->blocking) {
     if (g->gettile(x, y)->feat && g->gettile(x, y)->feat.get()->fflags) {
       g->gettile(x, y)->feat.get()->act(*this);
       meter += 100;
@@ -82,6 +82,7 @@ std::pair<int, int> monster::act(int x, int y) {
       messages::push(
           {"That would be silly.", severitylevel::NORMAL, devlevel::GAME, 0});
     }
+  }
   return {0, 0};
 }
 
@@ -94,16 +95,20 @@ void monster::trigger(const SDL_Event &e) {
   switch (mode) {
   case monmode::NONE:
     action = [this](int x, int y) { return this->move(x, y); };
+    break;
   case monmode::ACTING:
     action = [this](int x, int y) { return this->act(x, y); };
+    break;
   }
 
+  messages::push({std::to_string((int)mode)});
+
   switch (e.key.keysym.sym) {
-  case SDLK_a:
-    mode = monmode::ACTING;
-    break;
   case SDLK_ESCAPE:
     mode = monmode::NONE;
+    break;
+  case SDLK_a:
+    mode = monmode::ACTING;
     break;
   case SDLK_KP_7:
     action(x - 1, y - 1);

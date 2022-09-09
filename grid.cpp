@@ -98,8 +98,7 @@ void grid::draw() {
 std::pair<unsigned short, unsigned short>
 grid::movemonster(monster *m, unsigned short x, unsigned short y) {
   tile *dest = gettile(x, y);
-  if (!dest->mon &&
-      compbit(dest->flags(), tileflag::PASSABLE)) {
+  if (!dest->mon && compbit(dest->flags(), tileflag::PASSABLE)) {
     gettile(m->getx(), m->gety())->mon = nullptr;
     dest->mon = m;
     m->setx(x);
@@ -176,7 +175,7 @@ grid::newmonst(protomonster::montype type) {
   std::vector<std::pair<tile *, unsigned long>> candidates;
   for (unsigned long i = 0; i < w * h; i++)
     if ((gettile(i)->mon == nullptr) &&
-        compbit(tile::ttypes[(int)gettile(i)->type].flags, tileflag::PASSABLE))
+        compbit(gettile(i)->flags(), tileflag::PASSABLE))
       candidates.push_back({gettile(i), i});
 
   if (candidates.size() <= 0)

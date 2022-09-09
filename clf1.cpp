@@ -22,8 +22,7 @@ std::pair<unsigned short, unsigned short> prochead(std::istream &level) {
 
 void proctile(tile *t, std::istream &level) {
   level.read((char *)&t->type, 1);
-  level.read((char *)&t->feat, 1);
-  level.read((char *)&t->flags, 1);
+  level.ignore(2);
   level.read((char *)&t->placeholder, 1);
   level.read((char *)&t->health, 2);
   level.ignore(2, EOF);
@@ -61,10 +60,10 @@ long outptile(std::ostream &level, const tile *t) {
   long count = 0;
   level.write((const char *)&t->type, sizeof(t->type));
   count += sizeof(t->type);
-  level.write((const char *)&t->feat, sizeof(t->feature));
-  count += sizeof(t->feat);
-  level.write((const char *)&t->flags, sizeof(t->flags));
-  count += sizeof(t->flags);
+  level.put('\0');
+  count += 1;
+  level.put('\0');
+  count += 1;
   level.write((const char *)&t->placeholder, sizeof(t->placeholder));
   count += sizeof(t->placeholder);
   level.write((const char *)&t->health, sizeof(t->health));

@@ -22,7 +22,7 @@ public:
   virtual void act(monster &);
   virtual void tick();
 
-  virtual std::bitset<TILEFLAG_SIZE> flags();
+  virtual tflags flags();
 
 private:
   tile &t;

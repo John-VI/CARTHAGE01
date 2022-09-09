@@ -4,20 +4,20 @@
 
 #include "tile.h"
 
+#include "feature.h"
 #include "tileflag.h"
 
+#include <bitset>
 #include <memory>
 #include <unordered_map>
-#include <bitset>
 
 typedef struct monster monster;
-typedef struct feature feature;
 
 enum class tiletype : char { UNDEF, FLOOR, WALL, MAX };
 enum class tilefeature : char { NONE, USTAIR, DSTAIR, GOLD, MAX };
 
 struct tiledef {
-  std::bitset<TILEFLAG_SIZE> flags;
+  tflags flags;
   short health;
   char tile;
 };
@@ -35,7 +35,7 @@ struct tile {
   template <class T> void mkfeat();
   void setfeat(tilefeature *newfeature);
 
-  std::bitset<TILEFLAG_SIZE> flags();
+  tflags flags();
 };
 
-template <class T> void tile::mkfeat() { feat = new T(*this); }
+template <class T> void tile::mkfeat() { feat = std::make_unique<T>(*this); }

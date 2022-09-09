@@ -9,7 +9,6 @@
 const tflags door::closedflags = (TILEFLAG_UNDERLYING)tileflag::DESTRUCT;
 const tflags door::openflags = (char)(tileflag::PASSABLE | tileflag::TRANSLUC);
 
-
 door::door(tile &t) : feature(t) {
   open = open % 2;
   fflags = 1;
@@ -28,6 +27,4 @@ void door::toggle() {
 
 void door::act(monster &) { toggle(); }
 
-tflags door::flags() {
-  return open ? openflags : closedflags;
-}
+tflags door::flags() { return open ? openflags : closedflags; }

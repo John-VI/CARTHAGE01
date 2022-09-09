@@ -43,10 +43,10 @@ void clk::mbuttonbind::trigger(const SDL_Event &e) {
     t->mktype((tiletype)stype);
     break;
   case SDL_BUTTON_RIGHT:
-    t->feat = (tilefeature)sfeat;
+    // t->feat = (tilefeature)sfeat;
     break;
   case SDL_BUTTON_MIDDLE:
-    t->flags = sflag;
+    // t->flags = sflag;
     break;
   }
 }
