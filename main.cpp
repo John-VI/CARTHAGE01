@@ -25,6 +25,7 @@
 #include "door.h"
 #include "grid.h"
 #include "gridman.h"
+#include "loopingbg.h"
 #include "messaging.h"
 #include "monster.h"
 
@@ -68,26 +69,53 @@ int main(int argc, char *argv[]) {
       iman); // FIXME this is going to break when we change levels
   mouse.managerreg();
 
+  double oldangle = 0;
+  double newangle = 0;
+
   clk::menubuild menuman(
-      {{SDLK_c, &mouse.stype}, {SDLK_v, &mouse.sflag}, {SDLK_b, &mouse.sflag}},
+      {// {SDLK_c, &mouse.stype}, 
+       {SDLK_v, &newangle}// , {SDLK_b, &mouse.sflag}
+      }
+      ,
       iman, kbd, vga);
 
   messages msg(win, vga);
+
+  clk::sprite backgroundasset(win, "testbg1.png");
+  loopingbg bg(backgroundasset);
+  bg.rate = 2;
+  bg.travelangle = newangle;
+  bg.updatepathing();
 
   while (!terminator) {
     gman.clevel.get()->tick();
     iman.processinputs();
 
     win.clear();
-    frog.draw(vports::FULL, 0, 0);
+
+    if (oldangle != newangle) {
+      bg.travelangle = newangle;
+      bg.updatepathing();
+      oldangle = newangle;
+    }
+
+    //frog.draw(vports::FULL, 0, 0);
+    bg.tick(1);
+    bg.draw();
+
     gman.clevel.get()->draw();
-    vga.drawstring(
-        vports::STATUS, 96, 0,
-        std::to_string(gman.clevel.get()->monsters.front().get()->meter));
+    // vga.drawstring(
+    //     vports::STATUS, 96, 0,
+    //     std::to_string(gman.clevel.get()->monsters.front().get()->meter));
     msg.draw();
-    vga.drawstring(vports::STATUS, 0, 0, std::to_string(mouse.stype));
-    vga.drawstring(vports::STATUS, 32, 0, std::to_string(mouse.sfeat));
-    vga.drawstring(vports::STATUS, 64, 0, std::to_string(mouse.sflag));
+
+    vga.drawstring(vports::STATUS, 0, 0, std::to_string(bg.currentoffset));
+    vga.drawstring(vports::STATUS, 0, 16, std::to_string(bg.travelangle));
+    vga.drawstring(vports::STATUS, 100, 0, std::to_string(bg.position));
+    vga.drawstring(vports::STATUS, 100, 16, std::to_string(bg.length));
+    vga.drawstring(vports::STATUS, 200, 0, std::to_string(backgroundasset.getw()));
+    vga.drawstring(vports::STATUS, 200, 16, std::to_string(backgroundasset.geth()));
+
     menuman.draw();
 
     win.draw();

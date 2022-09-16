@@ -9,7 +9,7 @@
 #include "clkkeybind.h"
 #include "clkviewport.h"
 
-clk::menubuild::menubuildktrig::menubuildktrig(menubuild &binding, char *val)
+clk::menubuild::menubuildktrig::menubuildktrig(menubuild &binding, double *val)
     : binding(binding), val(val) {}
 
 void clk::menubuild::menubuildktrig::trigger(const SDL_Event &e) {
@@ -18,13 +18,13 @@ void clk::menubuild::menubuildktrig::trigger(const SDL_Event &e) {
 
 clk::menubuild::menubuildktrig::~menubuildktrig() {}
 
-clk::menubuild::menubuild(std::unordered_map<SDL_Keycode, char *> m,
+clk::menubuild::menubuild(std::unordered_map<SDL_Keycode, double *> m,
                           inputman &iman, keybind &kman, sprite &f)
     : mappings{m}, mmanager(iman), kmanager(kman), font(f) {
   kmanagerreg();
 }
 
-void clk::menubuild::ktrigger(const SDL_Event &e, char *val) {
+void clk::menubuild::ktrigger(const SDL_Event &e, double *val) {
   target = val;
   mmanagerreg();
 }
@@ -77,7 +77,7 @@ void clk::menubuild::mtrigger(const SDL_Event &e) {
     target = nullptr;
     break;
   case SDLK_RETURN:
-    *target = std::stoi(buffer);
+    *target = std::stod(buffer);
     buffer.clear();
     target = nullptr;
     mmanagerdereg();

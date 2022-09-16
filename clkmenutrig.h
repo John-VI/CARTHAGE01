@@ -18,10 +18,10 @@ class menubuild {
 protected:
   struct menubuildktrig : public inputtrigger {
     menubuild &binding;
-    menubuildktrig(menubuild &binding, char *val);
+    menubuildktrig(menubuild &binding, double *val);
     void trigger(const SDL_Event &e) override;
     ~menubuildktrig();
-    char *val;
+    double *val;
   };
   struct menubuildmtrig : public inputtrigger {
     menubuild &binding;
@@ -37,15 +37,15 @@ protected:
   sprite &font;
   std::string buffer;
 
-  char *target = nullptr;
+  double *target = nullptr;
 
 public:
-  menubuild(std::unordered_map<SDL_Keycode, char *> mappings, inputman &,
+  menubuild(std::unordered_map<SDL_Keycode, double *> mappings, inputman &,
             keybind &, sprite &font);
   ~menubuild();
-  std::unordered_map<SDL_Keycode, char *> mappings;
+  std::unordered_map<SDL_Keycode, double *> mappings;
 
-  void ktrigger(const SDL_Event &e, char *val);
+  void ktrigger(const SDL_Event &e, double *val);
   void kmanagerreg();
   void kmanagerdereg();
   void mtrigger(const SDL_Event &e);

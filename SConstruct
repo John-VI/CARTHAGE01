@@ -31,7 +31,7 @@ opts.AddVariables(
 opts.Update(env)
 Help(opts.GenerateHelpText(env))
 
-flags = ["-Wall", "-pedantic", "-fdiagnostics-color=always", "-I."]
+flags = ["-Wall", "-pedantic", "-fdiagnostics-color=always", "-I.", "-std=gnu++20"]
 if env["mode"] == "debug":
 	flags += ["-ggdb"]
 elif env["mode"] == "release":
@@ -54,6 +54,6 @@ env.Tool('compilation_db')
 cdb = env.CompilationDatabase('compile_commands.json')
 Alias('cdb', cdb)
 
-rust = env.Program(os.path.join(bindir, "rusting"), ["clkinputman.cpp", "clkinputtrigger.cpp", "clkkeybind.cpp", "clkterminator.cpp", "clktex.cpp", "clkwin.cpp", "grid.cpp", "monster.cpp", "tile.cpp", "clkviewport.cpp", "messaging.cpp", "clkmenutrig.cpp", "clkmbuttonbind.cpp", "clf1.cpp", "gridman.cpp", "protomonster.cpp", "clkrand.cpp", "feature.cpp", "door.cpp",
+rust = env.Program(os.path.join(bindir, "rusting"), ["clkinputman.cpp", "clkinputtrigger.cpp", "clkkeybind.cpp", "clkterminator.cpp", "clktex.cpp", "clkwin.cpp", "grid.cpp", "monster.cpp", "tile.cpp", "clkviewport.cpp", "messaging.cpp", "clkmenutrig.cpp", "clkmbuttonbind.cpp", "clf1.cpp", "gridman.cpp", "protomonster.cpp", "clkrand.cpp", "feature.cpp", "door.cpp", "loopingbg.cpp",
 "main.cpp"])
 env.Default(rust)

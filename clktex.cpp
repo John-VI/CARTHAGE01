@@ -1,5 +1,6 @@
 // Copyright (c) John Allen Whitley, 2022, BSD 3-Clause
 
+#include <SDL2/SDL_render.h>
 #include <memory>
 #include <stdexcept>
 #include <string>
@@ -105,4 +106,16 @@ SDL_Rect clk::sprite::drawstring(viewport &viewport, int x, int y,
 
   return {x + screenoffset.x, y + screenoffset.y,
           screenoffset.w * (int)str.length(), screenoffset.h};
+}
+
+int clk::sprite::getw() const {
+  int w;
+  SDL_QueryTexture(texture.get(), nullptr, nullptr, &w, nullptr);
+  return w;
+}
+
+int clk::sprite::geth() const {
+    int h;
+SDL_QueryTexture(texture.get(), nullptr, nullptr, nullptr, &h);
+return h;
 }
