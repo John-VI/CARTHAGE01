@@ -115,7 +115,26 @@ int clk::sprite::getw() const {
 }
 
 int clk::sprite::geth() const {
-    int h;
-SDL_QueryTexture(texture.get(), nullptr, nullptr, nullptr, &h);
-return h;
+  int h;
+  SDL_QueryTexture(texture.get(), nullptr, nullptr, nullptr, &h);
+  return h;
+}
+
+SDL_Rect clk::sprite::draw(vports port, int x, int y, double angle,
+                           const SDL_Point *center, SDL_RendererFlip flip) {
+  const viewport &viewport = renderer.getviewport(port);
+  SDL_Rect region = {screenoffset.x + x + viewport.x,
+                     screenoffset.y + y + viewport.y, screenoffset.w,
+                     screenoffset.h};
+  SDL_RenderCopyEx(renderer.getSDL_Renderer(), texture.get(), &sheetoffset,
+                   &region, angle, center, flip);
+  return region;
+}
+SDL_Rect clk::sprite::draw(viewport &port, int x, int y, double angle,
+                           const SDL_Point *center, SDL_RendererFlip flip) {
+  SDL_Rect region = {screenoffset.x + x + port.x, screenoffset.y + y + port.y,
+                     screenoffset.w, screenoffset.h};
+  SDL_RenderCopyEx(renderer.getSDL_Renderer(), texture.get(), &sheetoffset,
+                   &region, angle, center, flip);
+  return region;
 }

@@ -39,5 +39,11 @@ public:
   SDL_Rect griddrawchar(viewport &port, int r, int d, char c) const;
   SDL_Rect griddrawstring(vports port, int r, int d, std::string &str);
   SDL_Rect griddrawstring(viewport &port, int r, int d, std::string &str);
+  SDL_Rect draw(vports port, int x, int y, double angle,
+                const SDL_Point *center = NULL,
+                SDL_RendererFlip flip = SDL_FLIP_NONE);
+  SDL_Rect draw(viewport &port, int x, int y, double angle,
+                const SDL_Point *center = NULL,
+                SDL_RendererFlip flip = SDL_FLIP_NONE);
 };
 } // namespace clk

@@ -73,10 +73,10 @@ int main(int argc, char *argv[]) {
   double newangle = 0;
 
   clk::menubuild menuman(
-      {// {SDLK_c, &mouse.stype}, 
-       {SDLK_v, &newangle}// , {SDLK_b, &mouse.sflag}
-      }
-      ,
+      {
+          // {SDLK_c, &mouse.stype},
+          {SDLK_v, &newangle} // , {SDLK_b, &mouse.sflag}
+      },
       iman, kbd, vga);
 
   messages msg(win, vga);
@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
       oldangle = newangle;
     }
 
-    //frog.draw(vports::FULL, 0, 0);
+    // frog.draw(vports::FULL, 0, 0);
     bg.tick(1);
     bg.draw();
 
@@ -113,8 +113,10 @@ int main(int argc, char *argv[]) {
     vga.drawstring(vports::STATUS, 0, 16, std::to_string(bg.travelangle));
     vga.drawstring(vports::STATUS, 100, 0, std::to_string(bg.position));
     vga.drawstring(vports::STATUS, 100, 16, std::to_string(bg.length));
-    vga.drawstring(vports::STATUS, 200, 0, std::to_string(backgroundasset.getw()));
-    vga.drawstring(vports::STATUS, 200, 16, std::to_string(backgroundasset.geth()));
+    vga.drawstring(vports::STATUS, 200, 0,
+                   std::to_string(backgroundasset.getw()));
+    vga.drawstring(vports::STATUS, 200, 16,
+                   std::to_string(backgroundasset.geth()));
 
     menuman.draw();
 
