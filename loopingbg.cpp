@@ -4,11 +4,7 @@
 
 #include "clktex.h"
 
-#include "messaging.h"
-
 #include <SDL2/SDL.h>
-
-#include <iostream>
 
 #define CORRECTAXIS (offsetxaxis ? bg.getw() : bg.geth())
 #define ADJUSTEDANGLE fmod(travelangle + angle, 360)
@@ -23,7 +19,6 @@ double loopingbg::tick(double ticks) {
       currentoffset = currentoffset >= 0 ? currentoffset - CORRECTAXIS
                                          : currentoffset + CORRECTAXIS;
     position = position >= 0 ? position - abs(length) : position + abs(length);
-    std::cout << currentoffset << std::endl << offsetxaxis << std::endl;
   }
 
   return position;
@@ -46,8 +41,6 @@ void loopingbg::updatepathing() {
     offsetxaxis = true;
   }
 
-  std::cout << "Critical angle: " << critangle << std::endl;
-
   position = 0;
   currentoffset = 0;
 
@@ -69,14 +62,6 @@ void loopingbg::drawone(double x, double y) {
               (offsetxaxis ? rotpoint(currentoffset, 0, deg2rad(angle)).y
                            : rotpoint(0, currentoffset, deg2rad(angle)).y),
           angle);
-  messages::push(
-      {std::to_string(offsetxaxis ? currentoffset * SDL_cos(deg2rad(angle))
-                                  : currentoffset * SDL_sin(deg2rad(angle))) +
-           " " +
-           std::to_string(offsetxaxis
-                              ? currentoffset * SDL_sin(deg2rad(angle))
-                              : currentoffset * SDL_cos(deg2rad(angle))),
-       severitylevel::DEV, devlevel::DEV, 0});
 }
 
 void loopingbg::draw() {

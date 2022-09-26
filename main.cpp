@@ -20,6 +20,7 @@
 #include "clktex.h"
 #include "clkviewport.h"
 #include "clkwin.h"
+#include "clktiming.h"
 
 #include "clf1.h"
 #include "door.h"
@@ -84,12 +85,18 @@ int main(int argc, char *argv[]) {
 
   clk::sprite backgroundasset(win, "testbg1.png");
   loopingbg bg(backgroundasset);
-  bg.rate = .5;
+  bg.rate = .05;
   bg.angle = 30;
   bg.travelangle = 0;
   bg.updatepathing();
 
+  clk::timer framedelta;
+  framedelta.start();
+
   while (!terminator) {
+    Uint32 mseconds = framedelta.ticks();
+    framedelta.start();
+
     gman.clevel.get()->tick();
     iman.processinputs();
 
@@ -116,7 +123,7 @@ int main(int argc, char *argv[]) {
     // }
 
     // frog.draw(vports::FULL, 0, 0);
-    bg.tick(1);
+    bg.tick(mseconds);
     bg.draw();
 
     gman.clevel.get()->draw();

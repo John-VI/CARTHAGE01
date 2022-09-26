@@ -54,6 +54,6 @@ env.Tool('compilation_db')
 cdb = env.CompilationDatabase('compile_commands.json')
 Alias('cdb', cdb)
 
-rust = env.Program(os.path.join(bindir, "rusting"), ["clkinputman.cpp", "clkinputtrigger.cpp", "clkkeybind.cpp", "clkterminator.cpp", "clktex.cpp", "clkwin.cpp", "grid.cpp", "monster.cpp", "tile.cpp", "clkviewport.cpp", "messaging.cpp", "clkmenutrig.cpp", "clkmbuttonbind.cpp", "clf1.cpp", "gridman.cpp", "protomonster.cpp", "clkrand.cpp", "feature.cpp", "door.cpp", "loopingbg.cpp",
+rust = env.Program(os.path.join(bindir, "rusting"), ["clkinputman.cpp", "clkinputtrigger.cpp", "clkkeybind.cpp", "clkterminator.cpp", "clktex.cpp", "clkwin.cpp", "grid.cpp", "monster.cpp", "tile.cpp", "clkviewport.cpp", "messaging.cpp", "clkmenutrig.cpp", "clkmbuttonbind.cpp", "clf1.cpp", "gridman.cpp", "protomonster.cpp", "clkrand.cpp", "feature.cpp", "door.cpp", "loopingbg.cpp", "clktiming.cpp",
 "main.cpp"])
 env.Default(rust)
