@@ -39,7 +39,10 @@ elif env["mode"] == "release":
 env.Append(CCFLAGS = flags)
 env.Append(CXXFLAGS = flags)
 
-game_libs = ["mingw32", "SDL2main", "SDL2", "SDL2_image", "pthread"]
+game_libs = ["SDL2main", "SDL2", "SDL2_image", "pthread"]
+if is_windows_host:
+    game_libs.Append("mingw32")
+
 env.Append(LIBS = game_libs)
 
 builddir = env["BUILDDIR"]
