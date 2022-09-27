@@ -18,9 +18,9 @@
 #include "clkrand.h"
 #include "clkterminator.h"
 #include "clktex.h"
+#include "clktiming.h"
 #include "clkviewport.h"
 #include "clkwin.h"
-#include "clktiming.h"
 
 #include "clf1.h"
 #include "door.h"

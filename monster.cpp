@@ -141,9 +141,11 @@ void monster::trigger(const SDL_Event &e) {
 }
 
 void monster::managerreg(clk::keybind *m) {
-  if (manager)
-    throw std::runtime_error("Already registered with input dispatcher.");
-  else
+  if (manager) {
+    messages::push({"Already registered with manager.", severitylevel::DEV,
+                    devlevel::DEV, 0});
+    return;
+  } else
     manager = m;
 
   for (int i = SDLK_KP_1; i <= SDLK_KP_9; i++)

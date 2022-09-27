@@ -4,6 +4,8 @@
 
 #include <stdexcept>
 
+#include "messaging.h"
+
 clk::keybind::kbdbtrig::kbdbtrig(keybind &bind) : binding(bind) {}
 
 void clk::keybind::kbdbtrig::trigger(const SDL_Event &e) { binding.trigger(e); }
@@ -24,7 +26,7 @@ void clk::keybind::trigger(const SDL_Event &e) {
 
 void clk::keybind::managerreg(inputman *man) {
   if (manager)
-    throw std::runtime_error("Already registered with input dispatcher.");
+    return;
   manager = man;
   registration = manager->registerinput(SDL_KEYDOWN, new kbdbtrig(*this));
 }

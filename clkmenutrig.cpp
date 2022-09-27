@@ -9,6 +9,8 @@
 #include "clkkeybind.h"
 #include "clkviewport.h"
 
+#include "messaging.h"
+
 clk::menubuild::menubuildktrig::menubuildktrig(menubuild &binding, double *val)
     : binding(binding), val(val) {}
 
@@ -30,8 +32,11 @@ void clk::menubuild::ktrigger(const SDL_Event &e, double *val) {
 }
 
 void clk::menubuild::kmanagerreg() {
-  if (kbound)
-    throw std::runtime_error("Already registered with input dispatcher.");
+  if (kbound) {
+    messages::push({"Already registered with manager.", severitylevel::DEV,
+                    devlevel::DEV, 0});
+    return;
+  }
   for (const auto &pair : mappings)
     kmanager.registerinput((SDL_Keycode)pair.first,
                            new menubuildktrig(*this, pair.second));

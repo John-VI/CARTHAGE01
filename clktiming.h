@@ -8,21 +8,21 @@
 
 namespace clk {
 
-  class timer {
-  public:
-    void start();
-    void stop();
-    void pause();
-    void play();
+class timer {
+public:
+  void start();
+  void stop();
+  void pause();
+  void play();
 
-    Uint32 ticks() const;
+  Uint32 ticks() const;
 
-  private:
-    Uint32 pauseticks = 0;
-    Uint32 baseticks = 0;
+private:
+  Uint32 pauseticks = 0;
+  Uint32 baseticks = 0;
 
-    std::bitset<2> flags = 0;
-    // started? | paused?
-  };
+  std::bitset<2> flags = 0;
+  // started? | paused?
+};
 
-}
+} // namespace clk

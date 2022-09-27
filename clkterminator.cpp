@@ -4,6 +4,8 @@
 
 #include <stdexcept>
 
+#include "messaging.h"
+
 clk::terminator::quittrig::quittrig(clk::terminator &bind) : binding(bind){};
 void clk::terminator::quittrig::trigger(const SDL_Event &e) {
   binding.terminate();
@@ -14,8 +16,11 @@ clk::terminator::quittrig::~quittrig() {}
 clk::terminator::terminator(int &signaler) : quitsignal(signaler){};
 
 void clk::terminator::managerreg(inputman *man) {
-  if (manager)
-    throw std::runtime_error("Already registered with input dispatcher.");
+  if (manager) {
+    messages::push({"Already registered with manager.", severitylevel::DEV,
+                    devlevel::DEV, 0});
+    return;
+  }
   manager = man;
   registration = manager->registerinput(SDL_QUIT, new quittrig(*this));
 }
