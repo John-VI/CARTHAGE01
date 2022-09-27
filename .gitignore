@@ -486,3 +486,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+sconsbuild/rusting
+
