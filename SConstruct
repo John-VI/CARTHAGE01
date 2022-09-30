@@ -25,8 +25,8 @@ if is_windows_host:
 opts = Variables()
 opts.AddVariables(
 	EnumVariable("mode", "Compilation mode", "debug", allowed_values=("release", "debug")),
-	PathVariable("BUILDDIR", "Directory to store compiled object files in", "sconsbuild", PathVariable.PathIsDirCreate),
-	PathVariable("BIN_DIR", "Directory to store binaries in", "sconsbuild", PathVariable.PathIsDirCreate)
+	PathVariable("BUILDDIR", "Directory to store compiled files in", "sconsbuild", PathVariable.PathIsDirCreate),
+	#PathVariable("BIN_DIR", "Directory to store binaries in", "sconsbuild", PathVariable.PathIsDirCreate)
 )
 opts.Update(env)
 Help(opts.GenerateHelpText(env))
@@ -46,17 +46,18 @@ if is_windows_host:
 env.Append(LIBS = game_libs)
 
 builddir = env["BUILDDIR"]
-bindir = env["BIN_DIR"]
 
 # This function is basically useless and unfinished right now but if we add subdirs it saves a tiny bit of effort.
-def RecursiveGlob(pattern, dir_name=builddir):
-	matches = env.Glob("C:\\Users\\dogja\\Projects\\C++\\caulk-", pattern)
-	return matches
 
 env.Tool('compilation_db')
 cdb = env.CompilationDatabase('compile_commands.json')
 Alias('cdb', cdb)
 
-rust = env.Program(os.path.join(bindir, "rusting"), ["clkinputman.cpp", "clkinputtrigger.cpp", "clkkeybind.cpp", "clkterminator.cpp", "clktex.cpp", "clkwin.cpp", "grid.cpp", "monster.cpp", "tile.cpp", "clkviewport.cpp", "messaging.cpp", "clkmenutrig.cpp", "clkmbuttonbind.cpp", "clf1.cpp", "gridman.cpp", "protomonster.cpp", "clkrand.cpp", "feature.cpp", "door.cpp", "loopingbg.cpp", "clktiming.cpp",
-"main.cpp"])
-env.Default(rust)
+Export('env os')
+
+SConscript('src/SConscript', variant_dir=builddir)
+
+Clean(env['rusting'], Glob(os.path.join(builddir, "*.cpp")))
+Clean(env['rusting'], Glob(os.path.join(builddir, "*.h")))
+
+env.Default(env["rusting"])

@@ -1,122 +1,134 @@
 [
     {
-        "command": "g++ -o clkinputman.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb clkinputman.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "clkinputman.cpp",
-        "output": "clkinputman.o"
+        "command": "g++ -o src/clkinputman.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkinputman.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clkinputman.cpp",
+        "output": "src/clkinputman.o"
     },
     {
-        "command": "g++ -o clkinputtrigger.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb clkinputtrigger.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "clkinputtrigger.cpp",
-        "output": "clkinputtrigger.o"
+        "command": "g++ -o src/clkinputtrigger.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkinputtrigger.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clkinputtrigger.cpp",
+        "output": "src/clkinputtrigger.o"
     },
     {
-        "command": "g++ -o clkkeybind.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb clkkeybind.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "clkkeybind.cpp",
-        "output": "clkkeybind.o"
+        "command": "g++ -o src/clkkeybind.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkkeybind.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clkkeybind.cpp",
+        "output": "src/clkkeybind.o"
     },
     {
-        "command": "g++ -o clkterminator.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb clkterminator.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "clkterminator.cpp",
-        "output": "clkterminator.o"
+        "command": "g++ -o src/clkterminator.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkterminator.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clkterminator.cpp",
+        "output": "src/clkterminator.o"
     },
     {
-        "command": "g++ -o clktex.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb clktex.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "clktex.cpp",
-        "output": "clktex.o"
+        "command": "g++ -o src/clktex.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clktex.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clktex.cpp",
+        "output": "src/clktex.o"
     },
     {
-        "command": "g++ -o clkwin.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb clkwin.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "clkwin.cpp",
-        "output": "clkwin.o"
+        "command": "g++ -o src/clkwin.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkwin.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clkwin.cpp",
+        "output": "src/clkwin.o"
     },
     {
-        "command": "g++ -o grid.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb grid.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "grid.cpp",
-        "output": "grid.o"
+        "command": "g++ -o src/grid.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/grid.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/grid.cpp",
+        "output": "src/grid.o"
     },
     {
-        "command": "g++ -o monster.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb monster.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "monster.cpp",
-        "output": "monster.o"
+        "command": "g++ -o src/monster.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/monster.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/monster.cpp",
+        "output": "src/monster.o"
     },
     {
-        "command": "g++ -o tile.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb tile.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "tile.cpp",
-        "output": "tile.o"
+        "command": "g++ -o src/tile.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/tile.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/tile.cpp",
+        "output": "src/tile.o"
     },
     {
-        "command": "g++ -o clkviewport.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb clkviewport.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "clkviewport.cpp",
-        "output": "clkviewport.o"
+        "command": "g++ -o src/clkviewport.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkviewport.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clkviewport.cpp",
+        "output": "src/clkviewport.o"
     },
     {
-        "command": "g++ -o messaging.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb messaging.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "messaging.cpp",
-        "output": "messaging.o"
+        "command": "g++ -o src/messaging.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/messaging.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/messaging.cpp",
+        "output": "src/messaging.o"
     },
     {
-        "command": "g++ -o clkmenutrig.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb clkmenutrig.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "clkmenutrig.cpp",
-        "output": "clkmenutrig.o"
+        "command": "g++ -o src/clkmenutrig.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkmenutrig.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clkmenutrig.cpp",
+        "output": "src/clkmenutrig.o"
     },
     {
-        "command": "g++ -o clkmbuttonbind.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb clkmbuttonbind.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "clkmbuttonbind.cpp",
-        "output": "clkmbuttonbind.o"
+        "command": "g++ -o src/clkmbuttonbind.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkmbuttonbind.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clkmbuttonbind.cpp",
+        "output": "src/clkmbuttonbind.o"
     },
     {
-        "command": "g++ -o clf1.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb clf1.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "clf1.cpp",
-        "output": "clf1.o"
+        "command": "g++ -o src/clf1.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clf1.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clf1.cpp",
+        "output": "src/clf1.o"
     },
     {
-        "command": "g++ -o gridman.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb gridman.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "gridman.cpp",
-        "output": "gridman.o"
+        "command": "g++ -o src/gridman.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/gridman.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/gridman.cpp",
+        "output": "src/gridman.o"
     },
     {
-        "command": "g++ -o protomonster.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb protomonster.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "protomonster.cpp",
-        "output": "protomonster.o"
+        "command": "g++ -o src/protomonster.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/protomonster.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/protomonster.cpp",
+        "output": "src/protomonster.o"
     },
     {
-        "command": "g++ -o clkrand.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb clkrand.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "clkrand.cpp",
-        "output": "clkrand.o"
+        "command": "g++ -o src/clkrand.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkrand.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clkrand.cpp",
+        "output": "src/clkrand.o"
     },
     {
-        "command": "g++ -o feature.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb feature.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "feature.cpp",
-        "output": "feature.o"
+        "command": "g++ -o src/feature.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/feature.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/feature.cpp",
+        "output": "src/feature.o"
     },
     {
-        "command": "g++ -o door.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb door.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "door.cpp",
-        "output": "door.o"
+        "command": "g++ -o src/door.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/door.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/door.cpp",
+        "output": "src/door.o"
     },
     {
-        "command": "g++ -o main.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb main.cpp",
-        "directory": "C:/Users/dogja/Projects/C++/caulk-",
-        "file": "main.cpp",
-        "output": "main.o"
+        "command": "g++ -o src/loopingbg.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/loopingbg.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/loopingbg.cpp",
+        "output": "src/loopingbg.o"
+    },
+    {
+        "command": "g++ -o src/clktiming.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clktiming.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/clktiming.cpp",
+        "output": "src/clktiming.o"
+    },
+    {
+        "command": "g++ -o src/main.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/main.cpp",
+        "directory": "/home/kdg/projects/C++/caulk-",
+        "file": "src/main.cpp",
+        "output": "src/main.o"
     }
 ]
