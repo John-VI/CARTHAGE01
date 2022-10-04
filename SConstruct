@@ -20,7 +20,7 @@ if 'AR' in os.environ:
 	env['AR'] = os.environ['AR']
 
 if is_windows_host:
-	env.Append(LINKFLAGS = ["-mwindows"])
+    env.Append(LINKFLAGS = ["-mwindows"])
 
 opts = Variables()
 opts.AddVariables(
@@ -31,7 +31,8 @@ opts.AddVariables(
 opts.Update(env)
 Help(opts.GenerateHelpText(env))
 
-flags = ["-Wall", "-pedantic", "-fdiagnostics-color=always", "-I.", "-std=gnu++20"]
+flags = ["-Wall", "-pedantic", "-fdiagnostics-color=always", "-I.", "-std=gnu++20", "-Dmain=SDL_main"]
+
 if env["mode"] == "debug":
 	flags += ["-ggdb"]
 elif env["mode"] == "release":
@@ -39,9 +40,14 @@ elif env["mode"] == "release":
 env.Append(CCFLAGS = flags)
 env.Append(CXXFLAGS = flags)
 
-game_libs = ["SDL2main", "SDL2", "SDL2_image", "pthread"]
+game_libs = []
+
 if is_windows_host:
-    game_libs.Append("mingw32")
+    game_libs.append("mingw32")
+
+game_libs += ["SDL2main", "SDL2", "SDL2_image", "pthread"]
+
+# game_libs = os.popen("sdl2-config --libs").read()
 
 env.Append(LIBS = game_libs)
 

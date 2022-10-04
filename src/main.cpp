@@ -6,6 +6,8 @@
 #define FONWID 8
 #define FONHEI 16
 
+#include <SDL2/SDL.h>
+
 #include <cassert>
 #include <fstream>
 #include <iostream>
