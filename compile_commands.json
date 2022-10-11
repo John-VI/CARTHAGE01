@@ -1,134 +1,134 @@
 [
     {
-        "command": "g++ -o src/clkinputman.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkinputman.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clkinputman.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clkinputman.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clkinputman.cpp",
-        "output": "src/clkinputman.o"
+        "output": "sconsbuild/clkinputman.o"
     },
     {
-        "command": "g++ -o src/clkinputtrigger.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkinputtrigger.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clkinputtrigger.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clkinputtrigger.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clkinputtrigger.cpp",
-        "output": "src/clkinputtrigger.o"
+        "output": "sconsbuild/clkinputtrigger.o"
     },
     {
-        "command": "g++ -o src/clkkeybind.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkkeybind.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clkkeybind.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clkkeybind.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clkkeybind.cpp",
-        "output": "src/clkkeybind.o"
+        "output": "sconsbuild/clkkeybind.o"
     },
     {
-        "command": "g++ -o src/clkterminator.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkterminator.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clkterminator.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clkterminator.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clkterminator.cpp",
-        "output": "src/clkterminator.o"
+        "output": "sconsbuild/clkterminator.o"
     },
     {
-        "command": "g++ -o src/clktex.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clktex.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clktex.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clktex.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clktex.cpp",
-        "output": "src/clktex.o"
+        "output": "sconsbuild/clktex.o"
     },
     {
-        "command": "g++ -o src/clkwin.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkwin.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clkwin.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clkwin.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clkwin.cpp",
-        "output": "src/clkwin.o"
+        "output": "sconsbuild/clkwin.o"
     },
     {
-        "command": "g++ -o src/grid.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/grid.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/grid.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/grid.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/grid.cpp",
-        "output": "src/grid.o"
+        "output": "sconsbuild/grid.o"
     },
     {
-        "command": "g++ -o src/monster.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/monster.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/monster.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/monster.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/monster.cpp",
-        "output": "src/monster.o"
+        "output": "sconsbuild/monster.o"
     },
     {
-        "command": "g++ -o src/tile.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/tile.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/tile.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/tile.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/tile.cpp",
-        "output": "src/tile.o"
+        "output": "sconsbuild/tile.o"
     },
     {
-        "command": "g++ -o src/clkviewport.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkviewport.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clkviewport.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clkviewport.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clkviewport.cpp",
-        "output": "src/clkviewport.o"
+        "output": "sconsbuild/clkviewport.o"
     },
     {
-        "command": "g++ -o src/messaging.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/messaging.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/messaging.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/messaging.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/messaging.cpp",
-        "output": "src/messaging.o"
+        "output": "sconsbuild/messaging.o"
     },
     {
-        "command": "g++ -o src/clkmenutrig.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkmenutrig.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clkmenutrig.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clkmenutrig.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clkmenutrig.cpp",
-        "output": "src/clkmenutrig.o"
+        "output": "sconsbuild/clkmenutrig.o"
     },
     {
-        "command": "g++ -o src/clkmbuttonbind.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkmbuttonbind.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clkmbuttonbind.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clkmbuttonbind.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clkmbuttonbind.cpp",
-        "output": "src/clkmbuttonbind.o"
+        "output": "sconsbuild/clkmbuttonbind.o"
     },
     {
-        "command": "g++ -o src/clf1.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clf1.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clf1.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clf1.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clf1.cpp",
-        "output": "src/clf1.o"
+        "output": "sconsbuild/clf1.o"
     },
     {
-        "command": "g++ -o src/gridman.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/gridman.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/gridman.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/gridman.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/gridman.cpp",
-        "output": "src/gridman.o"
+        "output": "sconsbuild/gridman.o"
     },
     {
-        "command": "g++ -o src/protomonster.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/protomonster.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/protomonster.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/protomonster.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/protomonster.cpp",
-        "output": "src/protomonster.o"
+        "output": "sconsbuild/protomonster.o"
     },
     {
-        "command": "g++ -o src/clkrand.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clkrand.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clkrand.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clkrand.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clkrand.cpp",
-        "output": "src/clkrand.o"
+        "output": "sconsbuild/clkrand.o"
     },
     {
-        "command": "g++ -o src/feature.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/feature.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/feature.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/feature.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/feature.cpp",
-        "output": "src/feature.o"
+        "output": "sconsbuild/feature.o"
     },
     {
-        "command": "g++ -o src/door.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/door.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/door.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/door.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/door.cpp",
-        "output": "src/door.o"
+        "output": "sconsbuild/door.o"
     },
     {
-        "command": "g++ -o src/loopingbg.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/loopingbg.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/loopingbg.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/loopingbg.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/loopingbg.cpp",
-        "output": "src/loopingbg.o"
+        "output": "sconsbuild/loopingbg.o"
     },
     {
-        "command": "g++ -o src/clktiming.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/clktiming.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/clktiming.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/clktiming.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/clktiming.cpp",
-        "output": "src/clktiming.o"
+        "output": "sconsbuild/clktiming.o"
     },
     {
-        "command": "g++ -o src/main.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -ggdb src/main.cpp",
-        "directory": "/home/kdg/projects/C++/caulk-",
+        "command": "g++ -o sconsbuild/main.o -c -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb -Wall -pedantic -fdiagnostics-color=always -I. -std=gnu++20 -Dmain=SDL_main -ggdb sconsbuild/main.cpp",
+        "directory": "C:/Users/dogja/Projects/C++/caulk-",
         "file": "src/main.cpp",
-        "output": "src/main.o"
+        "output": "sconsbuild/main.o"
     }
 ]
