@@ -20,7 +20,6 @@ int navmap::gety() const { return y; }
 
 navmap navmap::operator+(const navmap &other) const {
   CHKSIZE(other);
-
   navmap nmap(getx(), gety());
 
   for (int i = 0; i < size(); i++)
@@ -34,4 +33,62 @@ navmap &navmap::operator+=(const navmap &other) {
 
   for (int i = 0; i < size(); i++)
     (*this)[i] += other[i];
+
+  return *this;
+}
+
+// navmap navmap::operator*(const navmap &other) const {
+//   CHKSIZE(other);
+//   navmap nmap(getx(), gety());
+
+//   for (int i = 0; i < size(); i++)
+//     nmap[i] = (*this)[i] * other[i];
+
+//   return nmap;
+// }
+
+navmap navmap::operator*(int x) const {
+  navmap nmap(getx(), gety());
+
+  for (int i = 0; i < size(); i++)
+    nmap[i] = (*this)[i] * x;
+
+  return nmap;
+}
+
+navmap &navmap::operator*=(int x) {
+  for (int i = 0; i < size(); i++)
+    (*this)[i] *= x;
+
+  return *this;
+}
+
+navmap navmap::operator-() const {
+  navmap nmap(getx(), gety());
+
+  for (int i = 0; i < size(); i++)
+    nmap[i] = -(*this)[i];
+
+  return nmap;
+}
+
+navmap navmap::operator-(const navmap &other) const {
+  CHKSIZE(other);
+  navmap nmap(getx(), gety());
+
+  for (int i = 0; i < size(); i++)
+    nmap[i] = (*this)[i] - other[i];
+
+  return nmap;
+}
+
+navmap &navmap::operator-=(const navmap &other) {
+  CHKSIZE(other);
+
+  navmap nmap(getx(), gety());
+
+  for (int i = 0; i < size(); i++)
+    (*this)[i] -= other[i];
+
+  return *this;
 }

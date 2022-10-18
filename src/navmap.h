@@ -30,5 +30,4 @@ class navmap : public sdarray<int> {
   navmap operator-() const;
 
   navmap &operator=(const navmap &other);
-
 };
