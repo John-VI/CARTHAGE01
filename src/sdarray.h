@@ -9,13 +9,12 @@
 #include <memory>
 #include <stdexcept>
 
-template <class T>
-class sdarray {
- private:
+template <class T> class sdarray {
+private:
   std::shared_ptr<T[]> arr;
   const int len;
 
- public:
+public:
   sdarray(int size);
 
   constexpr T &at(int pos);
@@ -27,7 +26,8 @@ class sdarray {
   constexpr int size() const noexcept;
   constexpr int max_size() const noexcept;
 
-  constexpr std::shared_ptr<T[]> data() noexcept; // This violates the contract a bit since no noexcept.
+  constexpr std::shared_ptr<T[]>
+  data() noexcept; // This violates the contract a bit since no noexcept.
   constexpr std::shared_ptr<const T[]> data() const noexcept;
 
   constexpr T &front();
@@ -40,34 +40,29 @@ class sdarray {
   constexpr void swap(sdarray<T> &other);
 };
 
-template <class T>
-constexpr T &sdarray<T>::at(int pos) {
+template <class T> constexpr T &sdarray<T>::at(int pos) {
   if (pos < 0 || pos >= len)
     throw std::out_of_range("Reference out of range.");
   else
     return arr[pos];
 }
 
-template <class T>
-constexpr const T &sdarray<T>::at(int pos) const {
+template <class T> constexpr const T &sdarray<T>::at(int pos) const {
   if (pos < 0 || pos >= len)
     throw std::out_of_range("Reference out of range.");
   else
     return arr[pos];
 }
 
-template <class T>
-constexpr T &sdarray<T>::operator[](int pos) {
+template <class T> constexpr T &sdarray<T>::operator[](int pos) {
   return arr[pos];
 }
 
-template <class T>
-constexpr const T &sdarray<T>::operator[](int pos) const {
-  return arr[pos];  
+template <class T> constexpr const T &sdarray<T>::operator[](int pos) const {
+  return arr[pos];
 }
 
-template <class T>
-constexpr int sdarray<T>::size() const noexcept {
+template <class T> constexpr int sdarray<T>::size() const noexcept {
   return len;
 }
 
@@ -75,8 +70,7 @@ template <class T> constexpr int sdarray<T>::max_size() const noexcept {
   return len;
 }
 
-template <class T>
-constexpr std::shared_ptr<T[]> sdarray<T>::data() noexcept {
+template <class T> constexpr std::shared_ptr<T[]> sdarray<T>::data() noexcept {
   return std::shared_ptr(arr);
 }
 
@@ -85,23 +79,15 @@ constexpr std::shared_ptr<const T[]> sdarray<T>::data() const noexcept {
   return std::shared_ptr(arr);
 }
 
-template <class T>
-constexpr T &sdarray<T>::front() {
+template <class T> constexpr T &sdarray<T>::front() { return arr[0]; }
+
+template <class T> constexpr const T &sdarray<T>::front() const {
   return arr[0];
 }
 
-template <class T>
-constexpr const T &sdarray<T>::front() const {
-  return arr[0];
-}
+template <class T> constexpr T &sdarray<T>::back() { return arr[len - 1]; }
 
-template <class T>
-constexpr T &sdarray<T>::back() {
-  return arr[len - 1];
-}
-
-template <class T>
-constexpr const T &sdarray<T>::back() const {
+template <class T> constexpr const T &sdarray<T>::back() const {
   return arr[len - 1];
 }
 
@@ -110,11 +96,10 @@ template <class T>
   return arr.get();
 }
 
-template <class T>
-constexpr void sdarray<T>::swap(sdarray<T> &other) {
+template <class T> constexpr void sdarray<T>::swap(sdarray<T> &other) {
   if (other.size() != size())
     throw std::out_of_range("Arrays are not of the same size.");
 
-  for (int i = 0; i < size(); i ++)
+  for (int i = 0; i < size(); i++)
     std::swap(data()[i], other.data()[i]);
 }

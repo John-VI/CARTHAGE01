@@ -7,16 +7,21 @@
 #include <functional>
 
 class navmap : public sdarray<int> {
- private:
+private:
   int x, y;
+  inline int chkpos(int x, int y) const;
 
- public:
+protected:
+  int bleedfunc(int x);
+
+public:
   navmap(int x, int y);
 
   int getx() const;
   int gety() const;
 
-  int bleed(std::function<int>);
+  navmap bleed(std::function<int, int>) const;
+  navmap &bleedout();
 
   navmap operator+(const navmap &other) const;
   navmap &operator+=(const navmap &other);

@@ -8,10 +8,9 @@
 
 #include <functional>
 
-#define CHKSIZE(X)                            \
-  if (getx() != X.getx() || gety() != X.gety())    \
+#define CHKSIZE(X)                                                             \
+  if (getx() != X.getx() || gety() != X.gety())                                \
     throw std::runtime_error("Missized matrices.");
-
 
 navmap::navmap(int x, int y) : sdarray<int>(x * y), x(x), y(y) {}
 
@@ -91,4 +90,25 @@ navmap &navmap::operator-=(const navmap &other) {
     (*this)[i] -= other[i];
 
   return *this;
+}
+
+inline int navmap::chkpos(int x, int y) { return x + (y * this->x); }
+
+navmap navmap::bleed(std::function<int, int> func) const {
+  navmap nmap(x, y);
+
+  for (int i = 0; i < y; i++)
+    for (int j = 0; j < x; j++)
+      if ((*this)[chkpos(j, i)] > 0) {
+        nmap[chkpos(j, i)] = (*this)[chkpos(j, i)];
+        if (j > 0)
+          nmap[chkpos(j - 1, i)] = func((*this)[chkpos(j - 1, i)]);
+        if (j < this->x)
+          nmap[chkpos(j + 1, i)] = func((*this)[chkpos(j + 1, i)]);
+        if (i > 0)
+          nmap[chkpos(j, i - 1)] = func((*this)[chkpos(j, i - 1)]);
+        if (i < this->y)
+          nmap[chkpos(j, i + 1)] = func((*this)[chkpos(j, i + 1)]);
+      }
+  return nmap;
 }
