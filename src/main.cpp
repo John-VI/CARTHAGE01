@@ -37,8 +37,9 @@
 
 const char *copyright = "Copyright (c) John Allen Whitley, 2022, BSD 3-Clause";
 
-#define ECHOMAP(MAP) for (int i = 0; i < MAP.size(); i++) \
-    printf("%d ", MAP[i]); \
+#define ECHOMAP(MAP)                                                           \
+  for (int i = 0; i < MAP.size(); i++)                                         \
+    printf("%d ", MAP[i]);                                                     \
   printf("\n\n");
 
 extern "C";
@@ -101,17 +102,15 @@ int main(int argc, char *argv[]) {
   bg.travelangle = 0;
   bg.updatepathing();
 
-
   navmap map1(10, 10);
   map1[55] = 256;
-  navmap map2 = map1.bleed([] (int x) { return x / 2; });
+  navmap map2 = map1.bleed([](int x) { return x / 2; });
   navmap map3 = map2.bleed([](int x) { return x / 2; });
   navmap map4 = map3.bleed([](int x) { return x / 2; });
   ECHOMAP(map1);
   ECHOMAP(map2);
   ECHOMAP(map3);
   ECHOMAP(map4);
-
 
   clk::timer framedelta;
   framedelta.start();

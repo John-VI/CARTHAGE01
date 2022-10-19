@@ -492,3 +492,6 @@ sconsbuild/rusting
 sconsbuild/*.h
 sconsbuild/*.cpp
 *.dblite
+
+sconsbuild/SConscript
+

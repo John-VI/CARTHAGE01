@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-//#include "clkinputtrigger.h"
+// #include "clkinputtrigger.h"
 
 namespace clk {
 typedef struct sprite sprite;

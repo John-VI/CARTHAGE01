@@ -15,17 +15,17 @@ navmap::navmap(int x, int y) : sdarray(x * y), x(x), y(y) {
     (*this)[i] = 0;
 }
 
-  int navmap::getx() const { return x; }
-  int navmap::gety() const { return y; }
+int navmap::getx() const { return x; }
+int navmap::gety() const { return y; }
 
-  navmap navmap::operator+(const navmap &other) const {
-    CHKSIZE(other);
-    navmap nmap(getx(), gety());
+navmap navmap::operator+(const navmap &other) const {
+  CHKSIZE(other);
+  navmap nmap(getx(), gety());
 
-    for (int i = 0; i < size(); i++)
-      nmap[i] = (*this)[i] + other[i];
+  for (int i = 0; i < size(); i++)
+    nmap[i] = (*this)[i] + other[i];
 
-    return nmap;
+  return nmap;
 }
 
 navmap &navmap::operator+=(const navmap &other) {
