@@ -2,6 +2,3 @@
 
 #include "sdarray.h"
 
-template <class T> sdarray<T>::sdarray(const int size) : len(size) {
-  arr(new T[len]);
-}

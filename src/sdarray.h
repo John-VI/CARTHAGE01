@@ -40,6 +40,10 @@ public:
   constexpr void swap(sdarray<T> &other);
 };
 
+template <class T> sdarray<T>::sdarray(const int size) : len(size) {
+  arr.reset(new T[len]);
+}
+
 template <class T> constexpr T &sdarray<T>::at(int pos) {
   if (pos < 0 || pos >= len)
     throw std::out_of_range("Reference out of range.");

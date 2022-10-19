@@ -20,7 +20,7 @@ public:
   int getx() const;
   int gety() const;
 
-  navmap bleed(std::function<int, int>) const;
+  navmap bleed(std::function<int(int)>) const;
   navmap &bleedout();
 
   navmap operator+(const navmap &other) const;

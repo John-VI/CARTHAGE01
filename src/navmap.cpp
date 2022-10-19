@@ -1,7 +1,5 @@
 // Copyright (c) John Allen Whitley, 2022, BSD 3-Clause
 
-#pragma once
-
 #include "navmap.h"
 
 #include "sdarray.h"
@@ -12,19 +10,22 @@
   if (getx() != X.getx() || gety() != X.gety())                                \
     throw std::runtime_error("Missized matrices.");
 
-navmap::navmap(int x, int y) : sdarray<int>(x * y), x(x), y(y) {}
-
-int navmap::getx() const { return x; }
-int navmap::gety() const { return y; }
-
-navmap navmap::operator+(const navmap &other) const {
-  CHKSIZE(other);
-  navmap nmap(getx(), gety());
-
+navmap::navmap(int x, int y) : sdarray(x * y), x(x), y(y) {
   for (int i = 0; i < size(); i++)
-    nmap[i] = (*this)[i] + other[i];
+    (*this)[i] = 0;
+}
 
-  return nmap;
+  int navmap::getx() const { return x; }
+  int navmap::gety() const { return y; }
+
+  navmap navmap::operator+(const navmap &other) const {
+    CHKSIZE(other);
+    navmap nmap(getx(), gety());
+
+    for (int i = 0; i < size(); i++)
+      nmap[i] = (*this)[i] + other[i];
+
+    return nmap;
 }
 
 navmap &navmap::operator+=(const navmap &other) {
@@ -92,9 +93,9 @@ navmap &navmap::operator-=(const navmap &other) {
   return *this;
 }
 
-inline int navmap::chkpos(int x, int y) { return x + (y * this->x); }
+inline int navmap::chkpos(int x, int y) const { return x + (y * this->x); }
 
-navmap navmap::bleed(std::function<int, int> func) const {
+navmap navmap::bleed(std::function<int(int)> func) const {
   navmap nmap(x, y);
 
   for (int i = 0; i < y; i++)
@@ -102,13 +103,13 @@ navmap navmap::bleed(std::function<int, int> func) const {
       if ((*this)[chkpos(j, i)] > 0) {
         nmap[chkpos(j, i)] = (*this)[chkpos(j, i)];
         if (j > 0)
-          nmap[chkpos(j - 1, i)] = func((*this)[chkpos(j - 1, i)]);
+          nmap[chkpos(j - 1, i)] = func((*this)[chkpos(j, i)]);
         if (j < this->x)
-          nmap[chkpos(j + 1, i)] = func((*this)[chkpos(j + 1, i)]);
+          nmap[chkpos(j + 1, i)] = func((*this)[chkpos(j, i)]);
         if (i > 0)
-          nmap[chkpos(j, i - 1)] = func((*this)[chkpos(j, i - 1)]);
+          nmap[chkpos(j, i - 1)] = func((*this)[chkpos(j, i)]);
         if (i < this->y)
-          nmap[chkpos(j, i + 1)] = func((*this)[chkpos(j, i + 1)]);
+          nmap[chkpos(j, i + 1)] = func((*this)[chkpos(j, i)]);
       }
   return nmap;
 }
