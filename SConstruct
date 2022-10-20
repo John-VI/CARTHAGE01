@@ -31,12 +31,18 @@ opts.AddVariables(
 opts.Update(env)
 Help(opts.GenerateHelpText(env))
 
-flags = ["-Wall", "-pedantic", "-fdiagnostics-color=always", "-I.", "-std=gnu++20", "-Dmain=SDL_main"]
+flags = ["-Wall", "-pedantic", "-fdiagnostics-color=always", "-I.", "-std=gnu++20"]
 
 if env["mode"] == "debug":
 	flags += ["-ggdb"]
 elif env["mode"] == "release":
 	flags += ["-O3"] # WHOA, YEAH
+
+if is_windows_host:
+        flags += ["-Dmain=SDL_main"]
+else:
+        flags += ["-D_REENTRANT"]
+
 env.Append(CCFLAGS = flags)
 env.Append(CXXFLAGS = flags)
 
@@ -44,8 +50,9 @@ game_libs = []
 
 if is_windows_host:
     game_libs.append("mingw32")
+    game_libs.append("SDL2main")
 
-game_libs += ["SDL2main", "SDL2", "SDL2_image", "pthread"]
+game_libs += ["SDL2", "SDL2_image", "pthread"]
 
 # game_libs = os.popen("sdl2-config --libs").read()
 

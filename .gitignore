@@ -494,4 +494,4 @@ sconsbuild/*.cpp
 *.dblite
 
 sconsbuild/SConscript
-
+vgcore.*

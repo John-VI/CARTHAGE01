@@ -38,8 +38,11 @@
 const char *copyright = "Copyright (c) John Allen Whitley, 2022, BSD 3-Clause";
 
 #define ECHOMAP(MAP)                                                           \
-  for (int i = 0; i < MAP.size(); i++)                                         \
-    printf("%d ", MAP[i]);                                                     \
+  for (int i = 0; i < MAP.gety(); i++) {                                       \
+    for (int j = 0; j < MAP.getx(); j++)                                       \
+      printf("%d ", MAP[j + (i * MAP.getx())]);                                \
+    printf("\n");                                                              \
+  }                                                                            \
   printf("\n\n");
 
 extern "C";
@@ -104,13 +107,10 @@ int main(int argc, char *argv[]) {
 
   navmap map1(10, 10);
   map1[55] = 256;
-  navmap map2 = map1.bleed([](int x) { return x / 2; });
-  navmap map3 = map2.bleed([](int x) { return x / 2; });
-  navmap map4 = map3.bleed([](int x) { return x / 2; });
+  navmap map2(10, 10);
+  map2 = map1.bleedout();
   ECHOMAP(map1);
   ECHOMAP(map2);
-  ECHOMAP(map3);
-  ECHOMAP(map4);
 
   clk::timer framedelta;
   framedelta.start();

@@ -11,11 +11,16 @@
 
 template <class T> class sdarray {
 private:
-  std::shared_ptr<T[]> arr;
+  std::unique_ptr<T[]> arr;
   const int len;
 
 public:
   sdarray(int size);
+  sdarray(const sdarray &) = delete;
+  sdarray(sdarray &&) = default;
+  sdarray &operator=(sdarray &&) = default;
+  // sdarray &operator=(sdarray &&other);
+  // sdarray(sdarray &);
 
   constexpr T &at(int pos);
   constexpr const T &at(int pos) const;
@@ -26,9 +31,9 @@ public:
   constexpr int size() const noexcept;
   constexpr int max_size() const noexcept;
 
-  constexpr std::shared_ptr<T[]>
-  data() noexcept; // This violates the contract a bit since no noexcept.
-  constexpr std::shared_ptr<const T[]> data() const noexcept;
+  // constexpr std::shared_ptr<T[]>
+  // data() noexcept; // This violates the contract a bit since no noexcept.
+  // constexpr std::shared_ptr<const T[]> data() const noexcept;
 
   constexpr T &front();
   constexpr const T &front() const;
@@ -41,8 +46,11 @@ public:
 };
 
 template <class T> sdarray<T>::sdarray(const int size) : len(size) {
-  arr.reset(new T[len]);
+  arr = std::make_unique<T[]>(size);
 }
+
+// template <class T> sdarray<T> &sdarray<T>::operator=(sdarray &&) = default;
+// template <class T> sdarray<T>::sdarray(sdarray &) = default;
 
 template <class T> constexpr T &sdarray<T>::at(int pos) {
   if (pos < 0 || pos >= len)
@@ -74,14 +82,15 @@ template <class T> constexpr int sdarray<T>::max_size() const noexcept {
   return len;
 }
 
-template <class T> constexpr std::shared_ptr<T[]> sdarray<T>::data() noexcept {
-  return std::shared_ptr(arr);
-}
+// template <class T> constexpr std::shared_ptr<T[]> sdarray<T>::data() noexcept
+// {
+//   return std::shared_ptr<T[]>(arr);
+// }
 
-template <class T>
-constexpr std::shared_ptr<const T[]> sdarray<T>::data() const noexcept {
-  return std::shared_ptr(arr);
-}
+// template <class T>
+// constexpr std::shared_ptr<const T[]> sdarray<T>::data() const noexcept {
+//   return std::shared_ptr<T[]>(arr);
+// }
 
 template <class T> constexpr T &sdarray<T>::front() { return arr[0]; }
 
@@ -105,5 +114,5 @@ template <class T> constexpr void sdarray<T>::swap(sdarray<T> &other) {
     throw std::out_of_range("Arrays are not of the same size.");
 
   for (int i = 0; i < size(); i++)
-    std::swap(data()[i], other.data()[i]);
+    std::swap((*this)[i], other[i]);
 }

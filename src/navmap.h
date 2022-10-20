@@ -16,12 +16,15 @@ protected:
 
 public:
   navmap(int x, int y);
+  navmap(const navmap &);
+  navmap(navmap &&);
+  // navmap &operator=(navmap &&);
 
   int getx() const;
   int gety() const;
 
   navmap bleed(std::function<int(int)>) const;
-  navmap &bleedout();
+  navmap bleedout();
 
   navmap operator+(const navmap &other) const;
   navmap &operator+=(const navmap &other);
@@ -35,4 +38,12 @@ public:
   navmap operator-() const;
 
   navmap &operator=(const navmap &other);
+  // navmap &operator=(navmap &&);
+
+  bool operator==(const navmap &other);
+  inline bool operator!=(const navmap &other);
 };
+
+inline bool navmap::operator!=(const navmap &other) {
+  return !(*this == other);
+}
