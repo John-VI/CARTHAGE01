@@ -495,3 +495,4 @@ sconsbuild/*.cpp
 
 sconsbuild/SConscript
 vgcore.*
+log
