@@ -1,10 +1,12 @@
 // Copyright (c) John Allen Whitley, 2022, BSD 3-Clause
 
-#define INTWID 480
-#define INTHEI 416
+#define INTWID 640
+#define INTHEI 480
 
 #define FONWID 8
 #define FONHEI 16
+
+#define MAXFPS 60
 
 #include <SDL2/SDL.h>
 
@@ -25,38 +27,34 @@
 #include "clkviewport.h"
 #include "clkwin.h"
 
-#include "clf1.h"
-#include "door.h"
-#include "grid.h"
-#include "gridman.h"
-#include "loopingbg.h"
 #include "messaging.h"
-#include "monster.h"
-
-#include "navmap.h"
+#include "loopingbg.h"
 
 const char *copyright = "Copyright (c) John Allen Whitley, 2022, BSD 3-Clause";
 
-#define ECHOMAP(MAP)                                                           \
-  for (int i = 0; i < MAP.gety(); i++) {                                       \
-    for (int j = 0; j < MAP.getx(); j++)                                       \
-      printf("%d ", MAP[j + (i * MAP.getx())]);                                \
-    printf("\n");                                                              \
-  }                                                                            \
-  printf("\n\n");
+// #define ECHOMAP(MAP)                                                           \
+//   for (int i = 0; i < MAP.gety(); i++) {                                       \
+//     for (int j = 0; j < MAP.getx(); j++)                                       \
+//       printf("%d ", MAP[j + (i * MAP.getx())]);                                \
+//     printf("\n");                                                              \
+//   }                                                                            \
+//  printf("\n\n");
 
 extern "C";
 
 int main(int argc, char *argv[]) {
+
+  const double msecondsperframe = 1000.0 / MAXFPS;
+
   std::cout << "Starting\n";
 
   SDL_Color black = {0, 0, 0};
 
   clk::window win("rusting", INTWID, INTHEI, &black); // We're 100% black
   win.setviewport(vports::FULL, {0, 0, INTWID, INTHEI});
-  win.setviewport(vports::GRID, {0, 0, 40 * FONWID, 24 * FONHEI});
-  win.setviewport(vports::MESSAGES, {40 * FONWID, 0, 20 * FONWID, 26 * FONHEI});
-  win.setviewport(vports::STATUS, {0, 24 * FONHEI, 40 * FONWID, 2 * FONHEI});
+  win.setviewport(vports::RIGHT, {0, 0, 140, INTHEI});
+  win.setviewport(vports::LEFT, {500, 0, 140, INTHEI});
+  win.setviewport(vports::CENTER, {140, 0, INTWID - 140 * 2, INTHEI});
 
   clk::sprite frog(win, "frog.png");
   clk::sprite vga(win, "compac.png");
@@ -74,29 +72,23 @@ int main(int argc, char *argv[]) {
 
   clk::randctl::randinit();
 
-  gridman gman(vga, kbd);
-  gman.load();
-  gman.managerreg();
+  // clk::mbuttonbind mouse(
+  //     *gman.clevel.get(),
+  //     iman); // FIXME this is going to break when we change levels
+  // mouse.managerreg();
 
-  gman.clevel.get()->gettile(5, 5)->mkfeat<door>();
+  // double oldangle = 10000;
+  // double newangle = 10000;
+  // double oldtangle = 0;
+  // double newtangle = 0;
 
-  clk::mbuttonbind mouse(
-      *gman.clevel.get(),
-      iman); // FIXME this is going to break when we change levels
-  mouse.managerreg();
+  // clk::menubuild menuman(
+  //     {                     // {SDLK_c, &mouse.stype},
+  //      {SDLK_v, &newangle}, // , {SDLK_b, &mouse.sflag}
+  //      {SDLK_c, &newtangle}},
+  //     iman, kbd, vga);
 
-  double oldangle = 10000;
-  double newangle = 10000;
-  double oldtangle = 0;
-  double newtangle = 0;
-
-  clk::menubuild menuman(
-      {                     // {SDLK_c, &mouse.stype},
-       {SDLK_v, &newangle}, // , {SDLK_b, &mouse.sflag}
-       {SDLK_c, &newtangle}},
-      iman, kbd, vga);
-
-  messages msg(win, vga);
+  // messages msg(win, vga);
 
   clk::sprite backgroundasset(win, "testbg1.png");
   loopingbg bg(backgroundasset);
@@ -105,36 +97,23 @@ int main(int argc, char *argv[]) {
   bg.travelangle = 0;
   bg.updatepathing();
 
-  navmap map1(10, 10);
-  map1[55] = 256;
-  navmap map2(10, 10);
-  map2 = map1.bleedout();
-  ECHOMAP(map1);
-  ECHOMAP(map2);
+  // navmap map1(10, 10);
+  // map1[55] = 256;
+  // navmap map2(10, 10);
+  // map2 = map1.bleedout();
+  // ECHOMAP(map1);
+  // ECHOMAP(map2);
 
   clk::timer framedelta;
   framedelta.start();
+  Uint32 mseconds = 0;
 
   while (!terminator) {
-    Uint32 mseconds = framedelta.ticks();
     framedelta.start();
 
-    gman.clevel.get()->tick();
     iman.processinputs();
 
     win.clear();
-
-    if (oldtangle != newtangle) {
-      bg.travelangle = newtangle;
-      bg.updatepathing();
-      oldtangle = newtangle;
-    }
-
-    if (oldangle != newangle) {
-      bg.angle = newangle;
-      bg.updatepathing();
-      oldangle = newangle;
-    }
 
     // if (accumulator >= 10) {
     //   bg.angle++;
@@ -148,27 +127,19 @@ int main(int argc, char *argv[]) {
     bg.tick(mseconds);
     bg.draw();
 
-    gman.clevel.get()->draw();
     // vga.drawstring(
     //     vports::STATUS, 96, 0,
     //     std::to_string(gman.clevel.get()->monsters.front().get()->meter));
-    msg.draw();
-
-    vga.drawstring(vports::STATUS, 0, 0,
-                   "Offset " + std::to_string(bg.currentoffset));
-    vga.drawstring(vports::STATUS, 0, 16,
-                   "Tr.angle " + std::to_string(bg.travelangle));
-    vga.drawstring(vports::STATUS, 150, 0,
-                   "Position " + std::to_string(bg.position));
-    vga.drawstring(vports::STATUS, 150, 16,
-                   "Length " + std::to_string(bg.length));
-    vga.drawstring(vports::STATUS, 309, 0, "Angle " + std::to_string(bg.angle));
-    vga.drawstring(vports::STATUS, 309, 16,
-                   std::to_string(backgroundasset.geth()));
-
-    menuman.draw();
+    // msg.draw();
 
     win.draw();
+
+    mseconds = framedelta.ticks();
+
+    if ((double)mseconds < msecondsperframe) {
+      SDL_Delay((Uint32)(msecondsperframe - (double)mseconds));
+      mseconds = framedelta.ticks();
+    }
   }
   return 0;
 }

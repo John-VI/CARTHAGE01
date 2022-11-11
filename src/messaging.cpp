@@ -23,9 +23,9 @@ void messages::push(message msg) {
 }
 
 void messages::draw() {
-  int rows = win.getviewport(vports::MESSAGES).h / FONTHEI;
+  int rows = win.getviewport(vports::LEFT).h / FONTHEI;
   for (int i = queue.size() - 1; i >= 0 && (queue.size() - i) < rows + 1; i--) {
-    font.drawstring(vports::MESSAGES, 0, (rows - (queue.size() - i)) * FONTHEI,
+    font.drawstring(vports::LEFT, 0, (rows - (queue.size() - i)) * FONTHEI,
                     queue.at(i).text);
   }
 }

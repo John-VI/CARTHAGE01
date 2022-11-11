@@ -69,7 +69,7 @@ void clk::menubuild::mmanagerdereg() {
   kmanager.managerreg(&mmanager);
 }
 
-void clk::menubuild::draw() { font.drawstring(vports::STATUS, 0, 16, buffer); }
+void clk::menubuild::draw() { }
 
 void clk::menubuild::mtrigger(const SDL_Event &e) {
   switch (e.key.keysym.sym) {
