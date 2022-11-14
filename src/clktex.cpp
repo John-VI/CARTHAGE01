@@ -130,11 +130,43 @@ SDL_Rect clk::sprite::draw(vports port, int x, int y, double angle,
                    &region, angle, center, flip);
   return region;
 }
+
 SDL_Rect clk::sprite::draw(viewport &port, int x, int y, double angle,
                            const SDL_Point *center, SDL_RendererFlip flip) {
   SDL_Rect region = {screenoffset.x + x + port.x, screenoffset.y + y + port.y,
                      screenoffset.w, screenoffset.h};
   SDL_RenderCopyEx(renderer.getSDL_Renderer(), texture.get(), &sheetoffset,
                    &region, angle, center, flip);
+  return region;
+}
+
+SDL_Rect clk::sprite::drawframe(vports port, int x, int y,
+                                const SDL_Rect &frame, const SDL_Rect *dest,
+                                double angle, SDL_RendererFlip flip) {
+  const viewport &viewport = renderer.getviewport(port);
+  return drawframe(viewport, x, y, frame, dest, angle, flip);
+}
+
+SDL_Rect clk::sprite::drawframe(const viewport &port, int x, int y,
+                                const SDL_Rect &frame, const SDL_Rect *dest,
+                                double angle, SDL_RendererFlip flip) {
+  SDL_Rect region;
+  if (dest) {
+    region.x = dest->x + x + port.x;
+    region.y = dest->y + y + port.y;
+    region.w = dest->w;
+    region.h = dest->h;
+  } else {
+    region.x = x + port.x;
+    region.y = y + port.y;
+    region.w = frame.w;
+    region.h = frame.h;
+  }
+
+  SDL_Point center = {frame.w / 2, frame.h / 2};
+
+  SDL_RenderCopyEx(renderer.getSDL_Renderer(), texture.get(), &frame, &region,
+                   angle, &center, flip);
+
   return region;
 }

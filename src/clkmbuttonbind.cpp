@@ -8,9 +8,6 @@
 
 #include "clkinputman.h"
 
-#include "grid.h" // TODO: Clean this up so it can be generic and not a quick hack
-#include "tile.h"
-
 clk::mbuttonbind::mbuttontrig::mbuttontrig(mbuttonbind &bind) : binding(bind) {}
 void clk::mbuttonbind::mbuttontrig::trigger(const SDL_Event &e) {
   binding.trigger(e);

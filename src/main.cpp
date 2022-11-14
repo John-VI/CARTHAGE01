@@ -27,8 +27,9 @@
 #include "clkviewport.h"
 #include "clkwin.h"
 
-#include "messaging.h"
 #include "loopingbg.h"
+#include "messaging.h"
+#include "clksheet.h"
 
 const char *copyright = "Copyright (c) John Allen Whitley, 2022, BSD 3-Clause";
 
@@ -97,6 +98,8 @@ int main(int argc, char *argv[]) {
   bg.travelangle = 0;
   bg.updatepathing();
 
+  clk::sheet player(win, "01.png", {{0, 0, 31, 16, 1, 1, 0, 0}});
+
   // navmap map1(10, 10);
   // map1[55] = 256;
   // navmap map2(10, 10);
@@ -125,7 +128,9 @@ int main(int argc, char *argv[]) {
 
     // frog.draw(vports::FULL, 0, 0);
     bg.tick(mseconds);
+
     bg.draw();
+    player.drawframe(vports::CENTER, 0, 0, 100, 100);
 
     // vga.drawstring(
     //     vports::STATUS, 96, 0,
@@ -137,7 +142,7 @@ int main(int argc, char *argv[]) {
     mseconds = framedelta.ticks();
 
     if ((double)mseconds < msecondsperframe) {
-      SDL_Delay((Uint32)(msecondsperframe - (double)mseconds));
+      SDL_Delay((Uint32)(msecondsperframe - mseconds));
       mseconds = framedelta.ticks();
     }
   }
