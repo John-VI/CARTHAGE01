@@ -7,8 +7,6 @@
 #include <memory>
 #include <unordered_map>
 
-typedef struct grid grid;
-
 namespace clk {
 
 typedef struct inputman inputman;
@@ -24,12 +22,12 @@ protected:
   };
   int registration;
   inputman &manager;
-  grid &g;
+  std::shared_ptr<mbuttontrig> manblock;
 
 public:
   char stype, sfeat, sflag;
 
-  mbuttonbind(grid &, inputman &);
+  mbuttonbind(inputman &);
 
   void trigger(const SDL_Event &e);
   void managerreg();

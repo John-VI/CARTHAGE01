@@ -23,6 +23,9 @@ clk::menubuild::menubuildktrig::~menubuildktrig() {}
 clk::menubuild::menubuild(std::unordered_map<SDL_Keycode, double *> m,
                           inputman &iman, keybind &kman, sprite &f)
     : mappings{m}, mmanager(iman), kmanager(kman), font(f) {
+  mmanblock = std::make_unique<menubuildmtrig>(*this);
+  for (const auto &pair : mappings)
+    kmanblocks.push_back(std::make_shared<menubuildktrig>(*this, pair.second));
   kmanagerreg();
 }
 
@@ -37,7 +40,6 @@ void clk::menubuild::kmanagerreg() {
                     devlevel::DEV, 0});
     return;
   }
-  for (const auto &pair : mappings)
     kmanager.registerinput((SDL_Keycode)pair.first,
                            new menubuildktrig(*this, pair.second));
   kbound = true;

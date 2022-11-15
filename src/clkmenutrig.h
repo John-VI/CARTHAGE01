@@ -6,6 +6,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 // #include <vector>
 
 #include "clkinputman.h"
@@ -13,6 +14,8 @@
 #include "clktex.h"
 
 namespace clk {
+
+  //TODO: Fix this class to work with the new input management system I don't care enough right now.
 
 class menubuild {
 protected:
@@ -34,6 +37,9 @@ protected:
   int registration;
   keybind &kmanager;
   bool kbound = false;
+  std::shared_ptr<menubuildmtrig> mmanblock;
+  std::vector<std::shared_ptr<menubuildktrig>> kmanblocks;
+
   sprite &font;
   std::string buffer;
 

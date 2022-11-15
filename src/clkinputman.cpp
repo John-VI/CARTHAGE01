@@ -22,13 +22,10 @@ int clk::inputman::processinputs() {
       return 0;
     }
     if (registered) {
+      registered->remove_if([](auto t) { return t.expired(); });
       for (auto &t : *registered)
-        if (t.expired())
-          registered->remove(t);
-        else
-          t.lock()->trigger(e);
+        t.lock()->trigger(e);
       i++;
-      registered = nullptr;
     }
   }
   return i;
@@ -50,14 +47,5 @@ int clk::inputman::registerinput(SDL_EventType type, std::weak_ptr<inputtrigger>
 }
 
 void clk::inputman::deregister(SDL_EventType type, int id) {
-  for (auto &t : imap.at(type).second) {
-    auto ts = t.lock();
-
-    if (!ts)
-      imap.at(type).second.remove(t);
-    else if (ts->id == id) {
-      imap.at(type).second.remove(t);
-      break;
-    }
-  }
+  imap.at(type).second.remove_if([id](auto t) {return t.expired() || t.lock()->id == id;});
 }

@@ -14,11 +14,13 @@ void clk::mbuttonbind::mbuttontrig::trigger(const SDL_Event &e) {
 }
 clk::mbuttonbind::mbuttontrig::~mbuttontrig() = default;
 
-clk::mbuttonbind::mbuttonbind(grid &g, inputman &m) : g(g), manager(m) {}
+clk::mbuttonbind::mbuttonbind(inputman &m) : manager(m) {
+  manblock = std::make_shared<mbuttontrig>(*this);
+}
 
 void clk::mbuttonbind::managerreg() {
   registration =
-      manager.registerinput(SDL_MOUSEBUTTONDOWN, new mbuttontrig(*this));
+      manager.registerinput(SDL_MOUSEBUTTONDOWN, manblock);
 }
 
 void clk::mbuttonbind::managerdereg() {
