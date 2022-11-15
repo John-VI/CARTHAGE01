@@ -22,6 +22,7 @@ protected:
     ~kbdbtrig();
   };
   int registration;
+  std::shared_ptr<kbdbtrig> regblock;
   inputman *manager = nullptr;
   std::unordered_map<SDL_Keycode, std::weak_ptr<inputtrigger>> registrations;
 

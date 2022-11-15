@@ -3,25 +3,28 @@
 #pragma once
 
 #include "hitbox.h"
-#include "clksheet.h"
 
 #include <memory>
 #include <functional>
+#include <vector>
 
 class ship;
 
-struct controllerlink {
-  virtual void damaged(ship &source, const ship &target);
-  virtual void destroyed(ship &source, const ship &target);
-  virtual void colliding(ship &source, const ship &target);
-  virtual void created(ship &source, const ship &target);
+namespace clk {
+  class sheet;
+}
 
-  std::list<
+struct controller {
+  virtual void damaged(ship &source, const ship &target);
+  virtual void destroyed(ship &source);
+  virtual void colliding(ship &source, const ship &target);
+  virtual void created(ship &source);
 };
 
-class ship {
+struct ship {
 public:
-  ship(int x, int y, int hp, std::vector<hitbox> boxes, std::shared_ptr<clk::sheet> sheet, int id, controllerlink ai);
+  ship(int x, int y, int hp, std::vector<hitbox> boxes, std::shared_ptr<clk::sheet> sheet, int id, controller &ai);
+  ~ship();
 
   int x;
   int y;
@@ -29,16 +32,15 @@ public:
   std::vector<hitbox> boxes;
 
   double speed = 0;
-  double heading = 0;
+  double heading = 0; // Angle expressed in radians.
 
-  void tick();
-  void draw();
-
-protected:
   std::shared_ptr<clk::sheet> sheet;
   int id, frame;
 
-  controllerlink &ai;
+  controller &ai;
 
   int hp;
+
+  void tick(double ticks);
+  void draw();
 };

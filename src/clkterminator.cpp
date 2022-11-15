@@ -22,7 +22,8 @@ void clk::terminator::managerreg(inputman *man) {
     return;
   }
   manager = man;
-  registration = manager->registerinput(SDL_QUIT, new quittrig(*this));
+  registblock = std::make_shared<quittrig>(*this);
+  registration = manager->registerinput(SDL_QUIT, registblock);
 }
 
 void clk::terminator::managerdereg() {

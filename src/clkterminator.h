@@ -19,6 +19,7 @@ protected:
   int registration;
   inputman *manager = nullptr;
   int &quitsignal;
+  std::shared_ptr<quittrig> registblock;
 
 public:
   terminator(int &signaler);

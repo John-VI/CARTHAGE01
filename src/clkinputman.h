@@ -17,7 +17,7 @@ typedef std::unordered_map<SDL_EventType,
                            std::list<std::unique_ptr<inputtrigger>>>
     inputmap;
 typedef std::unordered_map<
-    SDL_EventType, std::pair<int, std::list<std::shared_ptr<inputtrigger>>>>
+    SDL_EventType, std::pair<int, std::list<std::weak_ptr<inputtrigger>>>>
     idmap;
 
 class inputman {
@@ -30,7 +30,7 @@ public:
   int processinputs();
   /*int registerinput(SDL_EventType type,
                     std::unique_ptr<inputtrigger> newtrigger); */
-  int registerinput(SDL_EventType type, inputtrigger *newtrigger);
+  int registerinput(SDL_EventType type, std::weak_ptr<inputtrigger> newtrigger);
   void deregister(SDL_EventType type, int id);
 };
 

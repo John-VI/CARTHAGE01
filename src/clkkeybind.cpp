@@ -32,7 +32,8 @@ void clk::keybind::managerreg(inputman *man) {
     return;
   }
   manager = man;
-  registration = manager->registerinput(SDL_KEYDOWN, new kbdbtrig(*this));
+  regblock = std::make_shared<kbdbtrig>(*this);
+  registration = manager->registerinput(SDL_KEYDOWN, regblock);
 }
 
 void clk::keybind::managerdereg() {
