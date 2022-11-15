@@ -3,8 +3,42 @@
 #pragma once
 
 #include "hitbox.h"
+#include "clksheet.h"
+
+#include <memory>
+#include <functional>
+
+class ship;
+
+struct controllerlink {
+  virtual void damaged(ship &source, const ship &target);
+  virtual void destroyed(ship &source, const ship &target);
+  virtual void colliding(ship &source, const ship &target);
+  virtual void created(ship &source, const ship &target);
+
+  std::list<
+};
 
 class ship {
 public:
-  ship();
+  ship(int x, int y, int hp, std::vector<hitbox> boxes, std::shared_ptr<clk::sheet> sheet, int id, controllerlink ai);
+
+  int x;
+  int y;
+
+  std::vector<hitbox> boxes;
+
+  double speed = 0;
+  double heading = 0;
+
+  void tick();
+  void draw();
+
+protected:
+  std::shared_ptr<clk::sheet> sheet;
+  int id, frame;
+
+  controllerlink &ai;
+
+  int hp;
 };

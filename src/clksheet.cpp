@@ -40,4 +40,5 @@ void sheet::drawframe(vports port, int id, int frame, int x, int y,
   sheet::drawframe(renderer.getviewport(port), id, frame, x, y, angle, flip,
                    dest);
 }
+
 } // namespace clk

@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
   bg.travelangle = 0;
   bg.updatepathing();
 
-  clk::sheet player(win, "01.png", {{0, 0, 31, 16, 1, 1, 0, 0}});
+  clk::sheet player(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}});
 
   // navmap map1(10, 10);
   // map1[55] = 256;
