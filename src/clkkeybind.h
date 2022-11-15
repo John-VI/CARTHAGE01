@@ -23,7 +23,7 @@ protected:
   };
   int registration;
   inputman *manager = nullptr;
-  std::unordered_map<SDL_Keycode, std::unique_ptr<inputtrigger>> registrations;
+  std::unordered_map<SDL_Keycode, std::weak_ptr<inputtrigger>> registrations;
 
 public:
   keybind();
@@ -33,7 +33,7 @@ public:
   void trigger(const SDL_Event &e);
   void managerreg(inputman *manager);
   void managerdereg();
-  void registerinput(SDL_Keycode code, inputtrigger *newtrigger);
+  void registerinput(SDL_Keycode code, std::weak_ptr<inputtrigger> newtrigger);
   void deregister(SDL_Keycode code);
 };
 

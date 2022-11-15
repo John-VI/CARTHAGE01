@@ -3,6 +3,7 @@
 #include "clkkeybind.h"
 
 #include <stdexcept>
+#include <unordered_map>
 
 #include "messaging.h"
 
@@ -15,13 +16,13 @@ clk::keybind::kbdbtrig::~kbdbtrig() {}
 clk::keybind::keybind() = default;
 
 void clk::keybind::trigger(const SDL_Event &e) {
-  inputtrigger *itrigger = nullptr;
   try {
-    itrigger = registrations.at(e.key.keysym.sym).get();
+    if (registrations.at(e.key.keysym.sym).expired())
+      registrations.erase(e.key.keysym.sym);
+    else
+      registrations.at(e.key.keysym.sym).lock()->trigger(e);
   } catch (std::out_of_range) {
   }
-  if (itrigger)
-    itrigger->trigger(e);
 }
 
 void clk::keybind::managerreg(inputman *man) {
@@ -41,13 +42,13 @@ void clk::keybind::managerdereg() {
   }
 }
 
-void clk::keybind::registerinput(SDL_Keycode code, inputtrigger *newtrigger) {
-  if (registrations[code] == nullptr)
-    registrations[code].reset(newtrigger);
+void clk::keybind::registerinput(SDL_Keycode code, std::weak_ptr<inputtrigger> newtrigger) {
+  if (registrations[code].expired())
+    registrations[code] = newtrigger;
   else
     throw std::runtime_error("Key is already bound.");
 }
 
 void clk::keybind::deregister(SDL_Keycode code) {
-  registrations[code].reset(nullptr);
+  registrations.erase(code);
 }
