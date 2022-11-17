@@ -19,9 +19,8 @@ protected:
     keybind &binding;
     kbdbtrig(keybind &bind);
     void trigger(const SDL_Event &e) override;
-    ~kbdbtrig();
   };
-  int registration;
+  int registration[2];
   std::shared_ptr<kbdbtrig> regblock;
   inputman *manager = nullptr;
   std::unordered_map<SDL_Keycode, std::weak_ptr<inputtrigger>> registrations;

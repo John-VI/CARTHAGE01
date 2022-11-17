@@ -7,6 +7,7 @@
 #include <memory>
 #include <functional>
 #include <vector>
+#include <list>
 
 class ship;
 
@@ -15,29 +16,32 @@ namespace clk {
 }
 
 struct controller {
+  controller(ship *);
   virtual void damaged(ship &source, const ship &target);
   virtual void destroyed(ship &source);
   virtual void colliding(ship &source, const ship &target);
   virtual void created(ship &source);
+
+  ship *target;
 };
 
 struct ship {
 public:
-  ship(int x, int y, int hp, std::vector<hitbox> boxes, std::shared_ptr<clk::sheet> sheet, int id, controller &ai);
+  ship(double x, double y, int hp, std::vector<hitbox> boxes, std::shared_ptr<clk::sheet> sheet, int id, controller *ai);
   ~ship();
 
-  int x;
-  int y;
+  double x;
+  double y;
+
+  double deltax = 0;
+  double deltay = 0;
 
   std::vector<hitbox> boxes;
-
-  double speed = 0;
-  double heading = 0; // Angle expressed in radians.
 
   std::shared_ptr<clk::sheet> sheet;
   int id, frame;
 
-  controller &ai;
+  controller *ai;
 
   int hp;
 

@@ -11,16 +11,14 @@ clk::keybind::kbdbtrig::kbdbtrig(keybind &bind) : binding(bind) {}
 
 void clk::keybind::kbdbtrig::trigger(const SDL_Event &e) { binding.trigger(e); }
 
-clk::keybind::kbdbtrig::~kbdbtrig() {}
-
 clk::keybind::keybind() = default;
 
 void clk::keybind::trigger(const SDL_Event &e) {
   try {
-    if (registrations.at(e.key.keysym.sym).expired())
-      registrations.erase(e.key.keysym.sym);
+    if (registrations.at(e.key.keysym.scancode).expired())
+      registrations.erase(e.key.keysym.scancode);
     else
-      registrations.at(e.key.keysym.sym).lock()->trigger(e);
+      registrations.at(e.key.keysym.scancode).lock()->trigger(e);
   } catch (std::out_of_range) {
   }
 }
@@ -33,12 +31,14 @@ void clk::keybind::managerreg(inputman *man) {
   }
   manager = man;
   regblock = std::make_shared<kbdbtrig>(*this);
-  registration = manager->registerinput(SDL_KEYDOWN, regblock);
+  registration[0] = manager->registerinput(SDL_KEYDOWN, regblock);
+  registration[1] = manager->registerinput(SDL_KEYUP, regblock);
 }
 
 void clk::keybind::managerdereg() {
   if (manager) {
-    manager->deregister(SDL_KEYDOWN, registration);
+    manager->deregister(SDL_KEYDOWN, registration[0]);
+    manager->deregister(SDL_KEYDOWN, registration[1]);
     manager = nullptr;
   }
 }

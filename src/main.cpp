@@ -26,10 +26,12 @@
 #include "clktiming.h"
 #include "clkviewport.h"
 #include "clkwin.h"
+#include "clksheet.h"
 
 #include "loopingbg.h"
 #include "messaging.h"
-#include "clksheet.h"
+#include "player.h"
+#include "ship.h"
 
 const char *copyright = "Copyright (c) John Allen Whitley, 2022, BSD 3-Clause";
 
@@ -98,14 +100,28 @@ int main(int argc, char *argv[]) {
   bg.travelangle = 0;
   bg.updatepathing();
 
-  clk::sheet player(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}});
+  //clk::sheet playersheet(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}});
 
-  // navmap map1(10, 10);
-  // map1[55] = 256;
-  // navmap map2(10, 10);
-  // map2 = map1.bleedout();
-  // ECHOMAP(map1);
-  // ECHOMAP(map2);
+  clk::sheet shat(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}});
+
+  player pai(nullptr, kbd);
+
+  std::vector<clk::frameinfo> frames {
+    { 0, 0, 62, 32, 1, 1, 0, 0 }
+  };
+
+  ship player(
+      20, 20, 3, std::vector<hitbox>(),
+      std::make_shared<clk::sheet>(win, "01.png", frames), 0, &pai);
+
+  pai.target = &player;
+
+      // navmap map1(10, 10);
+      // map1[55] = 256;
+      // navmap map2(10, 10);
+      // map2 = map1.bleedout();
+      // ECHOMAP(map1);
+      // ECHOMAP(map2);
 
   clk::timer framedelta;
   framedelta.start();
@@ -129,8 +145,11 @@ int main(int argc, char *argv[]) {
     // frog.draw(vports::FULL, 0, 0);
     bg.tick(mseconds);
 
+    player.tick(mseconds);
+
     bg.draw();
-    player.drawframe(vports::CENTER, 0, 0, 100, 100);
+
+    player.draw();
 
     // vga.drawstring(
     //     vports::STATUS, 96, 0,
