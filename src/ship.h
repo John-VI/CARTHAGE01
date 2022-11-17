@@ -8,6 +8,7 @@
 #include <functional>
 #include <vector>
 #include <list>
+#include <bitset>
 
 class ship;
 
@@ -47,4 +48,7 @@ public:
 
   void tick(double ticks);
   void draw();
+
+  int objectid;
+  std::bitset<1> objflags;
 };
