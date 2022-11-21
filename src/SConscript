@@ -1,3 +1,3 @@
 Import('env os')
-env["rusting"] = env.Program(os.path.join(".", "rusting"), ["clkinputman.cpp", "clkinputtrigger.cpp", "clkkeybind.cpp", "clkterminator.cpp", "clktex.cpp", "clkwin.cpp", "clkviewport.cpp", "clkmbuttonbind.cpp", "clkrand.cpp", "loopingbg.cpp", "clktiming.cpp", "messaging.cpp", "clksheet.cpp", "player.cpp", "ship.cpp",
+env["rusting"] = env.Program(os.path.join(".", "rusting"), ["clkinputman.cpp", "clkinputtrigger.cpp", "clkkeybind.cpp", "clkterminator.cpp", "clktex.cpp", "clkwin.cpp", "clkviewport.cpp", "clkmbuttonbind.cpp", "clkrand.cpp", "loopingbg.cpp", "clktiming.cpp", "messaging.cpp", "clksheet.cpp", "player.cpp", "ship.cpp", "objectman.cpp", 
 "main.cpp"])

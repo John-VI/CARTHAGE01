@@ -15,7 +15,8 @@
 
 namespace clk {
 
-  //TODO: Fix this class to work with the new input management system I don't care enough right now.
+// TODO: Fix this class to work with the new input management system I don't
+// care enough right now.
 
 class menubuild {
 protected:

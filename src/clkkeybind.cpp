@@ -43,13 +43,12 @@ void clk::keybind::managerdereg() {
   }
 }
 
-void clk::keybind::registerinput(SDL_Keycode code, std::weak_ptr<inputtrigger> newtrigger) {
+void clk::keybind::registerinput(SDL_Keycode code,
+                                 std::weak_ptr<inputtrigger> newtrigger) {
   if (registrations[code].expired())
     registrations[code] = newtrigger;
   else
     throw std::runtime_error("Key is already bound.");
 }
 
-void clk::keybind::deregister(SDL_Keycode code) {
-  registrations.erase(code);
-}
+void clk::keybind::deregister(SDL_Keycode code) { registrations.erase(code); }

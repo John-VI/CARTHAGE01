@@ -7,11 +7,11 @@
 #include "hitbox.h"
 #include "ship.h"
 
-#include <memory>
 #include <bitset>
+#include <memory>
 
 namespace clk {
-  class keybind;
+class keybind;
 }
 
 class player : public controller {
@@ -28,7 +28,7 @@ protected:
   std::bitset<4> movestate = 0;
 
 public:
-  player(ship *t, clk::keybind &manager);
+  player(objectman &objmanager, clk::keybind &manager);
 
   void managerreg();
   void managerdereg();

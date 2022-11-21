@@ -40,8 +40,8 @@ void clk::menubuild::kmanagerreg() {
                     devlevel::DEV, 0});
     return;
   }
-    kmanager.registerinput((SDL_Keycode)pair.first,
-                           new menubuildktrig(*this, pair.second));
+  kmanager.registerinput((SDL_Keycode)pair.first,
+                         new menubuildktrig(*this, pair.second));
   kbound = true;
 }
 

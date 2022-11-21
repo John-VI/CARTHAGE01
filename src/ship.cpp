@@ -3,6 +3,7 @@
 #include "ship.h"
 
 #include "hitbox.h"
+#include "objectman.h"
 
 #include "clksheet.h"
 
@@ -12,14 +13,30 @@
 #include <memory>
 #include <vector>
 
-ship::ship(double x, double y, int hp, std::vector<hitbox> boxes,
-           std::shared_ptr<clk::sheet> sheet, int id, controller *ai)
-    : x(x), y(y), boxes(boxes), sheet(sheet), id(id), frame(0), ai(ai), hp(hp) {
-  ai->created(*this);
-}
+#include <iostream>
 
-ship::~ship() {
-  ai->destroyed(*this);
+// ship::ship(double x, double y, int hp, std::vector<hitbox> *boxes,
+//            std::shared_ptr<clk::sheet> sheet, int id, controller *ai)
+//     : x(x), y(y), boxes(boxes), sheet(sheet), id(id), frame(0), ai(ai),
+//     hp(hp) {
+//   ai->created(*this);
+// }
+
+controller::controller(objectman &man) : objman(man) {}
+
+ship &ship::initship(double x, double y, int hp, std::vector<hitbox> *boxes,
+                     std::shared_ptr<clk::sheet> sheet, int id,
+                     controller *ai) {
+  this->x = x;
+  this->y = y;
+  this->hp = hp;
+  this->boxes = boxes;
+  this->sheet = sheet;
+  this->sheetid = id;
+  this->frame = 0;
+  this->ai = ai;
+
+  return *this;
 }
 
 void ship::tick(double ticks) {
@@ -27,12 +44,12 @@ void ship::tick(double ticks) {
   y += deltay * ticks;
 }
 
-void ship::draw() {
-  sheet->drawframe(vports::CENTER, id, frame, x, y);
-}
+void ship::draw() { sheet->drawframe(vports::CENTER, sheetid, frame, x, y); }
 
-controller::controller(ship *t) : target(t) {}
 void controller::damaged(ship &source, const ship &target) {}
 void controller::destroyed(ship &source) {}
 void controller::colliding(ship &source, const ship &target) {}
-void controller::created(ship &source) {}
+
+void controller::push(idpair ship) { ships.push_back(ship); }
+
+void controller::despawned(idpair source) { ships.remove(source); }

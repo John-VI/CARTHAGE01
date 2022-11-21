@@ -19,8 +19,7 @@ clk::mbuttonbind::mbuttonbind(inputman &m) : manager(m) {
 }
 
 void clk::mbuttonbind::managerreg() {
-  registration =
-      manager.registerinput(SDL_MOUSEBUTTONDOWN, manblock);
+  registration = manager.registerinput(SDL_MOUSEBUTTONDOWN, manblock);
 }
 
 void clk::mbuttonbind::managerdereg() {

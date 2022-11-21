@@ -21,17 +21,18 @@
 #include "clkmbuttonbind.h"
 #include "clkmenutrig.h"
 #include "clkrand.h"
+#include "clksheet.h"
 #include "clkterminator.h"
 #include "clktex.h"
 #include "clktiming.h"
 #include "clkviewport.h"
 #include "clkwin.h"
-#include "clksheet.h"
 
 #include "loopingbg.h"
 #include "messaging.h"
 #include "player.h"
 #include "ship.h"
+#include "objectman.h"
 
 const char *copyright = "Copyright (c) John Allen Whitley, 2022, BSD 3-Clause";
 
@@ -100,28 +101,29 @@ int main(int argc, char *argv[]) {
   bg.travelangle = 0;
   bg.updatepathing();
 
-  //clk::sheet playersheet(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}});
+  // clk::sheet playersheet(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}});
 
   clk::sheet shat(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}});
 
-  player pai(nullptr, kbd);
+  std::vector<clk::frameinfo> frames{{0, 0, 62, 32, 1, 1, 0, 0}};
+  std::vector<hitbox> boxes {};
 
-  std::vector<clk::frameinfo> frames {
-    { 0, 0, 62, 32, 1, 1, 0, 0 }
-  };
+  objectman objman;
 
-  ship player(
-      20, 20, 3, std::vector<hitbox>(),
-      std::make_shared<clk::sheet>(win, "01.png", frames), 0, &pai);
+  player pai(objman, kbd);
 
-  pai.target = &player;
+  objman.newobject(20, 20, 3, &boxes,
+              std::make_shared<clk::sheet>(win, "01.png", frames), 0, &pai);
+  objman.newobject(50, 50, 3, &boxes,
+                   std::make_shared<clk::sheet>(win, "01.png", frames), 0,
+                   &pai);
 
-      // navmap map1(10, 10);
-      // map1[55] = 256;
-      // navmap map2(10, 10);
-      // map2 = map1.bleedout();
-      // ECHOMAP(map1);
-      // ECHOMAP(map2);
+  // navmap map1(10, 10);
+  // map1[55] = 256;
+  // navmap map2(10, 10);
+  // map2 = map1.bleedout();
+  // ECHOMAP(map1);
+  // ECHOMAP(map2);
 
   clk::timer framedelta;
   framedelta.start();
@@ -145,11 +147,11 @@ int main(int argc, char *argv[]) {
     // frog.draw(vports::FULL, 0, 0);
     bg.tick(mseconds);
 
-    player.tick(mseconds);
+    objman.tick(mseconds);
 
     bg.draw();
 
-    player.draw();
+    objman.draw();
 
     // vga.drawstring(
     //     vports::STATUS, 96, 0,

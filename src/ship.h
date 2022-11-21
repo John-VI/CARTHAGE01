@@ -4,32 +4,38 @@
 
 #include "hitbox.h"
 
-#include <memory>
-#include <functional>
-#include <vector>
-#include <list>
 #include <bitset>
+#include <functional>
+#include <list>
+#include <memory>
+#include <vector>
 
-class ship;
+struct ship;
+struct idpair;
+class objectman;
 
 namespace clk {
-  class sheet;
+class sheet;
 }
 
-struct controller {
-  controller(ship *);
+class controller {
+public:
+  controller(objectman &);
+  virtual void push(idpair ship);
   virtual void damaged(ship &source, const ship &target);
   virtual void destroyed(ship &source);
   virtual void colliding(ship &source, const ship &target);
-  virtual void created(ship &source);
+  virtual void despawned(idpair source);
 
-  ship *target;
+protected:
+  objectman &objman;
+  std::list<idpair> ships;
 };
 
 struct ship {
 public:
-  ship(double x, double y, int hp, std::vector<hitbox> boxes, std::shared_ptr<clk::sheet> sheet, int id, controller *ai);
-  ~ship();
+  ship &initship(double x, double y, int hp, std::vector<hitbox> *boxes,
+                 std::shared_ptr<clk::sheet> sheet, int id, controller *ai);
 
   double x;
   double y;
@@ -37,10 +43,10 @@ public:
   double deltax = 0;
   double deltay = 0;
 
-  std::vector<hitbox> boxes;
+  std::vector<hitbox> *boxes;
 
   std::shared_ptr<clk::sheet> sheet;
-  int id, frame;
+  int sheetid, frame;
 
   controller *ai;
 
@@ -50,5 +56,5 @@ public:
   void draw();
 
   int objectid;
-  std::bitset<1> objflags;
+  std::bitset<1> objflags = 0;
 };
