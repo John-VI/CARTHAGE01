@@ -4,14 +4,13 @@
 
 #include "hitbox.h"
 
+#include "objectman.h"
+
 #include <bitset>
-#include <functional>
 #include <list>
 #include <memory>
-#include <vector>
 
 struct ship;
-struct idpair;
 class objectman;
 
 namespace clk {
@@ -37,6 +36,9 @@ public:
   ship &initship(double x, double y, int hp, std::vector<hitbox> *boxes,
                  std::shared_ptr<clk::sheet> sheet, int id, controller *ai);
 
+  idpair objectid;
+  std::bitset<1> objflags = 0;
+
   double x;
   double y;
 
@@ -54,7 +56,4 @@ public:
 
   void tick(double ticks);
   void draw();
-
-  int objectid;
-  std::bitset<1> objflags = 0;
 };

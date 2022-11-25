@@ -14,21 +14,18 @@ namespace clk {
 struct sheet;
 }
 
+typedef std::vector<ship>::size_type shipindex;
+
 struct idpair {
-  unsigned long long index;
+  shipindex index;
   int id;
 
-  bool operator==(const idpair &other) const;
+  inline bool operator==(const idpair &other) const {
+    return other.index == index && other.id == id;
+  }
 };
 
 class objectman {
-protected:
-  std::vector<ship> objects;
-
-  inline void enableship(unsigned long long index, double x, double y, int hp,
-                  std::vector<hitbox> *boxes, std::shared_ptr<clk::sheet> sheet,
-                  int id, controller *ai);
-
 public:
   objectman();
 
@@ -39,4 +36,16 @@ public:
 
   void tick(Uint32 step);
   void draw();
+
+protected:
+  const static std::size_t preallocsize = 128;
+
+  std::vector<ship> objects;
+  std::vector<shipindex> liveindices;
+  std::vector<shipindex> deadindices;
+
+  inline void enableship(unsigned long long index, double x, double y, int hp,
+                         std::vector<hitbox> *boxes,
+                         std::shared_ptr<clk::sheet> sheet, int id,
+                         controller *ai);
 };

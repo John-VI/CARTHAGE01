@@ -7,43 +7,50 @@
 
 #include <memory>
 #include <vector>
+#include <numeric>
+#include <algorithm>
 
-#include <iostream>
+objectman::objectman() {
+  for (shipindex i = 0; i < preallocsize; i++) {
+    objects.push_back(ship());
+    objects.back().objectid.index = i;
+  }
 
-bool idpair::operator==(const idpair &other) const {
-  return other.index == index && other.id == id;
+  for (shipindex i = 0; i < preallocsize; i++)
+    deadindices.push_back(i);
+
+  liveindices.reserve(preallocsize);
 }
 
-objectman::objectman() { objects.reserve(64); }
-
-inline void objectman::enableship(unsigned long long i, double x, double y, int hp,
-                           std::vector<hitbox> *boxes,
-                           std::shared_ptr<clk::sheet> sheet, int id,
-                           controller *ai) {
+inline void objectman::enableship(unsigned long long i, double x, double y,
+                                  int hp, std::vector<hitbox> *boxes,
+                                  std::shared_ptr<clk::sheet> sheet, int id,
+                                  controller *ai) {
   objects[i].initship(x, y, hp, boxes, sheet, id, ai);
-  objects[i].objectid++;
+  objects[i].objectid.id++;
   objects[i].objflags[0] = true;
-  objects[i].ai->push({i, objects[i].objectid});
+  objects[i].ai->push({i, objects[i].objectid.id});
 }
 
 idpair objectman::newobject(double x, double y, int hp,
                             std::vector<hitbox> *boxes,
                             std::shared_ptr<clk::sheet> sheet, int id,
                             controller *ai) {
-  for (unsigned long long i = 0; i < objects.size(); i++)
-    if (!objects[i].objflags[0]) {
-      enableship(i, x, y, hp, boxes, sheet, id, ai);
 
-      return {i, objects[i].objectid};
-    }
+  if (deadindices.empty()) {
+    liveindices.push_back(objects.size());
+    objects.push_back(ship());
+  } else {
+    liveindices.push_back(deadindices.back());
+    deadindices.pop_back();
+  }
 
-  objects.push_back(ship());
-  enableship(objects.size() - 1, x, y, hp, boxes, sheet, id, ai);
-  return {objects.size() - 1, objects.back().objectid};
+  enableship(liveindices.back(), x, y, hp, boxes, sheet, id, ai);
+  return {liveindices.back(), objects.back().objectid.id};
 }
 
 ship *objectman::operator[](idpair i) {
-  if (objects.at(i.index).objectid == i.id && objects[i.index].objflags[0])
+  if (objects.at(i.index).objectid.id == i.id && objects[i.index].objflags[0])
     return &objects[i.index];
   else
     return nullptr;
@@ -55,17 +62,23 @@ void objectman::delobject(idpair i) {
     s->ai->despawned(i);
     s->ai = nullptr;
     s->objflags[0] = false;
+
+    deadindices.push_back(s->objectid.index);
+
+    auto t = std::find(liveindices.begin(), liveindices.end(), s->objectid.index);
+    if (t != liveindices.end()) {
+      std::swap(*t, liveindices.back());
+      liveindices.pop_back();
+    }
   }
 }
 
 void objectman::tick(Uint32 step) {
-  for (auto &t : objects)
-    if (t.objflags[0])
-      t.tick(step);
+  for (auto &t : liveindices)
+    objects[t].tick(step);
 }
 
 void objectman::draw() {
-  for (auto &t: objects)
-    if (t.objflags[0])
-      t.draw();
+  for (auto &t : liveindices)
+    objects[t].draw();
 }

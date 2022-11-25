@@ -30,9 +30,9 @@
 
 #include "loopingbg.h"
 #include "messaging.h"
+#include "objectman.h"
 #include "player.h"
 #include "ship.h"
-#include "objectman.h"
 
 const char *copyright = "Copyright (c) John Allen Whitley, 2022, BSD 3-Clause";
 
@@ -106,14 +106,15 @@ int main(int argc, char *argv[]) {
   clk::sheet shat(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}});
 
   std::vector<clk::frameinfo> frames{{0, 0, 62, 32, 1, 1, 0, 0}};
-  std::vector<hitbox> boxes {};
+  std::vector<hitbox> boxes{};
 
   objectman objman;
 
   player pai(objman, kbd);
 
   objman.newobject(20, 20, 3, &boxes,
-              std::make_shared<clk::sheet>(win, "01.png", frames), 0, &pai);
+                   std::make_shared<clk::sheet>(win, "01.png", frames), 0,
+                   &pai);
   objman.newobject(50, 50, 3, &boxes,
                    std::make_shared<clk::sheet>(win, "01.png", frames), 0,
                    &pai);
