@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <array>
 #include <memory>
 #include <vector>
 
@@ -16,12 +17,15 @@ struct sheet;
 
 typedef std::vector<ship>::size_type shipindex;
 
+enum class shiptype { PLAYER, ENEMY, PBULLET, EBULLET, MAX };
+
 struct idpair {
+  shiptype type;
   shipindex index;
   int id;
 
   inline bool operator==(const idpair &other) const {
-    return other.index == index && other.id == id;
+    return other.index == index && other.id == id && other.type == type;
   }
 };
 
@@ -30,7 +34,8 @@ public:
   objectman();
 
   ship *operator[](idpair);
-  idpair newobject(double x, double y, int hp, std::vector<hitbox> *boxes,
+  idpair newobject(shiptype t, double x, double y, int hp,
+                   std::vector<hitbox> *boxes,
                    std::shared_ptr<clk::sheet> sheet, int id, controller *ai);
   void delobject(idpair);
 
@@ -38,14 +43,29 @@ public:
   void draw();
 
 protected:
-  const static std::size_t preallocsize = 128;
+  struct indexman {
+    std::vector<ship> objects;
+    std::vector<shipindex> liveindices;
+    std::vector<shipindex> deadindices;
 
-  std::vector<ship> objects;
-  std::vector<shipindex> liveindices;
-  std::vector<shipindex> deadindices;
+    void init(size_t preallocsize);
+    inline idpair newobject(shiptype type, double x, double y, int hp,
+                            std::vector<hitbox> *boxes,
+                            std::shared_ptr<clk::sheet> sheet, int id,
+                            controller *ai);
+    inline void enableship(shiptype type, shipindex index, double x, double y,
+                           int hp, std::vector<hitbox> *boxes,
+                           std::shared_ptr<clk::sheet> sheet, int id,
+                           controller *ai);
+    inline void delobject(idpair, ship *);
+  };
 
-  inline void enableship(unsigned long long index, double x, double y, int hp,
-                         std::vector<hitbox> *boxes,
+  static const size_t preallocsize = 128;
+
+  std::array<indexman, (int)shiptype::MAX> objects;
+
+  inline void enableship(shiptype type, shipindex index, double x, double y,
+                         int hp, std::vector<hitbox> *boxes,
                          std::shared_ptr<clk::sheet> sheet, int id,
                          controller *ai);
 };

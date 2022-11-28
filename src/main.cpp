@@ -112,10 +112,10 @@ int main(int argc, char *argv[]) {
 
   player pai(objman, kbd);
 
-  objman.newobject(20, 20, 3, &boxes,
+  objman.newobject(shiptype::PLAYER, 20, 20, 3, &boxes,
                    std::make_shared<clk::sheet>(win, "01.png", frames), 0,
                    &pai);
-  objman.newobject(50, 50, 3, &boxes,
+  objman.newobject(shiptype::PLAYER, 50, 50, 3, &boxes,
                    std::make_shared<clk::sheet>(win, "01.png", frames), 0,
                    &pai);
 
