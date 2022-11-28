@@ -39,13 +39,6 @@ ship &ship::initship(double x, double y, int hp, std::vector<hitbox> *boxes,
   return *this;
 }
 
-void ship::tick(double ticks) {
-  x += deltax * ticks;
-  y += deltay * ticks;
-}
-
-void ship::draw() { sheet->drawframe(vports::CENTER, sheetid, frame, x, y); }
-
 void controller::damaged(ship &source, const ship &target) {}
 void controller::destroyed(ship &source) {}
 void controller::colliding(ship &source, const ship &target) {}

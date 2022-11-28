@@ -5,6 +5,9 @@
 #include "hitbox.h"
 #include "ship.h"
 
+#include "clkwin.h"
+#include "clksheet.h"
+
 #include <algorithm>
 #include <memory>
 #include <numeric>
@@ -22,7 +25,7 @@ void objectman::indexman::init(size_t preallocsize) {
   liveindices.reserve(preallocsize);
 }
 
-objectman::objectman() {
+objectman::objectman(hitbox field) : field(field) {
   objects[(int)shiptype::PLAYER].init(2);
 
   for (int i = 1; i < (int)shiptype::MAX; i++)
@@ -103,8 +106,18 @@ void objectman::delobject(idpair i) {
 
 void objectman::tick(Uint32 step) {
   for (auto &i : objects)
-    for (auto &t : i.liveindices)
-      i.objects[t].tick(step);
+    for (auto &t : i.liveindices) { // We're using the dimensions of the center field in the rendering
+                                    // temporarily. Soon I'll decouple this.
+      i.objects[t].x += i.objects[t].deltax * step;
+      i.objects[t].y += i.objects[t].deltay * step;
+
+      hitbox space = hitbox(static_cast<SDL_Rect>(i.objects[t].sheet->getframe(i.objects[t].sheetid)));
+      space.x += i.objects[t].x;
+      space.y += i.objects[t].y;
+
+    if (!field.colliding(space)) // I cannot wake up from this nightmare
+        delobject(i.objects[t].objectid);
+    }
 }
 
 void objectman::draw() {

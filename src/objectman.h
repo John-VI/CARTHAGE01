@@ -31,7 +31,7 @@ struct idpair {
 
 class objectman {
 public:
-  objectman();
+  objectman(hitbox field);
 
   ship *operator[](idpair);
   idpair newobject(shiptype t, double x, double y, int hp,
@@ -41,6 +41,8 @@ public:
 
   void tick(Uint32 step);
   void draw();
+
+  const hitbox field;
 
 protected:
   struct indexman {

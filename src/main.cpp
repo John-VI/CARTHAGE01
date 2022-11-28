@@ -108,7 +108,7 @@ int main(int argc, char *argv[]) {
   std::vector<clk::frameinfo> frames{{0, 0, 62, 32, 1, 1, 0, 0}};
   std::vector<hitbox> boxes{};
 
-  objectman objman;
+  objectman objman(hitbox({ 0, 0, INTWID - 140 * 2, INTHEI }));
 
   player pai(objman, kbd);
 

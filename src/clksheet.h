@@ -17,6 +17,8 @@ struct frameinfo {
   int c;
   int xpad;
   int ypad;
+
+  inline explicit operator SDL_Rect() const { return {-(w / 2), -(h / 2), w, h}; }
 };
 
 class sheet : public sprite {
@@ -37,6 +39,8 @@ public:
                  SDL_RendererFlip flip = SDL_FLIP_NONE,
                  const SDL_Rect *dest = nullptr);
   void setframeinfo(std::vector<frameinfo> frames);
+
+  const frameinfo &getframe(int id) const;
 };
 
 } // namespace clk

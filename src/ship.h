@@ -3,8 +3,9 @@
 #pragma once
 
 #include "hitbox.h"
-
 #include "objectman.h"
+
+#include "clksheet.h"
 
 #include <bitset>
 #include <list>
@@ -13,9 +14,9 @@
 struct ship;
 class objectman;
 
-namespace clk {
-class sheet;
-}
+// namespace clk {
+// class sheet;
+// }
 
 class controller {
 public:
@@ -54,6 +55,5 @@ public:
 
   int hp;
 
-  void tick(double ticks);
-  void draw();
+  inline void draw() { sheet->drawframe(vports::CENTER, sheetid, frame, x, y); }
 };
