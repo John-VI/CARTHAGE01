@@ -26,7 +26,7 @@ controller::controller(objectman &man) : objman(man) {}
 
 ship &ship::initship(double x, double y, int hp, std::vector<hitbox> *boxes,
                      std::shared_ptr<clk::sheet> sheet, int id,
-                     controller *ai) {
+                     controller *ai, double dx, double dy, double rot) {
   this->x = x;
   this->y = y;
   this->hp = hp;
@@ -35,6 +35,9 @@ ship &ship::initship(double x, double y, int hp, std::vector<hitbox> *boxes,
   this->sheetid = id;
   this->frame = 0;
   this->ai = ai;
+  this->deltax = dx;
+  this->deltay = dy;
+  this->rotation = rot;
 
   return *this;
 }

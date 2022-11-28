@@ -44,6 +44,9 @@ void player::update(const SDL_Event &e) {
       case SDL_SCANCODE_D:
         movestate[3] = down(e);
         break;
+      case SDL_SCANCODE_Z:
+        playstate[0] = down(e);
+        break;
       default:
         return;
       }
@@ -55,6 +58,10 @@ void player::update(const SDL_Event &e) {
         target->deltay = movestate[1] - movestate[0];
         target->deltax = movestate[3] - movestate[2];
       }
+
+      if (playstate[0])
+        objman.newobject(shiptype::PBULLET, target->x, target->y, 1, target->boxes, target->sheet, target->sheetid, nullptr, 0, -1.5);
+      playstate[0] = 0;
     }
   }
 }
@@ -64,4 +71,5 @@ void player::managerreg() {
   keybinder.registerinput(SDL_SCANCODE_S, kbdblock);
   keybinder.registerinput(SDL_SCANCODE_A, kbdblock);
   keybinder.registerinput(SDL_SCANCODE_D, kbdblock);
+  keybinder.registerinput(SDL_SCANCODE_Z, kbdblock);
 }

@@ -36,7 +36,9 @@ public:
   ship *operator[](idpair);
   idpair newobject(shiptype t, double x, double y, int hp,
                    std::vector<hitbox> *boxes,
-                   std::shared_ptr<clk::sheet> sheet, int id, controller *ai);
+                   std::shared_ptr<clk::sheet> sheet, int id,
+                   controller *ai = nullptr, double deltax = 0,
+                   double deltay = 0, double rotation = 0);
   void delobject(idpair);
 
   void tick(Uint32 step);
@@ -54,11 +56,13 @@ protected:
     inline idpair newobject(shiptype type, double x, double y, int hp,
                             std::vector<hitbox> *boxes,
                             std::shared_ptr<clk::sheet> sheet, int id,
-                            controller *ai);
+                            controller *ai = nullptr, double deltax = 0,
+                            double deltay = 0, double rotation = 0);
     inline void enableship(shiptype type, shipindex index, double x, double y,
                            int hp, std::vector<hitbox> *boxes,
                            std::shared_ptr<clk::sheet> sheet, int id,
-                           controller *ai);
+                           controller *ai,
+                           double deltax, double deltay, double rotation);
     inline void delobject(idpair, ship *);
   };
 
@@ -69,5 +73,5 @@ protected:
   inline void enableship(shiptype type, shipindex index, double x, double y,
                          int hp, std::vector<hitbox> *boxes,
                          std::shared_ptr<clk::sheet> sheet, int id,
-                         controller *ai);
+                         controller *ai, double deltax, double deltay, double rotation);
 };

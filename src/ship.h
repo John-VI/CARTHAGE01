@@ -35,13 +35,14 @@ protected:
 struct ship {
 public:
   ship &initship(double x, double y, int hp, std::vector<hitbox> *boxes,
-                 std::shared_ptr<clk::sheet> sheet, int id, controller *ai);
+                 std::shared_ptr<clk::sheet> sheet, int id, controller *ai, double deltax, double deltay, double rotation);
 
   idpair objectid;
   std::bitset<1> objflags = 0;
 
   double x;
   double y;
+  double rotation = 0;
 
   double deltax = 0;
   double deltay = 0;

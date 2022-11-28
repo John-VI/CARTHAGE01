@@ -5,3 +5,8 @@ recently to lose some weight, threw me off a lot more than I was expecting. Not
 too much got done for a while. Writing and rewriting the object manager for
 efficiency and safety since we'll be creating and destroying lots of objects
 very rapidly.
+
+<2022-11-28 Mon>
+[[./developmentshots/mpv-shot0004.jpg]]
+Added shooting. We're growing by leaps and bounds here. Also
+made a bullet graphic but was too lazy to actually add it. Later.

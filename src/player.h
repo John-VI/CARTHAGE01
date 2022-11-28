@@ -26,6 +26,7 @@ protected:
   std::shared_ptr<playertrig> kbdblock;
 
   std::bitset<4> movestate = 0;
+  std::bitset<1> playstate = 0;
 
 public:
   player(objectman &objmanager, clk::keybind &manager);
