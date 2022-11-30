@@ -4,7 +4,6 @@
 
 #include "clkinputtrigger.h"
 
-#include "hitbox.h"
 #include "ship.h"
 
 #include <bitset>
@@ -13,6 +12,8 @@
 namespace clk {
 class keybind;
 }
+
+namespace ai {
 
 class player : public controller {
 protected:
@@ -36,3 +37,5 @@ public:
 
   void update(const SDL_Event &e);
 };
+
+}

@@ -12,6 +12,8 @@
 #include <SDL2/SDL_scancode.h>
 #include <memory>
 
+using namespace ai;
+
 player::playertrig::playertrig(player &bind) : binding(bind) {}
 void player::playertrig::trigger(const SDL_Event &e) { binding.update(e); }
 

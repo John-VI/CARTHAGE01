@@ -27,6 +27,8 @@ public:
   virtual void colliding(ship &source, const ship &target);
   virtual void despawned(idpair source);
 
+  virtual void tick(uint32_t);
+
 protected:
   objectman &objman;
   std::list<idpair> ships;

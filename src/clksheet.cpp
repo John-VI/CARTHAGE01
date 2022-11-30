@@ -11,11 +11,11 @@
 namespace clk {
 
 inline int sheet::calcfx(const frameinfo &f, int frame) {
-  return (frame % (f.r * f.c)) % f.c * (f.w + f.xpad);
+  return (frame % (f.r * f.c)) % f.c * (f.w + f.xpad) + f.x;
 }
 
 inline int sheet::calcfy(const frameinfo &f, int frame) {
-  return (frame % (f.r * f.c)) / f.c * (f.h + f.ypad);
+  return (frame % (f.r * f.c)) / f.c * (f.h + f.ypad) + f.y;
 }
 
 sheet::sheet(clk::window &renderer, const char filename[],

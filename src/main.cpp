@@ -33,6 +33,7 @@
 #include "objectman.h"
 #include "player.h"
 #include "ship.h"
+#include "spaceinvader.h"
 
 const char *copyright = "Copyright (c) John Allen Whitley, 2022, BSD 3-Clause";
 
@@ -101,23 +102,27 @@ int main(int argc, char *argv[]) {
   bg.travelangle = 0;
   bg.updatepathing();
 
-  // clk::sheet playersheet(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}});
+  clk::sheet shat(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}, {67, 0, 10, 24, 1, 1, 0, 0},
+                                  {79, 0, 12, 12, 1, 1, 0, 0}, {91, 0, 66, 17, 1, 1, 0, 0}});
 
-  clk::sheet shat(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}});
-
-  std::vector<clk::frameinfo> frames{{0, 0, 62, 32, 1, 1, 0, 0}};
+  std::vector<clk::frameinfo> frames{{0, 0, 62, 32, 1, 1, 0, 0},
+                                     {67, 0, 10, 24, 1, 1, 0, 0},
+                                     {79, 0, 12, 12, 1, 1, 0, 0},
+                                     {91, 0, 66, 17, 1, 1, 0, 0}};
   std::vector<hitbox> boxes{};
 
   objectman objman(hitbox({ 0, 0, INTWID - 140 * 2, INTHEI }));
 
-  player pai(objman, kbd);
+  ai::player pai(objman, kbd);
+  ai::spaceinvader eai(objman);
 
   objman.newobject(shiptype::PLAYER, 20, 20, 3, &boxes,
                    std::make_shared<clk::sheet>(win, "01.png", frames), 0,
                    &pai);
-  objman.newobject(shiptype::PLAYER, 50, 50, 3, &boxes,
-                   std::make_shared<clk::sheet>(win, "01.png", frames), 0,
-                   &pai);
+
+  objman.newobject(shiptype::ENEMY, 50, 50, 100, &boxes,
+                   std::make_shared<clk::sheet>(win, "01.png", frames), 3,
+                   &eai, 0.2, 0);
 
   // navmap map1(10, 10);
   // map1[55] = 256;
@@ -146,6 +151,9 @@ int main(int argc, char *argv[]) {
     // }
 
     // frog.draw(vports::FULL, 0, 0);
+
+    eai.tick(mseconds);
+
     bg.tick(mseconds);
 
     objman.tick(mseconds);

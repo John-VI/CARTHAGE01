@@ -49,3 +49,5 @@ void controller::colliding(ship &source, const ship &target) {}
 void controller::push(idpair ship) { ships.push_back(ship); }
 
 void controller::despawned(idpair source) { ships.remove(source); }
+
+void controller::tick(uint32_t) { return; }

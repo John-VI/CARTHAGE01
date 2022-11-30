@@ -10,3 +10,8 @@ very rapidly.
 [[./developmentshots/mpv-shot0004.jpg]]
 Added shooting. We're growing by leaps and bounds here. Also
 made a bullet graphic but was too lazy to actually add it. Later.
+
+<2022-11-30 Wed>
+[[developmentshots/rusting 11_30_2022 1_36_24 PM.png]]
+
+Today, the enemy bites back. It can't actually hurt me though, bullet collisions aren't programmed yet.
