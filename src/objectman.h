@@ -46,6 +46,8 @@ public:
 
   const hitbox field;
 
+  const std::array<int, (int)shiptype::MAX> draworder = { (int)shiptype::ENEMY, (int)shiptype::PBULLET, (int)shiptype::PLAYER, (int)shiptype::EBULLET};
+
 protected:
   struct indexman {
     std::vector<ship> objects;

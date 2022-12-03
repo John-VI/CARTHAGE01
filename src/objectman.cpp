@@ -130,7 +130,7 @@ void objectman::tick(Uint32 step) {
 }
 
 void objectman::draw() {
-  for (auto &i : objects)
-    for (auto &t : i.liveindices)
-      i.objects[t].draw();
+  for (auto &i : draworder)
+    for (auto &t : objects[i].liveindices)
+      objects[i].objects[t].draw();
 }
