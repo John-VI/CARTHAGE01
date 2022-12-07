@@ -41,7 +41,5 @@ void sheet::drawframe(vports port, int id, int frame, int x, int y,
                    dest);
 }
 
-  const frameinfo &sheet::getframe(int id) const {
-    return frames[id];
-  }
+const frameinfo &sheet::getframe(int id) const { return frames[id]; }
 } // namespace clk

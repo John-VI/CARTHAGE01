@@ -25,8 +25,8 @@
 controller::controller(objectman &man) : objman(man) {}
 
 ship &ship::initship(double x, double y, int hp, std::vector<hitbox> *boxes,
-                     std::shared_ptr<clk::sheet> sheet, int id,
-                     controller *ai, double dx, double dy, double rot) {
+                     std::shared_ptr<clk::sheet> sheet, int id, controller *ai,
+                     double dx, double dy, double rot) {
   this->x = x;
   this->y = y;
   this->hp = hp;

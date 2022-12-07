@@ -54,5 +54,7 @@ public:
   SDL_Rect draw(viewport &port, int x, int y, double angle = 0,
                 const SDL_Point *center = NULL,
                 SDL_RendererFlip flip = SDL_FLIP_NONE);
+
+  int drawrect(const SDL_Rect *rect, const SDL_Color &color);
 };
 } // namespace clk

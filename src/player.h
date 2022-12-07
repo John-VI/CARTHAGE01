@@ -38,4 +38,4 @@ public:
   void update(const SDL_Event &e);
 };
 
-}
+} // namespace ai

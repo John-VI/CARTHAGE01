@@ -170,3 +170,10 @@ SDL_Rect clk::sprite::drawframe(const viewport &port, int x, int y,
 
   return region;
 }
+
+int clk::sprite::drawrect(const SDL_Rect *rect, const SDL_Color &color) {
+  renderer.setcolor(&color);
+  return SDL_RenderDrawRect(renderer.getSDL_Renderer(), rect);
+  SDL_Color newcolor{0, 0, 0};
+  renderer.setcolor(&newcolor);
+}

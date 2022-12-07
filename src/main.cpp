@@ -102,27 +102,31 @@ int main(int argc, char *argv[]) {
   bg.travelangle = 0;
   bg.updatepathing();
 
-  clk::sheet shat(win, "01.png", {{0, 0, 62, 32, 1, 1, 0, 0}, {67, 0, 10, 24, 1, 1, 0, 0},
-                                  {79, 0, 12, 12, 1, 1, 0, 0}, {91, 0, 66, 17, 1, 1, 0, 0}});
+  clk::sheet shat(win, "01.png",
+                  {{0, 0, 62, 32, 1, 1, 0, 0},
+                   {67, 0, 10, 24, 1, 1, 0, 0},
+                   {79, 0, 12, 12, 1, 1, 0, 0},
+                   {91, 0, 66, 17, 1, 1, 0, 0}});
 
   std::vector<clk::frameinfo> frames{{0, 0, 62, 32, 1, 1, 0, 0},
                                      {67, 0, 10, 24, 1, 1, 0, 0},
                                      {79, 0, 12, 12, 1, 1, 0, 0},
                                      {91, 0, 66, 17, 1, 1, 0, 0}};
-  std::vector<hitbox> boxes{};
+  std::vector<hitbox> pboxes{{{-2, 0, 12, 9}}};
+  std::vector<hitbox> eboxes{{{0, -4, 66, 6}}, {{0, 3, 42, 11}}};
 
-  objectman objman(hitbox({ 0, 0, INTWID - 140 * 2, INTHEI }));
+  objectman objman(hitbox({0, 0, INTWID - 140 * 2, INTHEI}));
 
   ai::player pai(objman, kbd);
   ai::spaceinvader eai(objman);
 
-  objman.newobject(shiptype::PLAYER, 20, 20, 3, &boxes,
+  objman.newobject(shiptype::PLAYER, 20, 20, 3, &pboxes,
                    std::make_shared<clk::sheet>(win, "01.png", frames), 0,
                    &pai);
 
-  objman.newobject(shiptype::ENEMY, 50, 50, 100, &boxes,
-                   std::make_shared<clk::sheet>(win, "01.png", frames), 3,
-                   &eai, 0.2, 0);
+  objman.newobject(shiptype::ENEMY, 50, 50, 100, &eboxes,
+                   std::make_shared<clk::sheet>(win, "01.png", frames), 3, &eai,
+                   0.2, 0);
 
   // navmap map1(10, 10);
   // map1[55] = 256;
@@ -160,7 +164,7 @@ int main(int argc, char *argv[]) {
 
     bg.draw();
 
-    objman.draw();
+    objman.draw(win.getviewport(vports::CENTER));
 
     // vga.drawstring(
     //     vports::STATUS, 96, 0,

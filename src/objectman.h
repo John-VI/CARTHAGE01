@@ -6,6 +6,7 @@
 #include <memory>
 #include <vector>
 
+#include "clkviewport.h"
 #include "hitbox.h"
 
 struct ship;
@@ -42,11 +43,13 @@ public:
   void delobject(idpair);
 
   void tick(Uint32 step);
-  void draw();
+  void draw(clk::viewport port);
 
   const hitbox field;
 
-  const std::array<int, (int)shiptype::MAX> draworder = { (int)shiptype::ENEMY, (int)shiptype::PBULLET, (int)shiptype::PLAYER, (int)shiptype::EBULLET};
+  const std::array<int, (int)shiptype::MAX> draworder = {
+      (int)shiptype::ENEMY, (int)shiptype::PBULLET, (int)shiptype::PLAYER,
+      (int)shiptype::EBULLET};
 
 protected:
   struct indexman {
@@ -63,8 +66,8 @@ protected:
     inline void enableship(shiptype type, shipindex index, double x, double y,
                            int hp, std::vector<hitbox> *boxes,
                            std::shared_ptr<clk::sheet> sheet, int id,
-                           controller *ai,
-                           double deltax, double deltay, double rotation);
+                           controller *ai, double deltax, double deltay,
+                           double rotation);
     inline void delobject(idpair, ship *);
   };
 
@@ -75,5 +78,8 @@ protected:
   inline void enableship(shiptype type, shipindex index, double x, double y,
                          int hp, std::vector<hitbox> *boxes,
                          std::shared_ptr<clk::sheet> sheet, int id,
-                         controller *ai, double deltax, double deltay, double rotation);
+                         controller *ai, double deltax, double deltay,
+                         double rotation);
+
+  int drawboxes(const ship &s, clk::viewport port);
 };

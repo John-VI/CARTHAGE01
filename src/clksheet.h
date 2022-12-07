@@ -18,7 +18,9 @@ struct frameinfo {
   int xpad;
   int ypad;
 
-  inline explicit operator SDL_Rect() const { return {-(w / 2), -(h / 2), w, h}; }
+  inline explicit operator SDL_Rect() const {
+    return {-(w / 2), -(h / 2), w, h};
+  }
 };
 
 class sheet : public sprite {

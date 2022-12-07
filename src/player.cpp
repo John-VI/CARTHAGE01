@@ -62,7 +62,9 @@ void player::update(const SDL_Event &e) {
       }
 
       if (playstate[0])
-        objman.newobject(shiptype::PBULLET, target->x, target->y, 1, target->boxes, target->sheet, target->sheetid, nullptr, 0, -1.5);
+        objman.newobject(shiptype::PBULLET, target->x, target->y, 1,
+                         target->boxes, target->sheet, target->sheetid, nullptr,
+                         0, -1.5);
       playstate[0] = 0;
     }
   }
